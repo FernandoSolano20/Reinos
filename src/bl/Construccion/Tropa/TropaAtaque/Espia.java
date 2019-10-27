@@ -1,8 +1,14 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
 public class Espia extends TropaAtaque {
-    public Espia(int vida, int id, int alcance, int precio, int ataque, int cantMovimientos, int defensa, int oro) {
-        super(vida, id, alcance, precio, ataque, cantMovimientos, defensa, oro);
+    public Espia() {
+        super(10);
+        setPrecio(5);
+        setVida(2);
+        setCantMovimientos(5);
+        setDefensa(1);
+        setAtaque(1);
+        setAlcance(3);
         setNombre("Espia");
     }
 }

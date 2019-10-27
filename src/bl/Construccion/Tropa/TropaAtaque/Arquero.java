@@ -1,8 +1,14 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
 public class Arquero extends TropaAtaque {
-    public Arquero(int vida, int id, int alcance, int precio, int ataque, int cantMovimientos, int defensa, int oro) {
-        super(vida, id, alcance, precio, ataque, cantMovimientos, defensa, oro);
+    public Arquero() {
+        super(2);
+        setPrecio(10);
+        setVida(10);
+        setCantMovimientos(3);
+        setDefensa(3);
+        setAtaque(3);
+        setAlcance(4);
         setNombre("Arquero");
     }
 }

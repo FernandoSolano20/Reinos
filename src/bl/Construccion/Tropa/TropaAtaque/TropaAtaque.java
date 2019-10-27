@@ -11,12 +11,9 @@ public abstract class TropaAtaque extends Tropa {
     private int defensa;
     private Oro[] oros;
 
-    public TropaAtaque(int vida, int id, int alcance, int precio, int ataque, int cantMovimientos, int defensa, int oro) {
-        super(vida, id, alcance, precio, ataque);
-        setCantMovimientos(cantMovimientos);
-        setDefensa(defensa);
-        oros = new Oro[oro];
+    public TropaAtaque(int oro) {
         contador = 0;
+        oros = new Oro[oro];
     }
 
     public int getCantMovimientos() {

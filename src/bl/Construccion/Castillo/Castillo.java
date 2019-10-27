@@ -1,5 +1,6 @@
-package bl.Construccion;
+package bl.Construccion.Castillo;
 
+import bl.Construccion.Construccion;
 import bl.Oro.Oro;
 
 import java.util.ArrayList;
@@ -8,10 +9,10 @@ public class Castillo extends Construccion {
     private Oro[] oros;
     private int contador;
 
-    public Castillo(int vida, int id, int oro) {
-        super(vida,id);
+    public Castillo() {
         setNombre("Castillo");
-        oros = new Oro[oro];
+        setVida(30);
+        oros = new Oro[20];
         contador = 0;
     }
 

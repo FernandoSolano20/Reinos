@@ -7,11 +7,7 @@ public abstract class Tropa extends Construccion {
     private int precio;
     private int ataque;
 
-    public Tropa(int vida, int id, int alcance, int precio, int ataque) {
-        super(vida,id);
-        setAlcance(alcance);
-        setPrecio(precio);
-        setAtaque(ataque);
+    public Tropa() {
     }
 
     public int getAlcance() {

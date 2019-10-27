@@ -5,9 +5,7 @@ public abstract class Construccion {
     private int id;
     private String Nombre;
 
-    public Construccion(int vida, int id) {
-        setVida(vida);
-        setId(id);
+    public Construccion() {
     }
 
     public int getVida() {
