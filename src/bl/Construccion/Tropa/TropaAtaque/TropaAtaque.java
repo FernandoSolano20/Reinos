@@ -1,19 +1,15 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
 import bl.Construccion.Tropa.Tropa;
-import bl.Oro.Oro;
-
-import java.util.ArrayList;
 
 public abstract class TropaAtaque extends Tropa {
     private int cantMovimientos;
-    private int contador;
+    private int oroTransportable;
     private int defensa;
-    private Oro[] oros;
+    private int oros;
 
-    public TropaAtaque(int oro) {
-        contador = 0;
-        oros = new Oro[oro];
+    public TropaAtaque() {
+        oros = 0;
     }
 
     public int getCantMovimientos() {
@@ -32,22 +28,27 @@ public abstract class TropaAtaque extends Tropa {
         this.defensa = defensa;
     }
 
-    public Oro[] getOros() {
+    public int getOroTransportable() {
+        return oroTransportable;
+    }
+
+    public void setOroTransportable(int oroTransportable) {
+        this.oroTransportable = oroTransportable;
+    }
+
+    public int getOros() {
         return oros;
     }
 
-    public void setOros(Oro oro){
-        if (contador < 20){
-            oros[contador] = oro;
-            contador++;
+    public void setOros(int sumOro) {
+        if(oros < oroTransportable){
+            int resultOro = oros + sumOro;
+            if(resultOro > oroTransportable){
+                oros = oroTransportable;
+            }
+            else {
+                oros = resultOro;
+            }
         }
-    }
-
-    public int getContador() {
-        return contador;
-    }
-
-    public void setContador() {
-        this.contador++;
     }
 }

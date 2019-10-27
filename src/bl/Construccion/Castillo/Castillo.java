@@ -1,36 +1,39 @@
 package bl.Construccion.Castillo;
 
 import bl.Construccion.Construccion;
-import bl.Oro.Oro;
-
-import java.util.ArrayList;
 
 public class Castillo extends Construccion {
-    private Oro[] oros;
-    private int contador;
+    private int oros;
+    private int oroTransportable;
 
     public Castillo() {
         setNombre("Castillo");
         setVida(30);
-        oros = new Oro[20];
-        contador = 0;
+        setOroTransportable(20);
+        oros = 0;
     }
 
-    public Oro[] getOros() {
+    public int getOros() {
         return oros;
     }
 
-    public void setOros(Oro oro) {
-        if(contador < 20){
-            this.oros[contador] = oro;
+    public void setOros(int sumOro) {
+        if(oros < oroTransportable){
+            int resultOro = oros + sumOro;
+            if(resultOro > oroTransportable){
+                oros = oroTransportable;
+            }
+            else {
+                oros = resultOro;
+            }
         }
     }
 
-    public int getContador() {
-        return contador;
+    public int getOroTransportable() {
+        return oroTransportable;
     }
 
-    public void setContador(int contador) {
-        this.contador = contador;
+    public void setOroTransportable(int oroTransportable) {
+        this.oroTransportable = oroTransportable;
     }
 }
