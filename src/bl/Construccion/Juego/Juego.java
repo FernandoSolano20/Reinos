@@ -1,7 +1,7 @@
 package bl.Construccion.Juego;
 
-import bl.Jugadores.Jugador;
-import bl.Tablero.Tablero;
+import bl.Construccion.Jugadores.Jugador;
+import bl.Construccion.Tablero.Tablero;
 
 import java.util.ArrayList;
 

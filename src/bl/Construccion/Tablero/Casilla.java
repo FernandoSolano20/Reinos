@@ -1,7 +1,7 @@
 package bl.Construccion.Tablero;
 
 import bl.Construccion.IConstruccion;
-import bl.Recursos.IRecurso;
+import bl.Construccion.Recursos.IRecurso;
 
 public class Casilla {
     IConstruccion pieza;

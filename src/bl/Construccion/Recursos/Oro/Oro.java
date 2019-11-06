@@ -1,6 +1,6 @@
 package bl.Construccion.Recursos.Oro;
 
-import bl.Recursos.IRecurso;
+import bl.Construccion.Recursos.IRecurso;
 
 public class Oro implements IRecurso {
     @Override

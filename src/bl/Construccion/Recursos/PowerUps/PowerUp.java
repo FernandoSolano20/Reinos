@@ -1,6 +1,6 @@
 package bl.Construccion.Recursos.PowerUps;
 
-import bl.Recursos.IRecurso;
+import bl.Construccion.Recursos.IRecurso;
 
 public class PowerUp implements IRecurso {
     private int tipo;

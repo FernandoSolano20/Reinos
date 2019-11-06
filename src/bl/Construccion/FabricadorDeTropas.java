@@ -1,7 +1,7 @@
 package bl.Construccion;
 
 import bl.Construccion.Fabricas.*;
-import bl.Construccion.Fabricas.Abstracta.FabricaTropas;
+import bl.Construccion.Fabricas.Abstracta.*;
 
 public class FabricadorDeTropas {
 
