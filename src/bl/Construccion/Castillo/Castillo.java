@@ -1,4 +1,4 @@
-package bl.Construccion.Castillo;
+package bl.Construccion;
 
 import bl.Construccion.Construccion;
 
