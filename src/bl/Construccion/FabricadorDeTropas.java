@@ -2,6 +2,9 @@ package bl.Construccion;
 
 import bl.Construccion.Fabricas.*;
 import bl.Construccion.Fabricas.Abstracta.FabricaTropas;
+import bl.Construccion.Fabricas.FabricasTropasAtaque.*;
+import bl.Construccion.Fabricas.FabricasTropasDefensa.FabricaBallesta;
+import bl.Construccion.Fabricas.FabricasTropasDefensa.FabricaCatapulta;
 
 public class FabricadorDeTropas {
 

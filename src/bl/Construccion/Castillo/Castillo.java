@@ -10,7 +10,7 @@ public class Castillo extends Construccion {
         setNombre("Castillo");
         setVida(30);
         setOroTransportable(20);
-        oros = 0;
+        oros = 30;
     }
 
     public int getOros() {

@@ -1,4 +1,6 @@
-package bl.Construccion.Tropa;
+package bl.Construccion.Tropa.TropaDefensa;
+
+import bl.Construccion.Tropa.Tropa;
 
 public class Catapulta extends Tropa {
     public Catapulta() {

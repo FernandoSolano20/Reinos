@@ -1,7 +1,7 @@
 package bl.Construccion.Juego;
 
-import bl.Jugadores.Jugador;
-import bl.Tablero.Tablero;
+import bl.Construccion.Jugadores.Jugador;
+import bl.Construccion.Tablero.Tablero;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,12 @@ public class Juego implements IJuego{
         this.cantidadJugadores = cantidadJugadores;
         this.tablero = tablero;
         this.jugadores = new ArrayList<>();
+    }
+
+    public Juego(){
+        setCantidadJugadores(0);
+        setTablero(new Tablero(10,10));
+        setJugadores(new ArrayList<>());
     }
 
     public int getCantidadJugadores() {
@@ -33,9 +39,16 @@ public class Juego implements IJuego{
         this.tablero = tablero;
     }
 
-    @Override
-    public void inicializarPartida(int pCantidadJugadores) {
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
 
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public void agregarJugador(Jugador pJugador){
+        this.jugadores.add(pJugador);
     }
 
     @Override

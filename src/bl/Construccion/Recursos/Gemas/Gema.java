@@ -1,6 +1,6 @@
 package bl.Construccion.Recursos.Gemas;
 
-import bl.Recursos.IRecurso;
+import bl.Construccion.Recursos.IRecurso;
 
 public class Gema implements IRecurso {
     private String color;

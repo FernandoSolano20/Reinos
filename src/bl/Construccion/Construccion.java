@@ -1,6 +1,6 @@
 package bl.Construccion;
 
-public abstract class Construccion {
+public abstract class Construccion implements IConstruccion{
     private int vida;
     private int id;
     private String Nombre;
