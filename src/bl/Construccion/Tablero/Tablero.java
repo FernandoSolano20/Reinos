@@ -4,23 +4,15 @@ import bl.Construccion.Castillo.Castillo;
 import bl.Construccion.IConstruccion;
 
 public class Tablero implements ITablero{
-    private Casilla[][] casillas;
-    private int largo;
-    private int ancho;
+	private Casilla[][] casillas;
+    private int ancho; //width
+    private int largo; //height
 
-    public Tablero(int largo, int ancho) {
-        setLargo(largo);
+    public Tablero(int ancho, int largo) {
         setAncho(ancho);
-        casillas  = new Casilla[largo][ancho];
-        generarCasillas(largo,ancho);
-    }
-
-    public int getLargo() {
-        return largo;
-    }
-
-    public void setLargo(int largo) {
-        this.largo = largo;
+        setLargo(largo);
+        casillas  = new Casilla[ancho][largo];
+        generarCasillas(ancho,largo);
     }
 
     public int getAncho() {
@@ -29,6 +21,13 @@ public class Tablero implements ITablero{
 
     public void setAncho(int ancho) {
         this.ancho = ancho;
+    }
+    public int getLargo() {
+        return largo;
+    }
+
+    public void setLargo(int largo) {
+        this.largo = largo;
     }
 
     public Casilla[][] getCasillas() {
@@ -39,30 +38,26 @@ public class Tablero implements ITablero{
         this.casillas = casillas;
     }
 
-    @Override
-    public void construirEnCasilla(int pLargo, int pAncho, IConstruccion pConstruccion) {
-        this.getCasillas()[pLargo][pAncho].setPieza(pConstruccion);
+    public void construirEnCasilla(int pAncho, int pLargo, IConstruccion pConstruccion) {
+        this.getCasillas()[pAncho][pLargo].setPieza(pConstruccion);
     }
 
-    private void generarCasillas(int pLargo, int pAncho){
-        for(int i = 0; i < pLargo; i++){
-            for(int j = 0; j < pAncho; j++){
+    private void generarCasillas(int pAncho, int pLargo){
+        for(int i = 0; i < pAncho; i++){
+            for(int j = 0; j < pLargo; j++){
                 this.casillas[i][j] = new Casilla();
             }
         }
     }
 
-    @Override
     public void generarGemas() {
 
     }
 
-    @Override
     public void generarPowerUps() {
 
     }
 
-    @Override
     public void generarCastillos() {
 
     }

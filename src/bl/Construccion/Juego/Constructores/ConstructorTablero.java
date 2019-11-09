@@ -2,7 +2,6 @@ package bl.Construccion.Juego.Constructores;
 
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
-import bl.Construccion.Tablero.Tablero;
 
 public abstract class ConstructorTablero {
     protected Juego juego;

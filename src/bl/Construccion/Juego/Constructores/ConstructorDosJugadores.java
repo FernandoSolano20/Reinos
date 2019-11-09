@@ -1,8 +1,6 @@
 package bl.Construccion.Juego.Constructores;
 
-import bl.Construccion.Castillo.Castillo;
 import bl.Construccion.Jugadores.Jugador;
-import bl.Construccion.Tablero.Casilla;
 
 public class ConstructorDosJugadores extends ConstructorTablero {
     @Override
