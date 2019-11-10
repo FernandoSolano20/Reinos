@@ -16,3 +16,10 @@ public class Director {
         constructorTablero.generarPowerUps();
     }
 }
+
+/// Tropas y que se muevan : Luis
+//  Enlazar logica tablero con ui: Jeison
+//  Movimiento: Andres
+//  Casillas en tablero: Fernando
+
+
