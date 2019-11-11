@@ -2,7 +2,7 @@ package bl.Construccion.Tropa.TropaAtaque;
 
 import bl.Construccion.Tropa.Tropa;
 
-public abstract class TropaAtaque extends Tropa {
+public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
     private int cantMovimientos;
     private int oroTransportable;
     private int defensa;
@@ -50,5 +50,15 @@ public abstract class TropaAtaque extends Tropa {
                 oros = resultOro;
             }
         }
+    }
+
+    @Override
+    public void movimientoTropa() {
+
+    }
+
+    @Override
+    public void robarOro() {
+
     }
 }

@@ -1,6 +1,6 @@
 package bl.Construccion.Juego.Constructores;
 
-import bl.Construccion.Castillo.Castillo;
+import bl.Construccion.Castillo;
 import bl.Construccion.Jugadores.Jugador;
 
 public class ConstructorCuatroJugadores extends ConstructorTablero {

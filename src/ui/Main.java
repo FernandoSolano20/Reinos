@@ -1,9 +1,13 @@
 package ui;
 
+import bl.Construccion.Construccion;
 import bl.Construccion.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
+import bl.Construccion.IConstruccion;
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
+import bl.Construccion.Tropa.TropaAtaque.Arquero;
+import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.FORMS.Form;
 
 import javax.swing.*;
@@ -32,6 +36,18 @@ public class Main {
         Fachada fachada = new Fachada();
 
         Juego juego = fachada.construirJuego(cantidad);
+
+        Construccion pieza = new Arquero();
+        juego.getTablero().getCasillas()[0][1].setPieza(pieza);
+        System.out.println(juego.getTablero().recorrerTablero());
+
+       try{
+           juego.getTablero().moverPieza(0,1,0,0);
+       }catch (Exception e){
+           System.out.println(e);
+       }
+        System.out.println(juego.getTablero().recorrerTablero());
+
         for(Jugador jugador : juego.getJugadores()){
             System.out.println(jugador.getNombreJugador());
         }

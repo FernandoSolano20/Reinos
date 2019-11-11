@@ -1,22 +1,23 @@
 package bl.Construccion.Tablero;
 
+import bl.Construccion.Construccion;
 import bl.Construccion.IConstruccion;
 import bl.Construccion.Recursos.IRecurso;
 
 public class Casilla {
-    IConstruccion pieza;
-    IRecurso recurso;
+    private Construccion pieza;
+    private IRecurso recurso;
 
     public Casilla() {
-        pieza = null;
-        recurso = null;
+        setPieza(null);
+        setRecurso(null);
     }
 
-    public IConstruccion getPieza() {
+    public Construccion getPieza() {
         return pieza;
     }
 
-    public void setPieza(IConstruccion pieza) {
+    public void setPieza(Construccion pieza) {
         this.pieza = pieza;
     }
 
