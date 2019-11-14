@@ -72,6 +72,6 @@ public class FabricadorDeTropas {
 
     private static String CrearFabricaDeTropas(FabricaTropas pFabrica) {
         Construccion construccion = pFabrica.crearTropa();
-        return construccion.getNombre();
+        return construccion.getInfo();
     }
 }

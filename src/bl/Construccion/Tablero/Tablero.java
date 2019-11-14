@@ -1,22 +1,18 @@
 package bl.Construccion.Tablero;
 
+import bl.Construccion.Castillo.Castillo;
+import bl.Construccion.IConstruccion;
+
 public class Tablero implements ITablero{
-    private Casilla[][] casillas;
-    private int largo;
-    private int ancho;
+	private Casilla[][] casillas;
+    private int ancho; //width
+    private int largo; //height
 
-    public Tablero(int largo, int ancho) {
-        setLargo(largo);
+    public Tablero(int ancho, int largo) {
         setAncho(ancho);
-        casillas  = new Casilla[largo][ancho];
-    }
-
-    public int getLargo() {
-        return largo;
-    }
-
-    public void setLargo(int largo) {
-        this.largo = largo;
+        setLargo(largo);
+        casillas  = new Casilla[ancho][largo];
+        generarCasillas(ancho,largo);
     }
 
     public int getAncho() {
@@ -26,19 +22,42 @@ public class Tablero implements ITablero{
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
+    public int getLargo() {
+        return largo;
+    }
 
+    public void setLargo(int largo) {
+        this.largo = largo;
+    }
 
-    @Override
+    public Casilla[][] getCasillas() {
+        return casillas;
+    }
+
+    public void setCasillas(Casilla[][] casillas) {
+        this.casillas = casillas;
+    }
+
+    public void construirEnCasilla(int pAncho, int pLargo, IConstruccion pConstruccion) {
+        this.getCasillas()[pAncho][pLargo].setPieza(pConstruccion);
+    }
+
+    private void generarCasillas(int pAncho, int pLargo){
+        for(int i = 0; i < pAncho; i++){
+            for(int j = 0; j < pLargo; j++){
+                this.casillas[i][j] = new Casilla(i,j);
+            }
+        }
+    }
+
     public void generarGemas() {
 
     }
 
-    @Override
     public void generarPowerUps() {
 
     }
 
-    @Override
     public void generarCastillos() {
 
     }

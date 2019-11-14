@@ -17,6 +17,12 @@ public class Juego implements IJuego{
         this.jugadores = new ArrayList<>();
     }
 
+    public Juego(){
+        setCantidadJugadores(0);
+        setTablero(new Tablero(10,10));
+        setJugadores(new ArrayList<>());
+    }
+
     public int getCantidadJugadores() {
         return cantidadJugadores;
     }
@@ -33,9 +39,16 @@ public class Juego implements IJuego{
         this.tablero = tablero;
     }
 
-    @Override
-    public void inicializarPartida(int pCantidadJugadores) {
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
 
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public void agregarJugador(Jugador pJugador){
+        this.jugadores.add(pJugador);
     }
 
     @Override
