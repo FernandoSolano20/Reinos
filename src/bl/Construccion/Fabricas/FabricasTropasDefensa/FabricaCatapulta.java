@@ -1,4 +1,4 @@
-package bl.Construccion.Fabricas;
+package bl.Construccion.Fabricas.FabricasTropasDefensa;
 
 import bl.Construccion.Construccion;
 import bl.Construccion.Fabricas.Abstracta.FabricaTropas;

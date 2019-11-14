@@ -9,7 +9,6 @@ public class Tablero implements ITablero{
         setLargo(largo);
         setAncho(ancho);
         casillas  = new Casilla[largo][ancho];
-
     }
 
     public int getLargo() {

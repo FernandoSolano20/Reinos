@@ -4,12 +4,14 @@ import bl.Construccion.IConstruccion;
 import bl.Construccion.Recursos.IRecurso;
 
 public class Casilla {
-    IConstruccion pieza;
-    IRecurso recurso;
+    private IConstruccion pieza;
+    private IRecurso recurso;
+    private int x;
+    private int y;
 
-    public Casilla() {
-        pieza = null;
-        recurso = null;
+    public Casilla(int x, int y) {
+        setX(x);
+        setY(y);
     }
 
     public IConstruccion getPieza() {
@@ -26,5 +28,21 @@ public class Casilla {
 
     public void setRecurso(IRecurso recurso) {
         this.recurso = recurso;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

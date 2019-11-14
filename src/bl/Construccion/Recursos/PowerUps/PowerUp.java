@@ -4,13 +4,13 @@ import bl.Construccion.Recursos.IRecurso;
 
 public class PowerUp implements IRecurso {
     private int tipo;
-    private int multiplicador;
+    private int poderEspecial;
     private int duracionTurnos;
 
-    public PowerUp(int tipo, int multiplicador, int duracionTurnos) {
-        this.tipo = tipo;
-        this.multiplicador = multiplicador;
-        this.duracionTurnos = duracionTurnos;
+    public PowerUp(int tipo, int poderEspecial, int duracionTurnos) {
+        setTipo(tipo);
+        setDuracionTurnos(duracionTurnos);
+        setPoderEspecial(poderEspecial);
     }
 
     public int getTipo() {
@@ -21,20 +21,20 @@ public class PowerUp implements IRecurso {
         this.tipo = tipo;
     }
 
-    public int getMultiplicador() {
-        return multiplicador;
-    }
-
-    public void setMultiplicador(int multiplicador) {
-        this.multiplicador = multiplicador;
-    }
-
     public int getDuracionTurnos() {
         return duracionTurnos;
     }
 
     public void setDuracionTurnos(int duracionTurnos) {
         this.duracionTurnos = duracionTurnos;
+    }
+
+    public int getPoderEspecial() {
+        return poderEspecial;
+    }
+
+    public void setPoderEspecial(int poderEspecial) {
+        this.poderEspecial = poderEspecial;
     }
 
     @Override
