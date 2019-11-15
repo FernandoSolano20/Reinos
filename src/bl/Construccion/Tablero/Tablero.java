@@ -49,4 +49,14 @@ public class Tablero implements ITablero{
             }
         }
     }
+
+    public boolean esCasillasValida(Casilla casilla){
+        if(casilla.getX() == 0 && (casilla.getY() == 0 || casilla.getY() == getAncho() - 1)){
+            return false;
+        }
+        else if(casilla.getX() == 9 && (casilla.getY() == 0 || casilla.getY() == getLargo() - 1)){
+            return false;
+        }
+        return true;
+    }
 }

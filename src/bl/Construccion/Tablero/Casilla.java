@@ -45,4 +45,12 @@ public class Casilla {
     public void setY(int y) {
         this.y = y;
     }
+
+    public boolean tieneRecurso(){
+        return recurso == null;
+    }
+
+    public boolean tienePieza(){
+        return pieza == null;
+    }
 }
