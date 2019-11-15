@@ -3,21 +3,21 @@ package bl.Construccion.Recursos.PowerUps;
 import bl.Construccion.Recursos.IRecurso;
 
 public class PowerUp implements IRecurso {
-    private int tipo;
+    private String tipo;
     private int poderEspecial;
     private int duracionTurnos;
 
-    public PowerUp(int tipo, int poderEspecial, int duracionTurnos) {
+    public PowerUp(String tipo, int poderEspecial, int duracionTurnos) {
         setTipo(tipo);
         setDuracionTurnos(duracionTurnos);
         setPoderEspecial(poderEspecial);
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

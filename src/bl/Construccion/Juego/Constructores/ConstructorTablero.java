@@ -2,9 +2,15 @@ package bl.Construccion.Juego.Constructores;
 
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
+import bl.Construccion.MetodoFabrica.FabricaCasillas;
+import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tablero.Tablero;
+
+import java.util.Random;
 
 public abstract class ConstructorTablero {
     protected Juego juego;
+    private FabricaCasillas fabricaCasillas = new FabricaCasillas();
 
     public Juego obtenerJuego(){
         return this.juego;
@@ -24,10 +30,62 @@ public abstract class ConstructorTablero {
     public abstract void generarCastillos();
     //Genera una cantidad determinada de gemas en el tablero
     public void generarGemas(){
-
+        int[] puntos = new int[2];
+        int gema = 0;
+        Casilla casilla = null;
+        Tablero tablero = juego.getTablero();
+        int ancho = tablero.getAncho() - 1;
+        int largo = tablero.getLargo() - 1;
+        for(int i = 0; i < 14; i++) {
+            do {
+                puntos = obtenerPuntosAletorios(ancho,largo);
+                casilla = tablero.getCasillas()[puntos[0]][puntos[1]];
+            } while (!esCasillasValida(puntos[0], puntos[1]) && casilla.getRecurso() == null);
+            gema = numeroAleatorio(1, 3);
+            casilla.setRecurso(fabricaCasillas.crearGemas(gema));
+        }
     }
     //Genera aleatoriamente una cantidad definida de PowerUps en el tablero
     public void generarPowerUps(){
+        int[] puntos = new int[2];
+        int powerUp = 0;
+        Casilla casilla = null;
+        Tablero tablero = juego.getTablero();
+        int ancho = tablero.getAncho() - 1;
+        int largo = tablero.getLargo() - 1;
+        for(int i = 0; i < 14; i++) {
+            do {
+                puntos = obtenerPuntosAletorios(ancho, largo);
+                casilla = tablero.getCasillas()[puntos[0]][puntos[1]];
+            } while (!esCasillasValida(puntos[0], puntos[1]) && casilla.getRecurso() != null);
+            powerUp = numeroAleatorio(1, 4);
+            casilla.setRecurso(fabricaCasillas.crearPowerUp(powerUp));
+        }
+    }
 
+    private int numeroAleatorio(int min, int max){
+        if (min >= max) {
+            throw new IllegalArgumentException("Error maximo debe ser mayor a minimo");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+
+    private boolean esCasillasValida(int x, int y){
+        if(x == 0 && (y == 0 || y == 9)){
+            return false;
+        }
+        else if(x == 9 && (y == 0 || y == 9)){
+            return false;
+        }
+        return true;
+    }
+
+    private int[] obtenerPuntosAletorios(int ancho, int largo){
+        int[] puntos =  new int[2];
+        puntos[0] = numeroAleatorio(0,ancho);
+        puntos[1] = numeroAleatorio(0,largo);
+        return puntos;
     }
 }

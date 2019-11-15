@@ -15,7 +15,7 @@ import bl.Construccion.Tablero.Casilla;
 
 public class pnlCasilla extends JPanel implements MouseListener {
 
-	private Casilla laCasilla = new Casilla();
+	private Casilla laCasilla;
 	private pnlTablero tablero;
 	private Color[] fondo = new Color[] { new Color(220, 220, 220, 255), new Color(248, 248, 248, 255) };
 	private static int[] casillaMarcada = new int[2];
