@@ -49,16 +49,4 @@ public class Tablero implements ITablero{
             }
         }
     }
-
-    public void generarGemas() {
-
-    }
-
-    public void generarPowerUps() {
-
-    }
-
-    public void generarCastillos() {
-
-    }
 }

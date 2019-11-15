@@ -16,14 +16,4 @@ public class ConstructorDosJugadores extends ConstructorTablero {
         this.juego.getTablero().construirEnCasilla(0,9,jugador1.getCastillo());
         this.juego.getTablero().construirEnCasilla(9,0,jugador2.getCastillo());
     }
-
-    @Override
-    public void generarGemas() {
-
-    }
-
-    @Override
-    public void generarPowerUps() {
-
-    }
 }

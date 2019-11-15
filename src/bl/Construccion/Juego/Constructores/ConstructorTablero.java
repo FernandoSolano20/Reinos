@@ -23,7 +23,11 @@ public abstract class ConstructorTablero {
     //Añade los castillos de los jugadores en el ArrayList en el tablero
     public abstract void generarCastillos();
     //Genera una cantidad determinada de gemas en el tablero
-    public abstract void generarGemas();
+    public void generarGemas(){
+
+    }
     //Genera aleatoriamente una cantidad definida de PowerUps en el tablero
-    public abstract void generarPowerUps();
+    public void generarPowerUps(){
+
+    }
 }

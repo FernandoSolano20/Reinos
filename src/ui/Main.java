@@ -47,7 +47,7 @@ public class Main {
 				System.out.println(jugador.getNombreJugador());
 			}
 		} else {
-			System.err.println("No está permitido un jugador");
+			System.err.println("No estï¿½ permitido un jugador");
 			return;
 		}
 
@@ -78,10 +78,10 @@ public class Main {
 				elMain = new FrmMain();
 				elMain.setVisible(true);
 
-				// Mostrar el tablero para demostración:
+				// Mostrar el tablero para demostracion:
 				elMain.mostrarTablero();
 
-				// Pintar casillas para demostración:
+				// Pintar casillas para demostracion:
 				int[][] inicioCasilla = new int[][] { { 0, 0 }, { 9, 9 }, { 9, 0 }, { 0, 9 } };
 				for (int i = 0; i < cantidadJugadores; ++i) {
 					elMain.getTableroUI().pintarCasilla(inicioCasilla[i][0], inicioCasilla[i][1]);
