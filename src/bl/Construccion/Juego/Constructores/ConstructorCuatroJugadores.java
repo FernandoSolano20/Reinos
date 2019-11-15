@@ -22,14 +22,4 @@ public class ConstructorCuatroJugadores extends ConstructorTablero {
         this.juego.getTablero().construirEnCasilla(0,0,jugador3.getCastillo());
         this.juego.getTablero().construirEnCasilla(9,9,jugador4.getCastillo());
     }
-
-    @Override
-    public void generarGemas() {
-
-    }
-
-    @Override
-    public void generarPowerUps() {
-
-    }
 }

@@ -23,6 +23,12 @@ public class Juego implements IJuego{
         setJugadores(new ArrayList<>());
     }
 
+    public Juego(int cantidadJugadores){
+        setCantidadJugadores(cantidadJugadores);
+        setTablero(new Tablero(10,10));
+        setJugadores(new ArrayList<>());
+    }
+
     public int getCantidadJugadores() {
         return cantidadJugadores;
     }
