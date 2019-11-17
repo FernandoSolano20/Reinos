@@ -12,6 +12,7 @@ public class Director {
         constructorTablero.crearJuego();
         constructorTablero.generarJugadores();
         constructorTablero.generarCastillos();
+        constructorTablero.generarIterador();
         constructorTablero.generarGemas();
         constructorTablero.generarPowerUps();
     }

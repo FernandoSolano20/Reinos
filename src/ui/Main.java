@@ -1,16 +1,11 @@
 package ui;
 
-import bl.Construccion.Construccion;
 import bl.Construccion.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
-import bl.Construccion.IConstruccion;
 import bl.Construccion.Juego.Juego;
-import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tropa.TropaAtaque.Arquero;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
-import ui.FORMS.Form;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,20 +32,31 @@ public class Main {
 
         Juego juego = fachada.construirJuego(cantidad);
 
-        Construccion pieza = new Arquero();
+        TropaAtaque pieza = new Arquero();
+        juego.getJugadores().get(0).getTropas().add(pieza);
+
         juego.getTablero().getCasillas()[0][1].setPieza(pieza);
         System.out.println(juego.getTablero().recorrerTablero());
 
        try{
-           juego.getTablero().moverPieza(0,1,0,0);
+           juego.getTablero().moverPieza(0,1,0,5);
        }catch (Exception e){
            System.out.println(e);
        }
         System.out.println(juego.getTablero().recorrerTablero());
-
-        for(Jugador jugador : juego.getJugadores()){
-            System.out.println(jugador.getNombreJugador());
+        try{
+            for(int i = 0 ; i < 10; i++){
+                System.out.println(juego.getIterador().obtenerSiguienteJugador().getNombreJugador());
+            }
+        }catch (Exception e){
+            System.out.println(e);
         }
+
+        juego.getTablero().getCasillas()[0][5].getPieza().setNombre("test");
+        System.out.println(juego.getTablero().getCasillas()[0][5].getPieza().getId());
+        System.out.println( juego.getJugadores().get(0).getTropas().get(0).getId());
+
+        System.out.println(juego.getTablero().getCasillas()[0][5].getPieza().equals(juego.getJugadores().get(0).getTropas().get(0)));
 
 
         /*JFrame inicio = new JFrame("App");

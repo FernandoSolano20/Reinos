@@ -1,6 +1,7 @@
 package bl.Construccion.Juego.Constructores;
 
 import bl.Construccion.Castillo;
+import bl.Construccion.Juego.Turno.Agregado.Agregado;
 import bl.Construccion.Jugadores.Jugador;
 
 public class ConstructorCuatroJugadores extends ConstructorTablero {
@@ -22,6 +23,12 @@ public class ConstructorCuatroJugadores extends ConstructorTablero {
         this.juego.getTablero().construirEnCasilla(9,0,jugador2.getCastillo());
         this.juego.getTablero().construirEnCasilla(0,0,jugador3.getCastillo());
         this.juego.getTablero().construirEnCasilla(9,9,jugador4.getCastillo());
+    }
+
+    @Override
+    public void generarIterador() {
+        Agregado agregado = new Agregado(this.juego);
+        this.juego.setIterador(agregado.getIterador());
     }
 
     @Override
