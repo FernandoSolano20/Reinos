@@ -1,14 +1,14 @@
 package bl.Construccion.Jugadores;
 
 import bl.Construccion.Castillo.Castillo;
-import bl.Construccion.Tropa.ITropa;
+import bl.Construccion.Tropa.Tropa;
 
 import java.util.ArrayList;
 
 public class Jugador {
     private String nombreJugador;
     private Castillo castillo;
-    private ArrayList<ITropa> tropas;
+    private ArrayList<Tropa> tropas;
 
     public Jugador(){
         setNombreJugador("");
@@ -22,7 +22,7 @@ public class Jugador {
         setTropas(new ArrayList<>());
     }
 
-    public Jugador(String nombreJugador, Castillo castillo, ArrayList<ITropa> tropas) {
+    public Jugador(String nombreJugador, Castillo castillo, ArrayList<Tropa> tropas) {
         setNombreJugador(nombreJugador);
         setCastillo(castillo);
         setTropas(tropas);
@@ -44,11 +44,11 @@ public class Jugador {
         this.castillo = castillo;
     }
 
-    public ArrayList<ITropa> getTropas() {
+    public ArrayList<Tropa> getTropas() {
         return tropas;
     }
 
-    public void setTropas(ArrayList<ITropa> tropas) {
+    public void setTropas(ArrayList<Tropa> tropas) {
         this.tropas = tropas;
     }
 }

@@ -28,6 +28,8 @@ public abstract class ConstructorTablero {
     public abstract void generarJugadores();
     //AÃ±ade los castillos de los jugadores en el ArrayList en el tablero
     public abstract void generarCastillos();
+    //Crea el iterador que permite manejar los turnos de los jugadores
+    public abstract void generarIterador();
     //Genera una cantidad determinada de gemas en el tablero
     public void generarGemas(){
         int[] puntos = new int[2];
@@ -65,7 +67,7 @@ public abstract class ConstructorTablero {
 
     private int numeroAleatorio(int min, int max){
         if (min >= max) {
-            throw new IllegalArgumentException("Error maximo debe ser mayor a minimo");
+            throw new IllegalArgumentException("Error máximo debe ser mayor al minimo");
         }
 
         Random r = new Random();

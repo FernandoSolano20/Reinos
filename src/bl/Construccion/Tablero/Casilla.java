@@ -1,10 +1,10 @@
 package bl.Construccion.Tablero;
 
-import bl.Construccion.IConstruccion;
+import bl.Construccion.Construccion;
 import bl.Construccion.Recursos.IRecurso;
 
 public class Casilla {
-    private IConstruccion pieza;
+    private Construccion pieza;
     private IRecurso recurso;
     private int x;
     private int y;
@@ -14,11 +14,11 @@ public class Casilla {
         setY(y);
     }
 
-    public IConstruccion getPieza() {
+    public Construccion getPieza() {
         return pieza;
     }
 
-    public void setPieza(IConstruccion pieza) {
+    public void setPieza(Construccion pieza) {
         this.pieza = pieza;
     }
 

@@ -5,6 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class pnlArriba extends JPanel {
 	private Image imagenfondo;
 	private final int ALTURA = 50;

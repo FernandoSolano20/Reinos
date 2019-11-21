@@ -3,6 +3,7 @@ package ui.contenedor.componentes;
 import javax.swing.JPanel;
 import ui.eConfiguracion;
 
+@SuppressWarnings("serial")
 public class pnlIzquierda extends JPanel {
 	private final int ANCHO = 90;
 

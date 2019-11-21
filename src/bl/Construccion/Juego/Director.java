@@ -4,15 +4,16 @@ import bl.Construccion.Juego.Constructores.ConstructorTablero;
 
 public class Director {
 
-    public Director(){
+	public Director() {
 
-    }
+	}
 
-    public void construirTablero(ConstructorTablero constructorTablero){
-        constructorTablero.crearJuego();
-        constructorTablero.generarJugadores();
-        constructorTablero.generarCastillos();
-        constructorTablero.generarGemas();
-        constructorTablero.generarPowerUps();
-    }
+	public void construirTablero(ConstructorTablero constructorTablero) {
+		constructorTablero.crearJuego();
+		constructorTablero.generarJugadores();
+		constructorTablero.generarCastillos();
+		constructorTablero.generarIterador();
+		constructorTablero.generarGemas();
+		constructorTablero.generarPowerUps();
+	}
 }

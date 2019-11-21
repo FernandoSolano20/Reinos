@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bl.Construccion.Tablero.Tablero;
 import ui.eConfiguracion;
 import ui.Tablero.pnlTablero;
 import ui.contenedor.componentes.*;
@@ -19,6 +21,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class FrmMain extends JFrame {
 
 	private JPanel pnlMain;
@@ -29,8 +32,6 @@ public class FrmMain extends JFrame {
 	private JPanel pPnlCentro;
 	private JLabel btnSalir = new JLabel();
 	private JLabel txtTitulo = new JLabel();
-	private final int PNL_CENTRAL_BORDE = 4;
-
 	private pnlTablero tableroUI;
 
 	/**
@@ -121,7 +122,8 @@ public class FrmMain extends JFrame {
 		pnlMain.add(pPnlDerecha, null);
 
 		pPnlIzquierda = new pnlIzquierda(centroAlto);
-		pPnlIzquierda.setBounds((pnlMain.getWidth() - pPnlIzquierda.getWidth()), arribaAlto, pPnlIzquierda.getWidth(), centroAlto);
+		pPnlIzquierda.setBounds((pnlMain.getWidth() - pPnlIzquierda.getWidth()), arribaAlto, pPnlIzquierda.getWidth(),
+				centroAlto);
 		pnlMain.add(pPnlIzquierda, null);
 
 		int derechaAncho = (pPnlDerecha.getWidth() - pPnlDerecha.getInsets().left - pPnlDerecha.getInsets().right);
@@ -135,14 +137,16 @@ public class FrmMain extends JFrame {
 		pPnlCentro.setBounds(derechaAncho, arribaAlto, centroAncho, centroAlto);
 		pnlMain.add(pPnlCentro, null);
 
-		tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight());
-
 	}
 
 	public pnlTablero getTableroUI() {
 		return tableroUI;
 	}
-	
+
+	public void setTableroUI(Tablero pTablero) {
+		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), pTablero);
+	}
+
 	public void limpiarPanelCentral() {
 		pPnlCentro.removeAll();
 		pPnlCentro.repaint();
