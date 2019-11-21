@@ -29,4 +29,3 @@ public class ConstructorDosJugadores extends ConstructorTablero {
 
 
 	}
-}

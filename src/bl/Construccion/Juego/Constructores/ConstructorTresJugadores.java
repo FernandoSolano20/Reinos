@@ -21,7 +21,7 @@ public class ConstructorTresJugadores extends ConstructorTablero {
 		this.juego.getTablero().construirEnCasilla(0, 0, jugador1.getCastillo());
 		this.juego.getTablero().construirEnCasilla(9, 9, jugador2.getCastillo());
 		this.juego.getTablero().construirEnCasilla(9, 0, jugador3.getCastillo());
-
+	}
     @Override
     public void generarIterador() {
         Agregado agregado = new Agregado(this.juego);
@@ -31,5 +31,5 @@ public class ConstructorTresJugadores extends ConstructorTablero {
 
 
 
-	}
 }
+
