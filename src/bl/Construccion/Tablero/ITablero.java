@@ -1,7 +1,6 @@
 package bl.Construccion.Tablero;
 
 import bl.Construccion.Construccion;
-import bl.Construccion.IConstruccion;
 
 public interface ITablero {
     void generarGemas();

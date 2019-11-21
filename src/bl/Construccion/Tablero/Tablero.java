@@ -5,85 +5,64 @@ import bl.Construccion.IConstruccion;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 
-public class Tablero implements ITablero{
+public class Tablero implements ITablero {
     private Casilla[][] casillas;
-    private int largo;
-    private int ancho;
+    private int ancho; //width
+    private int largo; //height
 
-    public Tablero(int largo, int ancho) {
-        setLargo(largo);
+    public Tablero(int ancho, int largo) {
         setAncho(ancho);
-        casillas  = new Casilla[largo][ancho];
-        generarCasillas(largo,ancho);
+		setLargo(largo);
+        setLargo(largo);
+        casillas  = new Casilla[ancho][largo];
+        generarCasillas(ancho,largo);
     }
 
-    public int getLargo() {
-        return largo;
-    }
-
-    public void setLargo(int largo) {
-        this.largo = largo;
-    }
-
-    public int getAncho() {
-        return ancho;
+	public int getAncho() {
+		return ancho;
     }
 
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
 
-    public Casilla[][] getCasillas() {
-        return casillas;
-    }
+	public int getLargo() {
+		return largo;
+	}
 
-    public void setCasillas(Casilla[][] casillas) {
-        this.casillas = casillas;
-    }
+	public void setLargo(int largo) {
+		this.largo = largo;
+	}
 
-    @Override
-    public void construirEnCasilla(int pLargo, int pAncho, Construccion pConstruccion) {
-        this.getCasillas()[pLargo][pAncho].setPieza(pConstruccion);
-    }
+	public Casilla[][] getCasillas() {
+		return casillas;
+	}
 
-    private void generarCasillas(int pLargo, int pAncho){
-        for(int i = 0; i < pLargo; i++){
-            for(int j = 0; j < pAncho; j++){
-                this.casillas[i][j] = new Casilla();
-            }
-        }
-    }
+	public void setCasillas(Casilla[][] casillas) {
+		this.casillas = casillas;
+	}
 
-    @Override
-    public String moverPieza(int origenX, int origenY, int destinoX, int destinoY) throws Exception{
-        if(validarMovimiento(origenX,origenY,destinoX,destinoY)) {
+    public void construirEnCasilla(int pAncho, int pLargo, Construccion pConstruccion) {
+        this.getCasillas()[pAncho][pLargo].setPieza(pConstruccion);
+	}
 
-            if(obtenerPiezaCasilla(destinoX,destinoY) != null) {
-                throw new Exception("La casilla de destino se encuentra ocupada");
-            }
+    private void generarCasillas(int pAncho, int pLargo){
+        for(int i = 0; i < pAncho; i++){
+            for(int j = 0; j < pLargo; j++){
+                this.casillas[i][j] = new Casilla(i,j);
+			}
+		}
+	}
 
-            else if (obtenerPiezaCasilla(origenX,origenY) != null) {
-                Construccion tropaAtaque = obtenerPiezaCasilla(origenX,origenY);
-                colocarPiezaCasilla(destinoX,destinoY,tropaAtaque);
-                removerPiezaCasilla(origenX,origenY);
-                return "La pieza ha sido movida a: " + destinoX + "," + destinoY;
-            }
-
-            else {
-                throw new Exception("No hay una pieza en la casilla de origen");
-            }
-        }
-        else{
-            throw new Exception("El movimiento solicitado es inválido");
-        }
-    }
-
-    private boolean validarMovimiento(int origenX, int origenY, int destinoX, int destinoY){
-        if(origenX != destinoX && origenY != destinoY){
+    public boolean esCasillasValida(Casilla casilla){
+        if(casilla.getX() == 0 && (casilla.getY() == 0 || casilla.getY() == getAncho() - 1)){
             return false;
         }
+        else if(casilla.getX() == 9 && (casilla.getY() == 0 || casilla.getY() == getLargo() - 1)){
+			return false;
+		}
         else{
-            return true;
+        return true;
         }
     }
 
@@ -109,25 +88,6 @@ public class Tablero implements ITablero{
     }
 
     @Override
-    public String recorrerTablero() {
-        int largoTablero = getLargo();
-        int anchoTablero = getAncho();
-        String tablero = "";
-        for(int i = 0; i < largoTablero; i++){
-            for(int j =0; j < anchoTablero; j++){
-                if(casillas[i][j].getPieza() != null){
-                    tablero += "\t" + casillas[i][j].getPieza().getNombre();
-                }
-                else{
-                    tablero += "\t vacio";
-                }
-            }
-            tablero += "\n";
-        }
-        return tablero;
-    }
-
-    @Override
     public void generarGemas() {
 
     }
@@ -140,5 +100,52 @@ public class Tablero implements ITablero{
     @Override
     public void generarCastillos() {
 
-    }
+	}
+
+	public String moverPieza(int origenX, int origenY, int destinoX, int destinoY) throws Exception {
+		if (validarMovimiento(origenX, origenY, destinoX, destinoY)) {
+
+			if (obtenerPiezaCasilla(destinoX, destinoY) != null) {
+				throw new Exception("La casilla de destino se encuentra ocupada");
+			}
+
+			if (obtenerPiezaCasilla(origenX, origenY) != null) {
+				Construccion tropaAtaque = obtenerPiezaCasilla(origenX, origenY);
+				colocarPiezaCasilla(destinoX, destinoY, tropaAtaque);
+				removerPiezaCasilla(origenX, origenY);
+				return "La pieza ha sido movida a: " + destinoX + "," + destinoY;
+			}
+
+			throw new Exception("No hay una pieza en la casilla de origen");
+
+		} else {
+			throw new Exception("El movimiento solicitado es inv�lido");
+		}
+	}
+
+	private boolean validarMovimiento(int origenX, int origenY, int destinoX, int destinoY) {
+		if (origenX != destinoX && origenY != destinoY) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public String recorrerTablero() {
+		String tablero = "";
+
+		for (Casilla[] i : getCasillas()) {
+			for (Casilla j : i) {
+				if (j.getPieza() != null) {
+					tablero += " [" + j.getPieza().getNombre() + " (" + j.getX() + " - " + j.getY() + ")] ";
+				} else {
+					tablero += " [] ";
+				}
+			}
+			tablero += "\n";
+		}
+		return tablero;
+	}
+
 }
