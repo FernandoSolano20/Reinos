@@ -1,9 +1,6 @@
 package bl.Construccion.Tablero;
 
 import bl.Construccion.Construccion;
-import bl.Construccion.IConstruccion;
-import bl.Construccion.Tropa.Tropa;
-import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 
 public class Tablero implements ITablero {
     private Casilla[][] casillas;

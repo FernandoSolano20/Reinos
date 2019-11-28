@@ -1,9 +1,7 @@
 package bl.Construccion.Juego.Constructores;
 
-import bl.Construccion.Castillo;
 import bl.Construccion.Juego.Turno.Agregado.Agregado;
 import bl.Construccion.Jugadores.Jugador;
-import bl.Construccion.Tablero.Casilla;
 
 public class ConstructorTresJugadores extends ConstructorTablero {
 	@Override

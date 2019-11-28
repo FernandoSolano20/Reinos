@@ -1,6 +1,7 @@
 package bl.Construccion.Jugadores;
 
-import bl.Construccion.Castillo;
+
+import bl.Construccion.Castillo.Castillo;
 import bl.Construccion.Tropa.Tropa;
 
 import java.util.ArrayList;
