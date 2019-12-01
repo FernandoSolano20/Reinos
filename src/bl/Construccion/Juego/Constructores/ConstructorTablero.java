@@ -59,7 +59,7 @@ public abstract class ConstructorTablero {
             do {
                 puntos = obtenerPuntosAletorios(ancho, largo);
                 casilla = tablero.getCasillas()[puntos[0]][puntos[1]];
-            } while (!tablero.esCasillasValida(casilla) && casilla.tieneRecurso());
+            } while (!tablero.esCasillasValida(casilla) && !casilla.tieneRecurso());
             powerUp = numeroAleatorio(1, 3);
             casilla.setRecurso(fabricaCasillas.crearGemas(powerUp));
         }

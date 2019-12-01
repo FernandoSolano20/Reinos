@@ -47,10 +47,12 @@ public class Casilla {
     }
 
     public boolean tieneRecurso(){
-        return recurso == null;
+    	// Si no es null entonces si tiene un recurso.
+        return recurso != null;
     }
 
     public boolean tienePieza(){
-        return pieza == null;
+    	// Si no es null entonces si tiene una pieza.
+        return pieza != null;
     }
 }
