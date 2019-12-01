@@ -1,5 +1,6 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
+import bl.Construccion.Juego.VisitanteTropas.IVisitante;
 import bl.Construccion.Tropa.Tropa;
 
 public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
@@ -61,4 +62,7 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
     public void robarOro() {
 
     }
+
+    @Override
+    public abstract void visitaRegeneracion(IVisitante pVisitante);
 }

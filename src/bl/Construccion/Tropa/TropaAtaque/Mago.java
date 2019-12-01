@@ -1,5 +1,7 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
+import bl.Construccion.Juego.VisitanteTropas.IVisitante;
+
 public class Mago extends TropaAtaque {
     public Mago() {
         setPrecio(10);
@@ -10,5 +12,10 @@ public class Mago extends TropaAtaque {
         setAlcance(3);
         setOroTransportable(2);
         setNombre("Mago");
+    }
+
+    @Override
+    public void visitaRegeneracion(IVisitante pVisitante) {
+        pVisitante.visitarTropaAtaque(this);
     }
 }

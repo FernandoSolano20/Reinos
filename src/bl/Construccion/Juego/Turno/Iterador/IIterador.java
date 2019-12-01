@@ -7,5 +7,6 @@ public interface IIterador {
     Jugador obtenerSiguienteJugador()throws Exception;
     Jugador obtenerJugadorActual();
     boolean hayMasJugadores();
+    int getPosicionActual();
 
 }

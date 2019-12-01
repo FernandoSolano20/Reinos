@@ -1,5 +1,7 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
+import bl.Construccion.Juego.VisitanteTropas.IVisitante;
+
 public class Jinete extends TropaAtaque {
     public Jinete() {
         setPrecio(15);
@@ -10,5 +12,10 @@ public class Jinete extends TropaAtaque {
         setAlcance(1);
         setOroTransportable(6);
         setNombre("Jinete");
+    }
+
+    @Override
+    public void visitaRegeneracion(IVisitante pVisitante) {
+        pVisitante.visitarTropaAtaque(this);
     }
 }

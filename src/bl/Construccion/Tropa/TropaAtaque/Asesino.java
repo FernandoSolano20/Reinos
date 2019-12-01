@@ -1,5 +1,7 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
+import bl.Construccion.Juego.VisitanteTropas.IVisitante;
+
 public class Asesino extends TropaAtaque {
     public Asesino() {
         setPrecio(5);
@@ -10,5 +12,10 @@ public class Asesino extends TropaAtaque {
         setAlcance(2);
         setOroTransportable(2);
         setNombre("Asesino");
+    }
+
+    @Override
+    public void visitaRegeneracion(IVisitante pVisitante) {
+        pVisitante.visitarTropaAtaque(this);
     }
 }

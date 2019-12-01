@@ -7,9 +7,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import bl.Construccion.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
+import bl.Construccion.Juego.Turno.Turno;
 import bl.Construccion.Jugadores.Jugador;
-import bl.Construccion.Tropa.TropaAtaque.Arquero;
-import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
+import bl.Construccion.Tropa.Tropa;
+import bl.Construccion.Tropa.TropaAtaque.*;
 import ui.contenedor.FrmMain;
 import ui.contenedor.OSUtil;
 
@@ -54,11 +55,11 @@ public class Main {
 
 		// TODO: Crear panel donde selecciona la cantidad de jugadores y se escribe el
 		// nombre de cada jugador:
-		int cantidadJugadores = 3;
+		int cantidadJugadores = 2;
 
 		if (cantidadJugadores < 5) {
 
-			System.out.println(FabricadorDeTropas.procesarFuncion(1));
+			/*System.out.println(FabricadorDeTropas.procesarFuncion(1));
 			System.out.println(FabricadorDeTropas.procesarFuncion(2));
 			System.out.println(FabricadorDeTropas.procesarFuncion(3));
 			System.out.println(FabricadorDeTropas.procesarFuncion(4));
@@ -67,7 +68,7 @@ public class Main {
 			System.out.println(FabricadorDeTropas.procesarFuncion(7));
 			System.out.println(FabricadorDeTropas.procesarFuncion(8));
 			System.out.println(FabricadorDeTropas.procesarFuncion(9));
-			System.out.println(FabricadorDeTropas.procesarFuncion(10));
+			System.out.println(FabricadorDeTropas.procesarFuncion(10));*/
 
 			juego = fachada.construirJuego(cantidadJugadores);
 
@@ -82,12 +83,24 @@ public class Main {
 				// Mostrar el tablero:
 				elMain.mostrarTablero();
 
-				TropaAtaque pieza = new Arquero();
-				juego.getJugadores().get(0).getTropas().add(pieza);
+				Tropa tropa = new Arquero();
 
+				juego.getJugadores().get(0).getTropas().add(tropa);
+
+				juego.getTablero().construirEnCasilla(0,1,tropa);
+
+				pasarTurno();
+				pasarTurno();
+				pasarTurno();
+				pasarTurno();
 				// Ejemplo:
-				juego.getTablero().getCasillas()[0][1].setPieza(pieza);
-				System.out.println(juego.getTablero().recorrerTablero());
+
+
+				try{
+					System.out.println(juego.getTablero().recorrerTablero());
+				}catch (Exception e){
+					System.out.println(e);
+				}
 
 				// Pintar casillas que no est�n vacias:
 				for (int i = 0; i < juego.getTablero().getAncho(); i++) {
@@ -115,4 +128,8 @@ public class Main {
 			System.exit(0);
 		}
 	}
+
+	public static void pasarTurno(){
+	    juego.pasarTurno();
+    }
 }

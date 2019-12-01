@@ -7,4 +7,7 @@ public interface IJuego {
 
     //Metodo utilizado para inciar el turno del obtenerSiguienteJugador jugador en partida
     void pasarTurno();
+
+    //Meotodo utilizado para obtener un nuevo valor del dado
+    int tirarDado();
 }
