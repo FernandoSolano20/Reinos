@@ -4,7 +4,7 @@ import bl.Construccion.Juego.Constructores.ConstructorCuatroJugadores;
 import bl.Construccion.Juego.Constructores.ConstructorDosJugadores;
 import bl.Construccion.Juego.Constructores.ConstructorTablero;
 import bl.Construccion.Juego.Constructores.ConstructorTresJugadores;
-import bl.Construccion.Juego.Director;
+import bl.Construccion.Juego.Director.Director;
 import bl.Construccion.Juego.Juego;
 
 public class Fachada {

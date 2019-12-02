@@ -1,6 +1,7 @@
 package bl.Construccion.Juego.Constructores;
 
 import bl.Construccion.Juego.Juego;
+import bl.Construccion.Juego.Turno.Turno;
 import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.MetodoFabrica.FabricaCasillas;
 import bl.Construccion.Tablero.Casilla;
@@ -26,10 +27,26 @@ public abstract class ConstructorTablero {
 
     //Añade la cantidad de jugadores al ArrayList de jugadores en la clase Juego
     public abstract void generarJugadores();
+
     //Añade los castillos de los jugadores en el ArrayList en el tablero
     public abstract void generarCastillos();
+
     //Crea el iterador que permite manejar los turnos de los jugadores
     public abstract void generarIterador();
+
+    //Crea un nuevo turno con el primer jugador de la lista
+    public void generarPrimerTurno(){
+        try{
+
+            Turno primerTurno = new Turno(juego.getTablero(), juego.getIterador().obtenerPrimerJugador(), juego.tirarDado());
+            juego.setTurnoActual(primerTurno);
+
+        }catch (Exception e){
+            System.out.println("Error: " + e);
+        }
+
+    }
+
     //Genera una cantidad determinada de gemas en el tablero
     public void generarGemas(){
         int[] puntos = new int[2];
@@ -42,7 +59,7 @@ public abstract class ConstructorTablero {
             do {
                 puntos = obtenerPuntosAletorios(ancho, largo);
                 casilla = tablero.getCasillas()[puntos[0]][puntos[1]];
-            } while (!tablero.esCasillasValida(casilla) && casilla.tieneRecurso());
+            } while (!tablero.esCasillasValida(casilla) && !casilla.tieneRecurso());
             powerUp = numeroAleatorio(1, 3);
             casilla.setRecurso(fabricaCasillas.crearGemas(powerUp));
         }

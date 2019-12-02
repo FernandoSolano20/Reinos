@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Iterador_Jugadores implements IIterador{
     private IAgregado jugadores;
-    private int posicion_actual = 0;
+    private int posicionActual = 0;
 
     public Iterador_Jugadores(Agregado informacionJugadores){
         setJugadores(informacionJugadores);
@@ -17,7 +17,7 @@ public class Iterador_Jugadores implements IIterador{
     public Jugador obtenerPrimerJugador() throws Exception{
         Jugador jugador = null;
         if( ! this.getJugadores().isEmpty()){
-            setPosicion_actual(0);
+            setPosicionActual(0);
             jugador = this.getJugadores().get(0);
         }
         else{
@@ -29,9 +29,9 @@ public class Iterador_Jugadores implements IIterador{
     @Override
     public Jugador obtenerSiguienteJugador() throws Exception{
         Jugador jugador = null;
-        setPosicion_actual(getPosicion_actual()+1);
+        setPosicionActual(getPosicionActual()+1);
         if( hayMasJugadores() ){
-            jugador = getJugadores().get(posicion_actual);
+            jugador = getJugadores().get(posicionActual);
         }
         else{
             // Si se encuentra en la ultima posicion, inicia de nuevo la lista y le da el turno al primer jugador
@@ -43,7 +43,7 @@ public class Iterador_Jugadores implements IIterador{
     @Override
     public Jugador obtenerJugadorActual() {
         Jugador jugador = null;
-        jugador = getJugadores().get(posicion_actual);
+        jugador = getJugadores().get(posicionActual);
         return jugador;
     }
 
@@ -51,7 +51,7 @@ public class Iterador_Jugadores implements IIterador{
     //Metodo que determina si hay mas Jugadores dentro del arreglo, esto para verificar si hay que volver al primer jugador
     public boolean hayMasJugadores() {
 
-        if(  getPosicion_actual() < this.getJugadores().size()){
+        if(  getPosicionActual() < this.getJugadores().size()){
             return true;
         }
         else{
@@ -59,12 +59,13 @@ public class Iterador_Jugadores implements IIterador{
         }
     }
 
-    public int getPosicion_actual() {
-        return posicion_actual;
+    @Override
+    public int getPosicionActual() {
+        return posicionActual;
     }
 
-    public void setPosicion_actual(int posicion_actual) {
-        this.posicion_actual = posicion_actual;
+    public void setPosicionActual(int posicionActual) {
+        this.posicionActual = posicionActual;
     }
 
     public ArrayList<Jugador> getJugadores() {

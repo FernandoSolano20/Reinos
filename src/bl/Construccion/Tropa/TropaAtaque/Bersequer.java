@@ -1,5 +1,7 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
+import bl.Construccion.Juego.VisitanteTropas.IVisitante;
+
 public class Bersequer extends TropaAtaque {
     public Bersequer() {
         setPrecio(25);
@@ -10,5 +12,10 @@ public class Bersequer extends TropaAtaque {
         setAlcance(2);
         setOroTransportable(6);
         setNombre("Bersequer");
+    }
+
+    @Override
+    public void visitaRegeneracion(IVisitante pVisitante) {
+        pVisitante.visitarTropaAtaque(this);
     }
 }

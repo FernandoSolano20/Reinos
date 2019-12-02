@@ -1,4 +1,4 @@
-package bl.Construccion.Juego;
+package bl.Construccion.Juego.Director;
 
 import bl.Construccion.Juego.Constructores.ConstructorTablero;
 
@@ -13,6 +13,7 @@ public class Director {
 		constructorTablero.generarJugadores();
 		constructorTablero.generarCastillos();
 		constructorTablero.generarIterador();
+		constructorTablero.generarPrimerTurno();
 		constructorTablero.generarGemas();
 		constructorTablero.generarPowerUps();
 	}
