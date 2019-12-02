@@ -9,8 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bl.Construccion.FabricadorDeTropas;
+import bl.Construccion.Fachada.Fachada;
+import bl.Construccion.Juego.Juego;
+import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Tablero;
+import bl.Construccion.Tropa.Tropa;
+import bl.Construccion.Tropa.TropaAtaque.Arquero;
 import ui.eConfiguracion;
+import ui.pnlControles;
 import ui.Tablero.pnlTablero;
 import ui.contenedor.componentes.*;
 import java.awt.Toolkit;
@@ -24,6 +31,8 @@ import java.awt.event.MouseEvent;
 @SuppressWarnings("serial")
 public class FrmMain extends JFrame {
 
+	private static Juego juego;
+
 	private JPanel pnlMain;
 	private JPanel pPnlArriba;
 	private JPanel pPnlIzquierda;
@@ -32,7 +41,11 @@ public class FrmMain extends JFrame {
 	private JPanel pPnlCentro;
 	private JLabel btnSalir = new JLabel();
 	private JLabel txtTitulo = new JLabel();
+
 	private pnlTablero tableroUI;
+	private pnlControles pnlControles;
+
+	private int cantidadJugadores = 0;
 
 	/**
 	 * Create the frame.
@@ -111,11 +124,33 @@ public class FrmMain extends JFrame {
 		txtTitulo.setBounds(txtTituloX, 0, txtTituloAncho, 47);
 
 		pPnlAbajo = new pnlAbajo(pnlMain.getWidth());
-		pPnlAbajo.setBounds(0, (mainAlto - pPnlAbajo.getHeight()), pnlMain.getWidth(), pPnlAbajo.getHeight());
 		pnlMain.add(pPnlAbajo, null);
+
+		pnlControles = new pnlControles(pnlMain.getWidth());
+
+		pPnlAbajo.add(pnlControles);
+		pPnlAbajo.setSize(pPnlAbajo.getWidth(), pnlControles.getHeight());
+
+		int controlesAncho = (pPnlAbajo.getWidth() - pPnlAbajo.getInsets().left - pPnlAbajo.getInsets().right);
+
+		if (controlesAncho > mainAncho) {
+			controlesAncho = mainAncho;
+		}
+
+		controlesAncho = Math.round((controlesAncho / 2) / 2);
+
+		pnlControles.setBounds(controlesAncho, 0, pnlControles.getWidth(), pnlControles.getHeight());
+
+		pnlControles.setVisible(false);
+
+		pPnlAbajo.setBounds(0, (mainAlto - pPnlAbajo.getHeight()), pnlMain.getWidth(), pPnlAbajo.getHeight());
+
 		int abajoAlto = (pPnlAbajo.getHeight() - pPnlAbajo.getInsets().top - pPnlAbajo.getInsets().bottom);
 
 		int centroAlto = (mainAlto - arribaAlto - abajoAlto);
+
+		// Margen:
+		centroAlto -= 5;
 
 		pPnlDerecha = new pnlDerecha(centroAlto);
 		pPnlDerecha.setBounds(0, arribaAlto, pPnlDerecha.getWidth(), centroAlto);
@@ -147,6 +182,14 @@ public class FrmMain extends JFrame {
 		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), pTablero);
 	}
 
+	public int pnlCentrogetWidth() {
+		return pPnlCentro.getWidth();
+	}
+
+	public int pnlCentrogetHeight() {
+		return pPnlCentro.getHeight();
+	}
+
 	public void limpiarPanelCentral() {
 		pPnlCentro.removeAll();
 		pPnlCentro.repaint();
@@ -156,6 +199,15 @@ public class FrmMain extends JFrame {
 		pPnlCentro.removeAll();
 		pPnlCentro.add(nuevoPanel);
 		pPnlCentro.repaint();
+	}
+
+	public void setPanelAbajo(JPanel nuevoPanel) {
+		System.out.println("nuevo: " + nuevoPanel.getWidth() + " - " + nuevoPanel.getHeight());
+		pPnlAbajo.removeAll();
+		pPnlAbajo.add(nuevoPanel, null);
+		pPnlAbajo.setBounds(nuevoPanel.getBounds());
+		pPnlAbajo.repaint();
+		pPnlAbajo.setVisible(true);
 	}
 
 	private void SALIR() {
@@ -196,6 +248,86 @@ public class FrmMain extends JFrame {
 
 	public void mostrarTablero() {
 		setPanelCentral(tableroUI);
+		pnlControles.setVisible(true);
+	}
+
+	public int getCantidadJugadores() {
+		return cantidadJugadores;
+	}
+
+	public void setCantidadJugadores(int cantidadJugadores) {
+		this.cantidadJugadores = cantidadJugadores;
+	}
+
+	private int getCantidadDeJugadores() {
+		int opcion = 0;
+		String cad = "Seleccione la cantidad de jugadores:\n";
+		String[] opciones = { "          2          ", "          3          ", "          4          " };
+		do {
+			opcion = JOptionPane.showOptionDialog(null, cad, eConfiguracion.TITULO_APP,
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+			opcion += 2;
+		} while (opcion != 2 && opcion != 3 && opcion != 4);
+
+		return opcion;
+	}
+
+	public void pasarTurno() {
+		juego.pasarTurno();
+	}
+
+	public void iniciar() {
+
+		int cantidadJugadores = getCantidadDeJugadores();
+		this.setCantidadJugadores(cantidadJugadores);
+
+		/*
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(1));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(2));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(3));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(4));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(5));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(6));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(7));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(8));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(9));
+		 * System.out.println(FabricadorDeTropas.procesarFuncion(10));
+		 */
+
+		FabricadorDeTropas.procesarFuncion(1);
+		FabricadorDeTropas.procesarFuncion(2);
+		FabricadorDeTropas.procesarFuncion(3);
+		FabricadorDeTropas.procesarFuncion(4);
+		FabricadorDeTropas.procesarFuncion(5);
+		FabricadorDeTropas.procesarFuncion(6);
+		FabricadorDeTropas.procesarFuncion(7);
+		FabricadorDeTropas.procesarFuncion(8);
+		FabricadorDeTropas.procesarFuncion(9);
+		FabricadorDeTropas.procesarFuncion(10);
+
+		juego = new Fachada().construirJuego(cantidadJugadores);
+
+		Tropa tropa = new Arquero();
+		juego.getJugadores().get(0).getTropas().add(tropa);
+		juego.getTablero().construirEnCasilla(0, 4, tropa);
+
+		// Envía el tablero a pnlTablero:
+		this.setTableroUI(juego.getTablero());
+
+		// Nombre del jugador:
+		int numJugador = 1;
+		for (Jugador jugador : juego.getJugadores()) {
+			jugador.setNombreJugador("Jugador" + numJugador);
+			++numJugador;
+		}
+
+		// pasarTurno();
+
+		System.out.println(juego.getTablero().recorrerTablero());
+
+		// Mostrar el tablero:
+		this.mostrarTablero();
+
 	}
 
 }
