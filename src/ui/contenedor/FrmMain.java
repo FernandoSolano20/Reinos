@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bl.Construccion.Juego.Juego;
 import bl.Construccion.Tablero.Tablero;
 import ui.eConfiguracion;
 import ui.Tablero.pnlTablero;
@@ -33,6 +34,7 @@ public class FrmMain extends JFrame {
 	private JLabel btnSalir = new JLabel();
 	private JLabel txtTitulo = new JLabel();
 	private pnlTablero tableroUI;
+	private Juego juego;
 
 	/**
 	 * Create the frame.
@@ -165,7 +167,7 @@ public class FrmMain extends JFrame {
 			icono = new ImageIcon(this.getClass().getResource("/ui/Imagenes/salir.png"));
 		} catch (Exception e) {
 		}
-		int opcion = JOptionPane.showOptionDialog(null, "<html><b>¿Seguro que desea salir?</b></html>", " ",
+		int opcion = JOptionPane.showOptionDialog(null, "<html><b>ï¿½Seguro que desea salir?</b></html>", " ",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icono, opciones, opciones[1]);
 
 		if (opcion == JOptionPane.YES_OPTION) {
@@ -177,7 +179,7 @@ public class FrmMain extends JFrame {
 	}
 
 	private void setPantallaCompleta() {
-		// Toolkit para conocer la resolución de la pantalla.
+		// Toolkit para conocer la resoluciï¿½n de la pantalla.
 		int largoBarraTareas = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screenSize.width, screenSize.height - largoBarraTareas);
@@ -190,12 +192,21 @@ public class FrmMain extends JFrame {
 
 			contenedor.setIconImage(xIMAGEN);
 		} catch (Exception ex) {
-			System.err.println("no cargó icono!");
+			System.err.println("no cargï¿½ icono!");
 		}
 	}
 
 	public void mostrarTablero() {
 		setPanelCentral(tableroUI);
 	}
+
+	public Juego getJuego() {
+		return juego;
+	}
+
+	public void setJuego(Juego juego) {
+		this.juego = juego;
+	}
+
 
 }

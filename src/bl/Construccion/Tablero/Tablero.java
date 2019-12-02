@@ -46,7 +46,7 @@ public class Tablero implements ITablero {
     private void generarCasillas(int pAncho, int pLargo){
         for(int i = 0; i < pAncho; i++){
             for(int j = 0; j < pLargo; j++){
-                this.casillas[i][j] = new Casilla(i,j);
+                this.casillas[j][i] = new Casilla(j,i);
 			}
 		}
 	}
@@ -63,35 +63,24 @@ public class Tablero implements ITablero {
         }
     }
 
-    private Construccion obtenerPiezaCasilla(int coordenadaX, int coordenadaY){
-        try{
-
-            return casillas[coordenadaX][coordenadaY].getPieza();
-
-        }catch (Exception e){
-            System.out.println(e);
-        }
+    public Construccion obtenerPiezaCasilla(int coordenadaX, int coordenadaY){
+    	Casilla casilla = casillas[coordenadaX][coordenadaY];
+    	if(casilla != null)
+            return casilla.getPieza();
         return null;
     }
 
-    private void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza){
+    public void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza){
+    	if(obtenerPiezaCasilla(coordenadaX,coordenadaY) == null){
+    		Casilla casilla = casillas[coordenadaX][coordenadaY];
+			casilla.setPieza(pieza);
+			pieza.setCasilla(casilla);
+		}
 
-            casillas[coordenadaX][coordenadaY].setPieza(pieza);
     }
 
     private void removerPiezaCasilla(int coordenadaX, int coordenadaY){
-
         casillas[coordenadaX][coordenadaY].setPieza(null);
-    }
-
-    @Override
-    public void generarGemas() {
-
-    }
-
-    @Override
-    public void generarPowerUps() {
-
     }
 
     @Override

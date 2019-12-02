@@ -8,6 +8,7 @@ import bl.Construccion.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
+import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.TropaAtaque.Arquero;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.contenedor.FrmMain;
@@ -18,6 +19,7 @@ public class Main {
 
 	private static Fachada fachada = new Fachada();
 	private static Juego juego;
+	private static Tablero tablero;
 
 	public static void main(String args[]) throws IOException {
 		try {
@@ -48,10 +50,8 @@ public class Main {
 	}
 
 	private static void iniciar() {
-
 		elMain = new FrmMain();
 		elMain.setVisible(true);
-
 		// TODO: Crear panel donde selecciona la cantidad de jugadores y se escribe el
 		// nombre de cada jugador:
 		int cantidadJugadores = 3;
@@ -70,10 +70,11 @@ public class Main {
 			System.out.println(FabricadorDeTropas.procesarFuncion(10));
 
 			juego = fachada.construirJuego(cantidadJugadores);
+			elMain.setJuego(juego);
 
 			if (null != juego) {
-
-				elMain.setTableroUI(juego.getTablero());
+				tablero = juego.getTablero();
+				elMain.setTableroUI(tablero);
 
 				for (Jugador jugador : juego.getJugadores()) {
 					System.out.println(jugador.getNombreJugador());
