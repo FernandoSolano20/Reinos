@@ -9,6 +9,7 @@ import ui.contenedor.OSUtil;
 public class Main {
 
 	public static void main(String args[]) throws IOException {
+
 		try {
 			OSUtil.OS_TYPE os = OSUtil.getOSType();
 			if (os == OSUtil.OS_TYPE.WINDOWS) {

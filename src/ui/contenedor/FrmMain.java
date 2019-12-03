@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bl.Construccion.FabricadorDeTropas;
+import bl.Construccion.Fabricas.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
@@ -51,38 +51,44 @@ public class FrmMain extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmMain() {
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(0, 0, 780, 430);
+
+		//Se determinan las caracteristicas para la escena del juego
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setBounds(0, 0, 780, 430);
 		this.setResizable(false);
 		this.setState(Frame.MAXIMIZED_BOTH);
-		setUndecorated(true);
-		setTitle("Reinos Cenfotecos");
+		this.setUndecorated(true);
+		this.setTitle("Reinos Cenfotecos");
 		this.setIcono(this, "/ui/imagenes/Xprogram.png");
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
-		setPantallaCompleta();
-		addWindowListener(new java.awt.event.WindowAdapter() {
+		this.setPantallaCompleta();
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent evt) {
 				SALIR();
 			}
 		});
 
+		//Se crea el panel principal
 		pnlMain = new JPanel();
+
 		pnlMain.setBorder(new EmptyBorder(5, 5, 5, 5));
 		pnlMain.setBackground(eConfiguracion.COLOR_FONDO);
 		pnlMain.setForeground(eConfiguracion.COLOR_LETRA);
 		pnlMain.setLayout(null);
 		pnlMain.setSize(this.getWidth(), this.getHeight());
-		setContentPane(pnlMain);
+		this.setContentPane(pnlMain);
 
 		int mainAncho = (pnlMain.getWidth() - pnlMain.getInsets().left - pnlMain.getInsets().right);
 		int mainAlto = (pnlMain.getHeight() - pnlMain.getInsets().top - pnlMain.getInsets().bottom);
 
+		//Se crea el panel superior
 		pPnlArriba = new pnlArriba(pnlMain.getWidth());
 		pPnlArriba.setBounds(0, 0, pPnlArriba.getWidth(), pPnlArriba.getHeight());
 		pnlMain.add(pPnlArriba, null);
 		int arribaAlto = (pPnlArriba.getHeight() - pPnlArriba.getInsets().top - pPnlArriba.getInsets().bottom);
 
+		//Se crea el boton de salida del juego
 		btnSalir.setBackground(new java.awt.Color(71, 71, 71));
 		btnSalir.setFont(new Font("Viner Hand ITC", 1, 18));
 		btnSalir.setForeground(new java.awt.Color(255, 102, 102));
@@ -217,7 +223,7 @@ public class FrmMain extends JFrame {
 			icono = new ImageIcon(this.getClass().getResource("/ui/Imagenes/salir.png"));
 		} catch (Exception e) {
 		}
-		int opcion = JOptionPane.showOptionDialog(null, "<html><b>¿Seguro que desea salir?</b></html>", " ",
+		int opcion = JOptionPane.showOptionDialog(null, "<html><b>ï¿½Seguro que desea salir?</b></html>", " ",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icono, opciones, opciones[1]);
 
 		if (opcion == JOptionPane.YES_OPTION) {
@@ -229,7 +235,7 @@ public class FrmMain extends JFrame {
 	}
 
 	private void setPantallaCompleta() {
-		// Toolkit para conocer la resolución de la pantalla.
+		// Toolkit para conocer la resoluciï¿½n de la pantalla.
 		int largoBarraTareas = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screenSize.width, screenSize.height - largoBarraTareas);
@@ -242,7 +248,7 @@ public class FrmMain extends JFrame {
 
 			contenedor.setIconImage(xIMAGEN);
 		} catch (Exception ex) {
-			System.err.println("no cargó icono!");
+			System.err.println("no cargï¿½ icono!");
 		}
 	}
 
@@ -281,20 +287,6 @@ public class FrmMain extends JFrame {
 		int cantidadJugadores = getCantidadDeJugadores();
 		this.setCantidadJugadores(cantidadJugadores);
 
-		/*
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(1));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(2));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(3));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(4));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(5));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(6));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(7));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(8));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(9));
-		 * System.out.println(FabricadorDeTropas.procesarFuncion(10));
-		 */
-
-		FabricadorDeTropas.procesarFuncion(1);
 		FabricadorDeTropas.procesarFuncion(2);
 		FabricadorDeTropas.procesarFuncion(3);
 		FabricadorDeTropas.procesarFuncion(4);
@@ -307,11 +299,12 @@ public class FrmMain extends JFrame {
 
 		juego = new Fachada().construirJuego(cantidadJugadores);
 
+
 		Tropa tropa = new Arquero();
 		juego.getJugadores().get(0).getTropas().add(tropa);
 		juego.getTablero().construirEnCasilla(0, 4, tropa);
 
-		// Envía el tablero a pnlTablero:
+		// Envï¿½a el tablero a pnlTablero:
 		this.setTableroUI(juego.getTablero());
 
 		// Nombre del jugador:
@@ -327,7 +320,6 @@ public class FrmMain extends JFrame {
 
 		// Mostrar el tablero:
 		this.mostrarTablero();
-
 	}
 
 }

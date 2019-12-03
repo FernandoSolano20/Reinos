@@ -1,6 +1,7 @@
 package bl.Construccion.Tablero;
 
 import bl.Construccion.Construccion;
+import bl.Construccion.Excepciones.ExcepcionJuego;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 
@@ -98,27 +99,27 @@ public class Tablero implements ITablero {
 		//Validamos que las dos coordenadas ingresadas sean correctas
 
 		if (! validarCasillas(origenX, origenY, destinoX, destinoY)) {
-			throw new Exception("El movimiento solicitado es invalido");
+			throw new ExcepcionJuego("El movimiento solicitado es invalido");
 		}
 
 		else if(piezaDestino != null){
-			throw new Exception("La casilla de destino se encuentra ocupada");
+			throw new ExcepcionJuego("La casilla de destino se encuentra ocupada");
 		}
 
 		else if(piezaOrigen == null){
-			throw new Exception("La casilla de origen se encuentra vacia");
+			throw new ExcepcionJuego("La casilla de origen se encuentra vacia");
 		}
 
 		else if(! validarTropaAtaque(piezaOrigen)){
-			throw new Exception("La tropa no es capaz de moverse");
+			throw new ExcepcionJuego("La tropa no es capaz de moverse");
 		}
 
 		else if(! validarMovimientoDado(distanciaMovimiento, pValorDado)) {
-			throw new Exception("La cantidad de moviemientos es mayor al valor restante del dado");
+			throw new ExcepcionJuego("La cantidad de moviemientos es mayor al valor restante del dado");
 		}
 
 		else if(! validarMovimientoTropa((TropaAtaque) piezaOrigen, distanciaMovimiento)) {
-			throw new Exception("La tropa no tiene suficientes moviemientos");
+			throw new ExcepcionJuego("La tropa no tiene suficientes moviemientos");
 		}
 		else{
 			colocarPiezaCasilla(destinoX, destinoY, piezaOrigen);

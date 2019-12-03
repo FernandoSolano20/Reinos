@@ -1,76 +1,96 @@
-package bl.Construccion;
+package bl.Construccion.Fabricas;
 
-import bl.Construccion.Fabricas.*;
 import bl.Construccion.Fabricas.Abstracta.FabricaTropas;
 import bl.Construccion.Fabricas.FabricasTropasAtaque.*;
 import bl.Construccion.Fabricas.FabricasTropasDefensa.FabricaBallesta;
 import bl.Construccion.Fabricas.FabricasTropasDefensa.FabricaCatapulta;
+import bl.Construccion.Tropa.Tropa;
+import bl.Construccion.Tropa.TropaAtaque.Arquero;
 
 public class FabricadorDeTropas {
 
-    public static String procesarFuncion(int pOpc) {
-        String sMensaje ="";
+    public static Tropa procesarFuncion(int pOpc) {
         FabricaTropas fabricaTropa;
+        Tropa tropa = new Arquero();
 
-        switch (pOpc) {
+        try{
 
-            case 1:
-                fabricaTropa = new FabricaCastillo();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+            switch (pOpc) {
 
-            case 2:
-                fabricaTropa = new FabricaBallesta();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 1:
+                {
+                    fabricaTropa = new FabricaBallesta();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 3:
-                fabricaTropa = new FabricaCatapulta();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 2:
+                {
+                    fabricaTropa = new FabricaCatapulta();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 4:
-                fabricaTropa = new FabricaArquero();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 3:
+                {
+                    fabricaTropa = new FabricaArquero();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 5:
-                fabricaTropa = new FabricaEspadachin();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 4:
+                {
+                    fabricaTropa = new FabricaEspadachin();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 6:
-                fabricaTropa = new FabricaBersequer();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 5:
+                {
+                    fabricaTropa = new FabricaBersequer();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 7:
-                fabricaTropa = new FabricaMago();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 6:
+                {
+                    fabricaTropa = new FabricaMago();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 8:
-                fabricaTropa = new FabricaAsesino();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 7:
+                {
+                    fabricaTropa = new FabricaAsesino();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 9:
-                fabricaTropa = new FabricaJinete();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 8:
+                {
+                    fabricaTropa = new FabricaJinete();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
 
-            case 10:
-                fabricaTropa = new FabricaEspia();
-                sMensaje = CrearFabricaDeTropas(fabricaTropa);
-                break;
+                case 9:
+                {
+                    fabricaTropa = new FabricaEspia();
+                    tropa = CrearTropa(fabricaTropa);
+                    break;
+                }
+
+            }
+        }catch (Exception e){
+            System.out.println("Error al fabricar la pieza: " + e);
         }
 
-        return sMensaje ;
 
+        return tropa;
     }
 
-    private static String CrearFabricaDeTropas(FabricaTropas pFabrica) {
-        Construccion construccion = pFabrica.crearTropa();
-        return construccion.getNombre();
+    private static Tropa CrearTropa(FabricaTropas pFabrica) {
+        Tropa tropa = (Tropa) pFabrica.crearTropa();
+        return tropa;
     }
 }

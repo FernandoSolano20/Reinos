@@ -1,5 +1,8 @@
 package ui.Tablero;
 
+import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tablero.CasillaActual;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -69,11 +72,16 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		// Marcamos la casilla seleccionada.
 		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
+		//Obtenemos la casilla del tablero para asignarla a la casilla actual
+		Casilla casillaActual = tablero.getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
+		CasillaActual.setCasilla(casillaActual);
+
 		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
 		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
 
 		JOptionPane.showMessageDialog(null,
 				"Casilla seleccionada:\nI: " + this.getCasillaMarcada()[0] + ",  J: " + this.getCasillaMarcada()[1]);
+
 
 	}
 
