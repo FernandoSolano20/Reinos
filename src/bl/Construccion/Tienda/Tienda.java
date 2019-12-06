@@ -7,15 +7,15 @@ import bl.Construccion.Tropa.Tropa;
 
 public class Tienda implements ITienda {
     @Override
-        public String comprarTropa(Jugador pJugador, int pTipoTropa) throws Exception{
-        String informacion = "";
+        public boolean comprarTropa(Jugador pJugador, int pTipoTropa) throws Exception{
+        boolean compraRealizada = false;
         try{
 
             Tropa tropa = FabricadorDeTropas.procesarFuncion(pTipoTropa);
 
             if(tropa != null){
                 acreditarTropa(pJugador,tropa);
-                informacion = "La tropa ha sido comprada para "  + pJugador.getNombreJugador();
+                compraRealizada = true;
             }
             else{
                 throw new ExcepcionJuego("La tropa obtenida de la fabrica es invalida");
@@ -23,10 +23,9 @@ public class Tienda implements ITienda {
 
         }catch (Exception e){
             System.out.println("Error al comprar la tropa: " + e);
-            informacion = "Error al comprar la tropa del " + pJugador.getNombreJugador();
         }
 
-        return informacion;
+        return compraRealizada;
     }
 
     private void acreditarTropa(Jugador pJugador, Tropa pTropa) throws Exception{
@@ -40,7 +39,7 @@ public class Tienda implements ITienda {
         }
 
         else if(! validarOroDisponible(precioTropa, cantidadOroJugador)){
-            throw new Exception("El " + pJugador.getNombreJugador() + " no posee suficiente oro");
+            throw new ExcepcionJuego("El " + pJugador.getNombreJugador() + " no posee suficiente oro");
         }
         else{
             pJugador.getTropas().add(pTropa);

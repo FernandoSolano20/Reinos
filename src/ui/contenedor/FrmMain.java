@@ -16,8 +16,10 @@ import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.Arquero;
+import bl.Construccion.Tropa.TropaAtaque.Asesino;
+import ui.contenedor.Controles.Tienda.pnlTienda;
 import ui.eConfiguracion;
-import ui.pnlControles;
+import ui.contenedor.Controles.pnlControles;
 import ui.Tablero.pnlTablero;
 import ui.contenedor.componentes.*;
 import java.awt.Toolkit;
@@ -31,7 +33,7 @@ import java.awt.event.MouseEvent;
 @SuppressWarnings("serial")
 public class FrmMain extends JFrame {
 
-	private static Juego juego;
+	public static Juego juego;
 
 	private JPanel pnlMain;
 	private JPanel pPnlArriba;

@@ -2,6 +2,8 @@ package bl.Construccion.Tablero;
 
 import bl.Construccion.Construccion;
 import bl.Construccion.Excepciones.ExcepcionJuego;
+import bl.Construccion.Juego.Turno.Turno;
+import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 
@@ -87,7 +89,7 @@ public class Tablero implements ITablero {
         casillas[coordenadaX][coordenadaY].setPieza(null);
     }
 
-	public int moverPieza(int origenX, int origenY, int destinoX, int destinoY, int pValorDado) throws Exception {
+	public int moverPieza(int origenX, int origenY, int destinoX, int destinoY, Turno pTurno) throws Exception {
 
     	//Se obtienen las piezas en las casillas de origen y destino
     	Construccion piezaOrigen = obtenerPiezaCasilla(origenX, origenY);
@@ -114,8 +116,12 @@ public class Tablero implements ITablero {
 			throw new ExcepcionJuego("La tropa no es capaz de moverse");
 		}
 
-		else if(! validarMovimientoDado(distanciaMovimiento, pValorDado)) {
-			throw new ExcepcionJuego("La cantidad de moviemientos es mayor al valor restante del dado");
+		else if(! validarTropaJugador((TropaAtaque) piezaOrigen, pTurno.getJugador())){
+			throw new ExcepcionJuego("Esta tropa pertenece a otro jugador");
+		}
+
+		else if(! validarMovimientoDado(distanciaMovimiento, pTurno.getMovimientosPermitidos())) {
+			throw new ExcepcionJuego("La cantidad de movimientos es mayor al valor restante del dado");
 		}
 
 		else if(! validarMovimientoTropa((TropaAtaque) piezaOrigen, distanciaMovimiento)) {
@@ -126,7 +132,8 @@ public class Tablero implements ITablero {
 			removerPiezaCasilla(origenX, origenY);
 			descontarMovimientosTropa((TropaAtaque) piezaOrigen, distanciaMovimiento);
 
-			return pValorDado - distanciaMovimiento;
+			//Retorna el valor restante del dado
+			return pTurno.getMovimientosPermitidos() - distanciaMovimiento;
 		}
 
     }
@@ -174,6 +181,15 @@ public class Tablero implements ITablero {
 	//Metodo que valida que el movimiento solicitado tiene un distancia menor o igual a los movimientos restantes en el dado
 	private boolean validarMovimientoDado(int pDistancia, int pValorDado) {
 		return pDistancia <= pValorDado;
+	}
+
+	private boolean validarTropaJugador(TropaAtaque pTropa, Jugador pJugador){
+		for(Tropa tropa : pJugador.getTropas()){
+			if(pTropa.equals(tropa)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	//Metodo que descuenta los movimientos realizados por la tropa

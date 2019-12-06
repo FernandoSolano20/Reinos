@@ -1,9 +1,11 @@
-package ui;
+package ui.contenedor.Controles;
 
-import javax.swing.JPanel;
+import ui.contenedor.Controles.Tienda.pnlTienda;
+import ui.contenedor.FrmMain;
+
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -29,18 +31,23 @@ public class pnlControles extends JPanel {
 		btnMover = new JButton("Mover");
 		btnMover.setBounds(45, 11, 142, 55);
 		add(btnMover);
+
 		btnPasarTurno = new JButton("Pasar Turno");
 		btnPasarTurno.setBounds(45, 69, 142, 55);
 		add(btnPasarTurno);
+
 		btnAtacar = new JButton("Atacar");
 		btnAtacar.setBounds(238, 11, 142, 55);
 		add(btnAtacar);
+
 		btnComprar = new JButton("Comprar");
 		btnComprar.setBounds(238, 69, 142, 55);
 		add(btnComprar);
+
 		btnMiOro = new JButton("Mi oro");
 		btnMiOro.setBounds(429, 11, 142, 55);
 		add(btnMiOro);
+
 		btnMisTropas = new JButton("Mis tropas");
 		btnMisTropas.setBounds(429, 69, 142, 55);
 		add(btnMisTropas);
@@ -51,34 +58,34 @@ public class pnlControles extends JPanel {
 	private void agregarAcciones() {
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acción de mover
+				// acciï¿½n de mover
 			}
 		});
 
-		btnPasarTurno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// acción de pasar turno
-			}
+		btnPasarTurno.addActionListener(e -> {
+			FrmMain.juego.pasarTurno();
+			String jugadorActual = FrmMain.juego.getTurnoActual().getJugador().getNombreJugador();
+			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno", JOptionPane.INFORMATION_MESSAGE);
 		});
 
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acción de atacar
+				// acciï¿½n de atacar
 			}
 		});
-		btnComprar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// acción de comprar
-			}
+
+		btnComprar.addActionListener(e -> {
+			pnlTienda pnlTienda = new pnlTienda();
 		});
+
 		btnMiOro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acción de mi oro
+				// acciï¿½n de mi oro
 			}
 		});
 		btnMisTropas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acción de mis tropas
+				// acciï¿½n de mis tropas
 			}
 		});
 	}

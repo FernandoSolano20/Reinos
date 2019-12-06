@@ -127,7 +127,7 @@ public class Juego implements IJuego {
 
     	try {
 
-			valorFinalDado =  getTablero().moverPieza(origenX,origenY,destinoX,destinoY, turnoActual.getMovimientosPermitidos());
+			valorFinalDado =  getTablero().moverPieza(origenX,origenY,destinoX,destinoY, getTurnoActual());
 			getTurnoActual().setMovimientosPermitidos(valorFinalDado);
 
 		}catch (Exception e){
