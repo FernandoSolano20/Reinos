@@ -18,7 +18,7 @@ public class pnlTablero extends JPanel {
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
-
+	private Tablero tablero;
 	private Color[] resaltarCasilla = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
 
 	/**
@@ -33,6 +33,8 @@ public class pnlTablero extends JPanel {
 
 		this.setAncho(tablero.getAncho());
 		this.setLargo(tablero.getLargo());
+
+		this.setTablero(tablero);
 
 		int sizeCasillaW = (int) anchoTablero / this.getLargo();
 		int sizeCasillaH = (int) largoTablero / this.getAncho();
@@ -95,6 +97,14 @@ public class pnlTablero extends JPanel {
 
 	public void setLargo(int largo) {
 		this.largo = largo;
+	}
+
+	public Tablero getTablero() {
+		return tablero;
+	}
+
+	public void setTablero(Tablero tablero) {
+		this.tablero = tablero;
 	}
 
 	public void construirEnCasilla(int i, int j, String nombrePieza, int Vida) {

@@ -13,6 +13,7 @@ public class Main {
 	private static Tablero tablero;
 
 	public static void main(String args[]) throws IOException {
+
 		try {
 			OSUtil.OS_TYPE os = OSUtil.getOSType();
 			if (os == OSUtil.OS_TYPE.WINDOWS) {

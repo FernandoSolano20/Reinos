@@ -1,10 +1,15 @@
 package ui.Tablero;
 
+<<<<<<< HEAD
 import bl.Construccion.Construccion;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.Asesino;
 import bl.Construccion.Tropa.TropaAtaque.Jinete;
+=======
+import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tablero.CasillaActual;
+>>>>>>> 72d85bf287e0e0759b75efc73ddd491d2f25d73f
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -78,6 +83,10 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		// Marcamos la casilla seleccionada.
 		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
+		//Obtenemos la casilla del tablero para asignarla a la casilla actual
+		Casilla casillaActual = tablero.getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
+		CasillaActual.setCasilla(casillaActual);
+
 		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
 		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
 
@@ -93,6 +102,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 				tablero.getTropaAtacante().atacar(tropa);
 			}
 		}
+
 
 	}
 
