@@ -1,15 +1,10 @@
 package ui.Tablero;
 
-<<<<<<< HEAD
 import bl.Construccion.Construccion;
-import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
-import bl.Construccion.Tropa.TropaAtaque.Asesino;
-import bl.Construccion.Tropa.TropaAtaque.Jinete;
-=======
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.CasillaActual;
->>>>>>> 72d85bf287e0e0759b75efc73ddd491d2f25d73f
+
 
 import java.awt.Color;
 import java.awt.GradientPaint;

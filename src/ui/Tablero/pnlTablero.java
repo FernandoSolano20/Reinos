@@ -18,7 +18,6 @@ public class pnlTablero extends JPanel {
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
-	private Tablero tablero;
 	private Color[] resaltarCasilla = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
 
 	/**
