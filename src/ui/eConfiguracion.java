@@ -1,6 +1,6 @@
 package ui;
 
-import java.awt.*;
+import java.awt.Color;
 
 /*
  * Este es un enum implementado a traves de Class.

@@ -1,17 +1,17 @@
 package bl.Construccion.Cordenadas;
 
 public class CoordenasAtaque {
-    public static int[] y1 = {0,1,0,-1,1,-1,-1,1};
-    public static int[] x1 = {1,0,-1,0,1,-1,1,-1};
+    public static int[] x1 = {0,1,0,-1,1,-1,-1,1};
+    public static int[] y1 = {1,0,-1,0,1,-1,1,-1};
 
-    public static int[] y2 = {0,1,2,0,-1,-2,0,1,2,0,-1,-2};
-    public static int[] x2 = {2,1,0,-2,-1,0,-2,-1,0,2,1,0};
+    public static int[] x2 = {0,1,2,0,-1,-2,0,1,2,0,-1,-2};
+    public static int[] y2 = {2,1,0,-2,-1,0,-2,-1,0,2,1,0};
 
-    public static int[] y3 = {0,1,2,3,0,-1,-2,-3,0,1,2,3,0,-1,-2,-3};
-    public static int[] x3 = {3,2,1,0,-3,-2,-1,0,-3,-2,-1,0,3,2,1,0};
+    public static int[] x3 = {0,1,2,3,0,-1,-2,-3,0,1,2,3,0,-1,-2,-3};
+    public static int[] y3 = {3,2,1,0,-3,-2,-1,0,-3,-2,-1,0,3,2,1,0};
 
-    public static int[] y4 = {0,1,2,3,4,0,-1,-2,-3,-4,0,1,2,3,4,0,-1,-2,-3,-4};
-    public static int[] x4 = {4,3,2,1,0,-4,-3,-2,-1,0,-4,-3,-2,-1,0,4,3,2,1,0};
+    public static int[] x4 = {0,1,2,3,4,0,-1,-2,-3,-4,0,1,2,3,4,0,-1,-2,-3,-4};
+    public static int[] y4 = {4,3,2,1,0,-4,-3,-2,-1,0,-4,-3,-2,-1,0,4,3,2,1,0};
 
     public static int[] getX1() {
         return x1;

@@ -20,10 +20,10 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class pnlCasilla extends JPanel implements MouseListener {
 	private pnlTablero tablero;
-	public int x;
-	public int y;
+	public int i;
+	public int j;
 	private Color[] fondo = new Color[] { new Color(220, 220, 220, 255), new Color(248, 248, 248, 255) };
-	private int[] casillaMarcada = new int[2];
+	private int[] casillaMarcada = new int[2]; //{ i, j }
 
 	/**
 	 * Create the panel.
@@ -76,14 +76,14 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 
 		// Marcamos la casilla seleccionada.
-		//this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
+		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
 		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
-		this.tablero.construirEnCasilla(this.x, this.y, colorVerde);
+		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
 
 		JOptionPane.showMessageDialog(null,
-				"Casilla seleccionada:\nX: " + this.x + ",  Y: " + this.y);
-		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(x,y);
+				"Casilla seleccionada:\nI: " + i + ",  J: " + j);
+		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i,j);
 		if(construccion instanceof Tropa){
 			Tropa tropa = (Tropa)construccion;
 			if(tablero.getTropaAtacante() == null){
