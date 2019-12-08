@@ -10,23 +10,15 @@ public class Castillo extends Construccion {
         setNombre("Castillo");
         setVida(30);
         setOroTransportable(20);
-        oros = 30;
+        oros = 20;
     }
 
     public int getOros() {
         return oros;
     }
 
-    public void setOros(int sumOro) {
-        if(oros < oroTransportable){
-            int resultOro = oros + sumOro;
-            if(resultOro > oroTransportable){
-                oros = oroTransportable;
-            }
-            else {
-                oros = resultOro;
-            }
-        }
+    public void setOros(int pOro) {
+        this.oros = pOro;
     }
 
     public int getOroTransportable() {

@@ -4,10 +4,9 @@ import bl.Construccion.Construccion;
 import bl.Construccion.Recursos.IRecurso;
 import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
-import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
-import bl.Construccion.Tropa.TropaAtaque.Asesino;
-import bl.Construccion.Tropa.TropaAtaque.Jinete;
+import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tablero.CasillaActual;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.eConfiguracion;
 
@@ -83,8 +82,10 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		// Marcamos la casilla seleccionada.
 		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
-		//Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
-		//this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
+		//Obtenemos la casilla del tablero para asignarla a la casilla actual
+		Casilla casillaActual = tablero.getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
+		CasillaActual.setCasilla(casillaActual);
+
 
 		JOptionPane.showMessageDialog(null,
 				"Casilla seleccionada:\nI: " + i + ",  J: " + j);
@@ -102,6 +103,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		else if(pnlTablero.isAtaque) {
 			atacar(construccion);
 		}
+
 	}
 
 	public void mouseReleased(MouseEvent e) {

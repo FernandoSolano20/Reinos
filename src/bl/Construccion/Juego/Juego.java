@@ -7,6 +7,8 @@ import bl.Construccion.Juego.VisitanteTropas.IVisitante;
 import bl.Construccion.Juego.VisitanteTropas.RegeneradorTropas;
 import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Tablero;
+import bl.Construccion.Tienda.ITienda;
+import bl.Construccion.Tienda.Tienda;
 
 import java.util.ArrayList;
 
@@ -19,15 +21,17 @@ public class Juego implements IJuego {
     private Turno turnoActual;
     private IDado dado;
     private IVisitante visitanteTropas;
+    private ITienda tienda;
 
     public Juego(int cantidadJugadores, Tablero tablero, IIterador iterador) {
-		this.cantidadJugadores = cantidadJugadores;
-		this.tablero = tablero;
-		this.jugadores = new ArrayList<>();
-        this.iterador = iterador;
-        this.turnoActual = new Turno();
-        this.dado = new Dado();
-        this.visitanteTropas = new RegeneradorTropas();
+    	setCantidadJugadores(cantidadJugadores);
+    	setTablero(tablero);
+    	setJugadores(new ArrayList<>());
+    	setIterador(iterador);
+    	setTurnoActual(new Turno());
+    	setDado(new Dado());
+    	setVisitanteTropas(new RegeneradorTropas());
+    	setTienda(new Tienda());
 	}
 
 	public Juego() {
@@ -37,6 +41,7 @@ public class Juego implements IJuego {
 		setTurnoActual(new Turno());
 		setDado(new Dado());
 		setVisitanteTropas(new RegeneradorTropas());
+		setTienda(new Tienda());
 	}
 
 	public Juego(int cantidadJugadores) {
@@ -46,6 +51,7 @@ public class Juego implements IJuego {
 		setTurnoActual(new Turno());
 		setDado(new Dado());
 		setVisitanteTropas(new RegeneradorTropas());
+		setTienda(new Tienda());
 	}
 
 	public int getCantidadJugadores() {
@@ -108,12 +114,20 @@ public class Juego implements IJuego {
 		this.visitanteTropas = visitanteTropas;
 	}
 
+	public ITienda getTienda() {
+		return tienda;
+	}
+
+	public void setTienda(ITienda tienda) {
+		this.tienda = tienda;
+	}
+
 	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY){
     	int valorFinalDado = 0;
 
     	try {
 
-			valorFinalDado =  getTablero().moverPieza(origenX,origenY,destinoX,destinoY, turnoActual.getMovimientosPermitidos());
+			valorFinalDado =  getTablero().moverPieza(origenX,origenY,destinoX,destinoY, getTurnoActual());
 			getTurnoActual().setMovimientosPermitidos(valorFinalDado);
 
 		}catch (Exception e){
