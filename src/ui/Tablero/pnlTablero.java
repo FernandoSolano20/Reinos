@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import bl.Construccion.Construccion;
+import bl.Construccion.Juego.Juego;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.Tablero;
 
@@ -13,22 +14,22 @@ public class pnlTablero extends JPanel {
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
-	private Tablero tablero;
+	private Juego juego;
 	private Color[] resaltarCasilla = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
 
 	/**
 	 * Create the panel.
 	 */
-	public pnlTablero(int anchoTablero, int largoTablero, Tablero tablero) {
+	public pnlTablero(int anchoTablero, int largoTablero, Juego juego) {
 		this.setLayout(null);
 		this.setSize(anchoTablero, largoTablero);
 		this.setBackground(new java.awt.Color(51, 51, 51));
 		this.setForeground(new java.awt.Color(250, 250, 250));
+		this.setJuego(juego);
+		this.setAncho(getJuego().getTablero().getAncho());
+		this.setLargo(getJuego().getTablero().getLargo());
 
-		this.setAncho(tablero.getAncho());
-		this.setLargo(tablero.getLargo());
 
-		this.setTablero(tablero);
 
 		int sizeCasillaW = (int) anchoTablero / this.getLargo();
 		int sizeCasillaH = (int) largoTablero / this.getAncho();
@@ -38,7 +39,7 @@ public class pnlTablero extends JPanel {
 		construirCasillas(sizeCasillaW, sizeCasillaH);
 
 		// Pintar casillas que no est�n vacias:
-		for (Casilla[] i : tablero.getCasillas()) {
+		for (Casilla[] i : getJuego().getTablero().getCasillas()) {
 			for (Casilla j : i) {
 				if (j.tienePieza()) {
 					Construccion laPieza = j.getPieza();
@@ -87,12 +88,12 @@ public class pnlTablero extends JPanel {
 		this.largo = largo;
 	}
 
-	public Tablero getTablero() {
-		return tablero;
+	public Juego getJuego() {
+		return juego;
 	}
 
-	public void setTablero(Tablero tablero) {
-		this.tablero = tablero;
+	public void setJuego(Juego juego) {
+		this.juego = juego;
 	}
 
 	public void construirEnCasilla(int i, int j, String nombrePieza, int Vida) {
@@ -120,4 +121,7 @@ public class pnlTablero extends JPanel {
 		return new int[2];
 	}
 
+	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY){
+		juego.moverPieza(origenX,origenY,destinoX,destinoY);
+	}
 }

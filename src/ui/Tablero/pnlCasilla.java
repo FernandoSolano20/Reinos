@@ -2,6 +2,7 @@ package ui.Tablero;
 
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.CasillaActual;
+import ui.contenedor.FrmMain;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -72,17 +73,27 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		// Marcamos la casilla seleccionada.
 		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
-		//Obtenemos la casilla del tablero para asignarla a la casilla actual
-		Casilla casillaActual = tablero.getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
-		CasillaActual.setCasilla(casillaActual);
+		if(tablero.getJuego().getTablero().isModoAtaque()){
+			System.out.println("Atacando a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
+		}
+		else if(tablero.getJuego().getTablero().isModoMovimiento()){
+			System.out.println("Movimiendo a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
+			tablero.getJuego().moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
+		}
+		else{
+			System.out.println("Casilla seleccionada");
+			//Obtenemos la casilla del tablero para asignarla a la casilla actual
+			Casilla casillaActual = tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
+			CasillaActual.setCasilla(casillaActual);
+		}
+
+
 
 		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
 		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
 
 		JOptionPane.showMessageDialog(null,
 				"Casilla seleccionada:\nI: " + this.getCasillaMarcada()[0] + ",  J: " + this.getCasillaMarcada()[1]);
-
-
 	}
 
 	public void mouseReleased(MouseEvent e) {

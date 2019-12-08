@@ -11,13 +11,17 @@ public class Tablero implements ITablero {
     private Casilla[][] casillas;
     private int ancho; //width
     private int largo; //height
+	private boolean modoAtaque;
+	private boolean modoMovimiento;
 
     public Tablero(int ancho, int largo) {
         setAncho(ancho);
 		setLargo(largo);
         setLargo(largo);
-        casillas  = new Casilla[ancho][largo];
+        setCasillas(new Casilla[ancho][largo]);
         generarCasillas(ancho,largo);
+        setModoAtaque(false);
+        setModoMovimiento(false);
     }
 
 	public int getAncho() {
@@ -44,7 +48,23 @@ public class Tablero implements ITablero {
 		this.casillas = casillas;
 	}
 
-    public void construirEnCasilla(int pAncho, int pLargo, Construccion pConstruccion) {
+	public boolean isModoAtaque() {
+		return modoAtaque;
+	}
+
+	public void setModoAtaque(boolean modoAtaque) {
+		this.modoAtaque = modoAtaque;
+	}
+
+	public boolean isModoMovimiento() {
+		return modoMovimiento;
+	}
+
+	public void setModoMovimiento(boolean modoMovimiento) {
+		this.modoMovimiento = modoMovimiento;
+	}
+
+	public void construirEnCasilla(int pAncho, int pLargo, Construccion pConstruccion) {
         this.getCasillas()[pAncho][pLargo].setPieza(pConstruccion);
 	}
 

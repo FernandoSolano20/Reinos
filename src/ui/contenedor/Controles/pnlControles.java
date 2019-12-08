@@ -1,5 +1,7 @@
 package ui.contenedor.Controles;
 
+import bl.Construccion.Juego.Juego;
+import ui.Tablero.pnlTablero;
 import ui.contenedor.Controles.Tienda.pnlTienda;
 import ui.contenedor.FrmMain;
 
@@ -17,11 +19,14 @@ public class pnlControles extends JPanel {
 	private JButton btnComprar;
 	private JButton btnMiOro;
 	private JButton btnMisTropas;
+	private Juego juego;
 
 	/**
 	 * Create the panel.
 	 */
-	public pnlControles(int widthTablero) {
+	public pnlControles(int widthTablero, Juego juego) {
+
+		this.juego = juego;
 		setBorder(new LineBorder(Color.RED));
 		this.setLayout(null);
 		this.setSize(603, 140);
@@ -56,26 +61,22 @@ public class pnlControles extends JPanel {
 	}
 
 	private void agregarAcciones() {
-		btnMover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// acci�n de mover
-			}
+		btnMover.addActionListener(e -> {
+			juego.getTablero().setModoMovimiento(true);
 		});
 
 		btnPasarTurno.addActionListener(e -> {
-			FrmMain.juego.pasarTurno();
-			String jugadorActual = FrmMain.juego.getTurnoActual().getJugador().getNombreJugador();
+			juego.pasarTurno();
+			String jugadorActual = juego.getTurnoActual().getJugador().getNombreJugador();
 			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno", JOptionPane.INFORMATION_MESSAGE);
 		});
 
-		btnAtacar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// acci�n de atacar
-			}
+		btnAtacar.addActionListener(e -> {
+			juego.getTablero().setModoAtaque(true);
 		});
 
 		btnComprar.addActionListener(e -> {
-			pnlTienda pnlTienda = new pnlTienda();
+			pnlTienda pnlTienda = new pnlTienda(this.getJuego());
 		});
 
 		btnMiOro.addActionListener(new ActionListener() {
@@ -88,5 +89,13 @@ public class pnlControles extends JPanel {
 				// acci�n de mis tropas
 			}
 		});
+	}
+
+	public Juego getJuego() {
+		return this.juego;
+	}
+
+	public void setJuego(Juego juego) {
+		this.juego = juego;
 	}
 }

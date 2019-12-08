@@ -33,7 +33,7 @@ import java.awt.event.MouseEvent;
 @SuppressWarnings("serial")
 public class FrmMain extends JFrame {
 
-	public static Juego juego;
+	private static Juego juego;
 
 	private JPanel pnlMain;
 	private JPanel pPnlArriba;
@@ -53,6 +53,9 @@ public class FrmMain extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmMain() {
+		int cantidadJugadores = getCantidadDeJugadores();
+		this.setCantidadJugadores(cantidadJugadores);
+		juego = new Fachada().construirJuego(cantidadJugadores);
 
 		//Se determinan las caracteristicas para la escena del juego
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -134,7 +137,7 @@ public class FrmMain extends JFrame {
 		pPnlAbajo = new pnlAbajo(pnlMain.getWidth());
 		pnlMain.add(pPnlAbajo, null);
 
-		pnlControles = new pnlControles(pnlMain.getWidth());
+		pnlControles = new pnlControles(pnlMain.getWidth(), juego);
 
 		pPnlAbajo.add(pnlControles);
 		pPnlAbajo.setSize(pPnlAbajo.getWidth(), pnlControles.getHeight());
@@ -187,7 +190,7 @@ public class FrmMain extends JFrame {
 	}
 
 	public void setTableroUI(Tablero pTablero) {
-		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), pTablero);
+		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), juego);
 	}
 
 	public int pnlCentrogetWidth() {
@@ -285,23 +288,6 @@ public class FrmMain extends JFrame {
 	}
 
 	public void iniciar() {
-
-		int cantidadJugadores = getCantidadDeJugadores();
-		this.setCantidadJugadores(cantidadJugadores);
-
-		FabricadorDeTropas.procesarFuncion(2);
-		FabricadorDeTropas.procesarFuncion(3);
-		FabricadorDeTropas.procesarFuncion(4);
-		FabricadorDeTropas.procesarFuncion(5);
-		FabricadorDeTropas.procesarFuncion(6);
-		FabricadorDeTropas.procesarFuncion(7);
-		FabricadorDeTropas.procesarFuncion(8);
-		FabricadorDeTropas.procesarFuncion(9);
-		FabricadorDeTropas.procesarFuncion(10);
-
-		juego = new Fachada().construirJuego(cantidadJugadores);
-
-
 		Tropa tropa = new Arquero();
 		juego.getJugadores().get(0).getTropas().add(tropa);
 		juego.getTablero().construirEnCasilla(0, 4, tropa);
