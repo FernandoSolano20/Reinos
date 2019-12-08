@@ -1,5 +1,6 @@
 package bl.Construccion;
 
+import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Casilla;
 
 public abstract class Construccion implements IConstruccion{
@@ -7,6 +8,7 @@ public abstract class Construccion implements IConstruccion{
     private int id;
     private String Nombre;
     private Casilla casilla;
+    private Jugador jugador;
 
     public Construccion() {
     }
@@ -41,5 +43,13 @@ public abstract class Construccion implements IConstruccion{
 
     public void setCasilla(Casilla casilla) {
         this.casilla = casilla;
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(Jugador jugador) {
+        this.jugador = jugador;
     }
 }

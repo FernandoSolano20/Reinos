@@ -10,4 +10,9 @@ public class Catapulta extends Tropa {
         setPrecio(8);
         setNombre("Catapulta");
     }
+
+    @Override
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
 }

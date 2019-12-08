@@ -55,4 +55,8 @@ public class Casilla {
     	// Si no es null entonces si tiene una pieza.
         return pieza != null;
     }
+
+    public void removerRecurso(){
+        recurso = null;
+    }
 }

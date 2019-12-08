@@ -3,6 +3,7 @@ package bl.Construccion.Juego.VisitanteTropas;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.*;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
+import bl.Construccion.decorador.ObjetoDecorado;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public interface IVisitante {
     void visitarTropaAtaque(Jinete pTropa);
 
     void visitarTropaAtaque(Mago pTropa);
+
+    public void visitarTropaAtaque(TropaAtaque tropa);
 
     void visitarGrupoTropas(ArrayList<Tropa> pTropas);
 }
