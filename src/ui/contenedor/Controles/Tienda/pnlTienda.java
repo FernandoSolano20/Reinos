@@ -9,6 +9,10 @@ import java.awt.*;
 
 @SuppressWarnings("serial")
 public class pnlTienda extends JFrame {
+
+	@SuppressWarnings("unused")
+	private eIMG eIMGIniciaConstructor = new eIMG();
+
 	private JPanel panelPrincipal;
 	private JPanel panelTropas;
 	private JPanel panelDefensas;
@@ -37,7 +41,7 @@ public class pnlTienda extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setTitle(eConfiguracion.TITULO_APP);
-		this.setIconImage(eIMG.getImage(eIMG.IMG_APP));
+		this.setIconImage(eIMG.IMAGE_APP);
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
 		this.setAlwaysOnTop(false);
@@ -134,41 +138,41 @@ public class pnlTienda extends JFrame {
 		// Botones tropas
 
 		arquero = new JButton("    Arquero       -   10 oro");
-		setIconButton(arquero, eIMG.IMG_ARQUERO);
+		setIconButton(arquero, eIMG.ICON_ARQUERO);
 		panelTropas.add(arquero);
 
 		asesino = new JButton("   Asesino        -     5 oro");
-		setIconButton(asesino, eIMG.IMG_ASESINO);
+		setIconButton(asesino, eIMG.ICON_ASESINO);
 		panelTropas.add(asesino);
 
 		bersequer = new JButton("   Berserquer    -   25 oro");
-		setIconButton(bersequer, eIMG.IMG_BERSEQUER);
+		setIconButton(bersequer, eIMG.ICON_BERSEQUER);
 		panelTropas.add(bersequer);
 
 		espadachin = new JButton("   Espadachín  -   15 oro");
-		setIconButton(espadachin, eIMG.IMG_ESPADACHIN);
+		setIconButton(espadachin, eIMG.ICON_ESPADACHIN);
 		panelTropas.add(espadachin);
 
 		espia = new JButton("    Espía            -     5 oro");
-		setIconButton(espia, eIMG.IMG_ESPIA);
+		setIconButton(espia, eIMG.ICON_ESPIA);
 		panelTropas.add(espia);
 
 		jinete = new JButton(" Jinete             -  15 oro  ");
-		setIconButton(jinete, eIMG.IMG_JINETE);
+		setIconButton(jinete, eIMG.ICON_JINETE);
 		panelTropas.add(jinete);
 
 		mago = new JButton("   Mago            -   10 oro");
-		setIconButton(mago, eIMG.IMG_MAGO);
+		setIconButton(mago, eIMG.ICON_MAGO);
 		panelTropas.add(mago);
 
 		// Botones defensas
 
 		catapulta = new JButton("   Catapulta   -  8 oro");
-		setIconButton(catapulta, eIMG.IMG_CATAPULTA);
+		setIconButton(catapulta, eIMG.ICON_CATAPULTA);
 		panelDefensas.add(catapulta);
 
 		ballesta = new JButton("   Ballesta      -  5 oro");
-		setIconButton(ballesta, eIMG.IMG_BALLESTA);
+		setIconButton(ballesta, eIMG.ICON_BALLESTA);
 		panelDefensas.add(ballesta);
 
 		this.add(panelPrincipal, BorderLayout.PAGE_START);
@@ -215,9 +219,9 @@ public class pnlTienda extends JFrame {
 		oroJugador.setText("Oro disponible: " + FrmMain.juego.getTurnoActual().getJugador().getCastillo().getOros());
 	}
 
-	private void setIconButton(JButton btn, String nombreIcono) {
-		btn.setIcon(eIMG.getIcon(nombreIcono));
-		btn.setSelectedIcon(eIMG.getIcon(nombreIcono));
+	private void setIconButton(JButton btn, ImageIcon imagenIcono) {
+		btn.setIcon(imagenIcono);
+		btn.setSelectedIcon(imagenIcono);
 		btn.setIconTextGap(2);
 		btn.setHorizontalAlignment(SwingConstants.CENTER);
 		btn.setVerticalAlignment(SwingConstants.CENTER);

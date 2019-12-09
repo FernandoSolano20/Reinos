@@ -2,6 +2,7 @@ package ui.contenedor.Controles;
 
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
+import ui.eConfiguracion;
 import ui.Tablero.pnlTablero;
 
 import ui.contenedor.Controles.Tienda.pnlTienda;
@@ -19,7 +20,6 @@ public class pnlControles extends JPanel {
 	private JButton btnPasarTurno;
 	private JButton btnAtacar;
 	private JButton btnComprar;
-	private JButton btnMiOro;
 	private JButton btnMisTropas;
 	private JButton btnUsarPowerUp;
 
@@ -27,11 +27,11 @@ public class pnlControles extends JPanel {
 	 * Create the panel.
 	 */
 	public pnlControles(int widthTablero) {
-		setBorder(new LineBorder(Color.RED));
+		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
 		this.setLayout(null);
-		this.setSize(800, 140);
-		this.setBackground(new java.awt.Color(51, 51, 51));
-		this.setForeground(new java.awt.Color(250, 250, 250));
+		this.setSize(603, 140);
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
 
 		btnMover = new JButton("Mover");
 		btnMover.setBounds(45, 11, 142, 55);
@@ -49,17 +49,13 @@ public class pnlControles extends JPanel {
 		btnComprar.setBounds(238, 69, 142, 55);
 		add(btnComprar);
 
-		btnMiOro = new JButton("Mi oro");
-		btnMiOro.setBounds(429, 11, 142, 55);
-		add(btnMiOro);
+		btnUsarPowerUp = new JButton("Usar power up");
+		btnUsarPowerUp.setBounds(429, 11, 142, 55);
+		add(btnUsarPowerUp);
 
 		btnMisTropas = new JButton("Mis tropas");
 		btnMisTropas.setBounds(429, 69, 142, 55);
 		add(btnMisTropas);
-
-		btnUsarPowerUp = new JButton("Usar power up");
-		btnUsarPowerUp.setBounds(600, 11, 142, 55);
-		add(btnUsarPowerUp);
 
 		agregarAcciones();
 	}
@@ -67,42 +63,38 @@ public class pnlControles extends JPanel {
 	private void agregarAcciones() {
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acci�n de mover
+				// acción de mover
 			}
 		});
 
 		btnPasarTurno.addActionListener(e -> {
 			FrmMain.juego.pasarTurno();
 			String jugadorActual = FrmMain.juego.getTurnoActual().getJugador().getNombreJugador();
-			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno",
+					JOptionPane.INFORMATION_MESSAGE);
 		});
 
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(pnlTablero.getTropaSeleccionada() != null)
+				if (pnlTablero.getTropaSeleccionada() != null)
 					pnlTablero.isAtaque = true;
 			}
 		});
 
 		btnComprar.addActionListener(e -> {
 			pnlTienda pnlTienda = new pnlTienda();
-		});
-
-		btnMiOro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// acci�n de mi oro
-			}
+			pnlTienda.setVisible(true);
 		});
 		btnMisTropas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acci�n de mis tropas
+				// acción de mis tropas
 			}
 		});
 		btnUsarPowerUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tropa tropa = pnlTablero.getTropaSeleccionada();
 				TropaAtaque tropaAtaque = null;
-				if (tropa != null && tropa instanceof TropaAtaque){
+				if (tropa != null && tropa instanceof TropaAtaque) {
 					tropaAtaque = (TropaAtaque) tropa;
 					tropaAtaque = tropaAtaque.usarPowerUp(tropaAtaque);
 					tropaAtaque.getCasilla().setPieza(tropaAtaque);
