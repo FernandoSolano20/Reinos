@@ -88,24 +88,30 @@ public class Tablero implements ITablero {
         }
     }
 
-    private Construccion obtenerPiezaCasilla(int coordenadaX, int coordenadaY){
-        try{
-
-            return casillas[coordenadaX][coordenadaY].getPieza();
-
-        }catch (Exception e){
-            System.out.println(e);
-        }
+    public Construccion obtenerPiezaCasilla(int coordenadaX, int coordenadaY){
+    	Casilla casilla = casillas[coordenadaX][coordenadaY];
+    	if(casilla != null)
+            return casilla.getPieza();
         return null;
     }
 
-    private void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza){
+	public boolean casillaTienePowerUp(int coordenadaX, int coordenadaY){
+		Casilla casilla = casillas[coordenadaX][coordenadaY];
+		if(casilla != null)
+			return true;
+		return false;
+	}
 
-            casillas[coordenadaX][coordenadaY].setPieza(pieza);
+    public void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza){
+    	if(obtenerPiezaCasilla(coordenadaX,coordenadaY) == null){
+    		Casilla casilla = casillas[coordenadaX][coordenadaY];
+			casilla.setPieza(pieza);
+			pieza.setCasilla(casilla);
+		}
+
     }
 
     private void removerPiezaCasilla(int coordenadaX, int coordenadaY){
-
         casillas[coordenadaX][coordenadaY].setPieza(null);
     }
 
@@ -117,7 +123,6 @@ public class Tablero implements ITablero {
 
     	//Se calcula la distancia total del movimiento solicitado por el jugador
     	int distanciaMovimiento = obtenerDistanciaEntreCasillas(origenX, origenY, destinoX, destinoY);
-
 		//Validamos que las dos coordenadas ingresadas sean correctas
 
 		if (! validarCasillas(origenX, origenY, destinoX, destinoY)) {
@@ -235,6 +240,10 @@ public class Tablero implements ITablero {
 			tablero += "\n";
 		}
 		return tablero;
+	}
+
+	public Casilla obtenerCasilla(int x, int y){
+    	return casillas[x][y];
 	}
 
 }

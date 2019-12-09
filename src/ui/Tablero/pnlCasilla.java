@@ -1,8 +1,15 @@
 package ui.Tablero;
 
+import bl.Construccion.Construccion;
+import bl.Construccion.Recursos.IRecurso;
+import bl.Construccion.Recursos.PowerUps.PowerUp;
+import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.CasillaActual;
 import ui.contenedor.FrmMain;
+import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
+import ui.eConfiguracion;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -18,7 +25,9 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class pnlCasilla extends JPanel implements MouseListener {
 	private pnlTablero tablero;
-	private Color[] fondo = new Color[] { new Color(220, 220, 220, 255), new Color(248, 248, 248, 255) };
+	public int i;
+	public int j;
+	private Color[] fondo = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
 	private int[] casillaMarcada = new int[2]; //{ i, j }
 
 	/**
@@ -49,6 +58,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		GradientPaint gp = new GradientPaint(0, 0, getFondo()[0], 0, this.getHeight(), getFondo()[1]);
 		g2.setPaint(gp);
 		g2.fillRect(2, 2, this.getWidth() - 4, this.getHeight() - 4);
+
 	}
 
 	public void setFondo(Color[] fondo) {
@@ -89,11 +99,22 @@ public class pnlCasilla extends JPanel implements MouseListener {
 
 
 
-		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
-		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
 
 		JOptionPane.showMessageDialog(null,
-				"Casilla seleccionada:\nI: " + this.getCasillaMarcada()[0] + ",  J: " + this.getCasillaMarcada()[1]);
+				"Casilla seleccionada:\nI: " + i + ",  J: " + j);
+		//Recursos
+		Casilla casilla = tablero.getTableroLogica().obtenerCasilla(i,j);
+		if (casilla.tieneRecurso()){
+			recorgerRecurso(casilla);
+		}
+		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i,j);
+		if(pnlTablero.getTropaSeleccionada() == null && construccion instanceof Tropa){
+			Tropa tropa = (Tropa)construccion;
+			pnlTablero.setTropaSeleccionada(tropa);
+		}
+		else if(pnlTablero.isAtaque) {
+			atacar(construccion);
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -107,4 +128,57 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		casillaMarcada = aCasillaMarcada;
 	}
 
+	private int recogerPowerUp() {
+		int opcion = 0;
+		String cad = "Quiere Recoger Power Up:\n";
+		String[] opciones = { "          Si          ", "          No          "};
+		do {
+			opcion = JOptionPane.showOptionDialog(null, cad, eConfiguracion.TITULO_APP,
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+		} while (opcion != 0 && opcion != 1);
+
+		return opcion;
+	}
+
+	private int recogerOro() {
+		int opcion = 0;
+		String cad = "Quiere Recoger oro:\n";
+		String[] opciones = { "          Si          ", "          No          "};
+		do {
+			opcion = JOptionPane.showOptionDialog(null, cad, eConfiguracion.TITULO_APP,
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+		} while (opcion != 0 && opcion != 1);
+
+		return opcion;
+	}
+
+	private void atacar(Construccion construccion){
+		pnlTablero.getTropaSeleccionada().atacar(construccion);
+		pnlTablero.setTropaSeleccionada(null);
+		pnlTablero.isAtaque = false;
+	}
+
+	private void recorgerRecurso(Casilla casilla){
+		IRecurso recurso = casilla.getRecurso();
+		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i,j);
+		if(construccion instanceof TropaAtaque){
+			TropaAtaque tropaAtaque = (TropaAtaque) construccion;
+			if(recurso instanceof PowerUp){
+				int opc = recogerPowerUp();
+				if(opc == 0){
+					tropaAtaque.recogerPowerUp(casilla);
+					Color[] fondoCasilla = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
+					this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], fondoCasilla);
+				}
+			}
+			else {
+				int opc = recogerOro();
+				if(opc == 0) {
+					tropaAtaque.recogerOro(casilla);
+					Color[] fondoCasilla = new Color[]{new Color(200, 200, 200, 200), new Color(200, 200, 200, 200)};
+					this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], fondoCasilla);
+				}
+			}
+		}
+	}
 }

@@ -3,10 +3,14 @@ package ui;
 import java.io.IOException;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import bl.Construccion.Tablero.Tablero;
+import bl.Construccion.Tropa.TropaAtaque.Arquero;
+import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.contenedor.FrmMain;
 import ui.contenedor.OSUtil;
 
 public class Main {
+	private static Tablero tablero;
 
 	public static void main(String args[]) throws IOException {
 

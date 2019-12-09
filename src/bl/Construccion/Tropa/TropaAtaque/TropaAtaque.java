@@ -1,13 +1,22 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
 import bl.Construccion.Juego.VisitanteTropas.IVisitante;
+import bl.Construccion.Recursos.Gemas.Gema;
+import bl.Construccion.Recursos.PowerUps.PowerUp;
+import bl.Construccion.Recursos.PowerUps.Tipo.AumentaAtaque;
+import bl.Construccion.Recursos.PowerUps.Tipo.AumentoDefensa;
+import bl.Construccion.Recursos.PowerUps.Tipo.TrampaAtaque;
+import bl.Construccion.Recursos.PowerUps.Tipo.TrampaDefensa;
+import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tropa.Tropa;
+import bl.Construccion.decoradoresPowerUp.*;
 
 public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
     private int cantMovimientos;
     private int oroTransportable;
-    private int defensa;
+    protected int defensa;
     private int oros;
+    private PowerUp powerUp;
 
     public TropaAtaque() {
         oros = 0;
@@ -25,9 +34,7 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
         return defensa;
     }
 
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
-    }
+    public abstract void setDefensa(int defensa);
 
     public int getOroTransportable() {
         return oroTransportable;
@@ -53,6 +60,14 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
         }
     }
 
+    public PowerUp getPowerUp() {
+        return powerUp;
+    }
+
+    public void setPowerUp(PowerUp powerUp) {
+        this.powerUp = powerUp;
+    }
+
     @Override
     public void movimientoTropa() {
 
@@ -65,4 +80,32 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
 
     @Override
     public abstract void visitaRegeneracion(IVisitante pVisitante);
+
+    public void recogerPowerUp(Casilla casilla){
+        setPowerUp((PowerUp)casilla.getRecurso());
+        casilla.removerRecurso();
+    }
+
+    public void recogerOro(Casilla casilla){
+        Gema gema = (Gema) casilla.getRecurso();
+        setOros(gema.getValor());
+    }
+
+    public TropaAtaque usarPowerUp(TropaAtaque tropaAtaque){
+        if (powerUp != null){
+            if(powerUp instanceof AumentaAtaque){
+                tropaAtaque = new DecoradorAumentaAtaque(tropaAtaque);
+            }
+            else if (powerUp instanceof AumentoDefensa){
+                tropaAtaque = new DecoradorAumentaDefensa(tropaAtaque);
+            }
+            else if (powerUp instanceof TrampaDefensa){
+                tropaAtaque = new DecoradorDisminuyeDefensa(tropaAtaque);
+            }
+            else if (powerUp instanceof TrampaAtaque){
+                tropaAtaque = new DecoradorDisminuyeAtaque(tropaAtaque);
+            }
+        }
+        return tropaAtaque;
+    }
 }

@@ -2,6 +2,7 @@ package bl.Construccion.Juego.VisitanteTropas;
 
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.*;
+import bl.Construccion.decorador.ObjetoDecorado;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,31 @@ public class RegeneradorTropas implements IVisitante {
     public void visitarTropaAtaque(Mago pTropa) {
         pTropa.setDefensa(3);
         pTropa.setCantMovimientos(2);
+    }
+
+    @Override
+    public void visitarTropaAtaque(TropaAtaque tropa) {
+        if(tropa instanceof Arquero){
+            visitarTropaAtaque((Arquero)tropa);
+        }
+        else if(tropa instanceof Asesino){
+            visitarTropaAtaque((Asesino)tropa);
+        }
+        else if(tropa instanceof Bersequer){
+            visitarTropaAtaque((Bersequer)tropa);
+        }
+        else if(tropa instanceof Espadachin){
+            visitarTropaAtaque((Espadachin)tropa);
+        }
+        else if(tropa instanceof Espia){
+            visitarTropaAtaque((Espia)tropa);
+        }
+        else if(tropa instanceof Jinete){
+            visitarTropaAtaque((Jinete)tropa);
+        }
+        else if(tropa instanceof Mago){
+            visitarTropaAtaque((Mago)tropa);
+        }
     }
 
     @Override

@@ -52,4 +52,14 @@ public class Jugador {
     public void setTropas(ArrayList<Tropa> tropas) {
         this.tropas = tropas;
     }
+
+    public Tropa esMiTropa(Tropa tropa){
+        Tropa response = null;
+        for (Tropa tropa1:tropas) {
+            if (tropa == tropa1){
+                response = tropa1;
+            }
+        }
+        return response;
+    }
 }

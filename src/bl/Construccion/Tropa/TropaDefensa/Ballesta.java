@@ -10,4 +10,9 @@ public class Ballesta extends Tropa {
         setPrecio(5);
         setNombre("Ballesta");
     }
+
+    @Override
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
 }

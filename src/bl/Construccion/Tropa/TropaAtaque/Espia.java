@@ -15,6 +15,16 @@ public class Espia extends TropaAtaque {
     }
 
     @Override
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    @Override
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+
+    @Override
     public void visitaRegeneracion(IVisitante pVisitante) {
         pVisitante.visitarTropaAtaque(this);
     }

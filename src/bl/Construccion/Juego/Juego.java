@@ -13,7 +13,7 @@ import bl.Construccion.Tienda.Tienda;
 import java.util.ArrayList;
 
 public class Juego implements IJuego {
-
+	public static Juego juegoActual;
 	private int cantidadJugadores;
 	private Tablero tablero;
 	private ArrayList<Jugador> jugadores;
@@ -137,7 +137,9 @@ public class Juego implements IJuego {
 
 	@Override
 	public void finalizarPartida() {
-
+    	if(jugadores.size() == 1) {
+			System.out.println("Gano " + jugadores.get(0).getNombreJugador());
+		}
 	}
 
 	@Override

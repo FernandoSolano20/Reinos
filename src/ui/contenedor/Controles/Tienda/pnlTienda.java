@@ -1,72 +1,75 @@
 package ui.contenedor.Controles.Tienda;
 import bl.Construccion.Juego.Juego;
-import ui.contenedor.FrmMain;
 
+import ui.eConfiguracion;
+import ui.eIMG;
+import ui.contenedor.FrmMain;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-
-public class pnlTienda extends JFrame{
+@SuppressWarnings("serial")
+public class pnlTienda extends JFrame {
 
     private Juego juego;
-    private JPanel panelPrincipal;
-    private JPanel panelTropas;
-    private JPanel panelDefensas;
+	private JPanel panelPrincipal;
+	private JPanel panelTropas;
+	private JPanel panelDefensas;
 
-    private JLabel titulo;
-    private JLabel tropas;
-    private JLabel defensas;
-    private JLabel oroJugador;
+	private JLabel titulo;
+	private JLabel tropas;
+	private JLabel defensas;
+	private JLabel oroJugador;
 
-    //Botones tropas ataque
-    private JButton arquero;
-    private JButton asesino;
-    private JButton bersequer;
-    private JButton espadachin;
-    private JButton espia;
-    private JButton jinete;
-    private JButton mago;
+	// Botones tropas ataque
+	private JButton arquero;
+	private JButton asesino;
+	private JButton bersequer;
+	private JButton espadachin;
+	private JButton espia;
+	private JButton jinete;
+	private JButton mago;
 
-    //Botones tropas defensa
-    private JButton catapulta;
-    private JButton ballesta;
-
-
+	// Botones tropas defensa
+	private JButton catapulta;
+	private JButton ballesta;
 
     public pnlTienda(Juego juego){
         setJuego(juego);
-        setTitle("Tienda Reinos Cenfotekos");
-        //setLayout(new BorderLayout());
-        setSize(600,600);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
+		this.setSize(600, 600);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setResizable(false);
+		this.setTitle(eConfiguracion.TITULO_APP);
+		this.setIconImage(eIMG.getImage(eIMG.IMG_APP));
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
+		this.setAlwaysOnTop(false);
+		// centrar:
+		this.setLocationRelativeTo(null);
 
-        //PANEL PRINCIPAL
-        panelPrincipal = new JPanel();
-        GridBagLayout layout = new GridBagLayout();
-        panelPrincipal.setLayout(layout);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+		// PANEL PRINCIPAL
+		panelPrincipal = new JPanel();
+		GridBagLayout layout = new GridBagLayout();
+		panelPrincipal.setLayout(layout);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        //LABEL Titulo principal
-        titulo = new JLabel("Tienda");
-        titulo.setFont(new Font(titulo.getFont().getName(), titulo.getFont().getStyle(), 20));
-        titulo.setBorder(new LineBorder(Color.BLACK));
-        titulo.setBackground(new Color(46,139,87));
-        titulo.setOpaque(true);
-        titulo.setPreferredSize(new Dimension(250, 65));
-        titulo.setHorizontalAlignment(JLabel.CENTER);
-        titulo.setVerticalAlignment(JLabel.CENTER);
-        gbc.gridwidth = 2;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panelPrincipal.add(titulo, gbc);
+		// LABEL Titulo principal
+		titulo = new JLabel("Tienda");
+		titulo.setFont(new Font(titulo.getFont().getName(), titulo.getFont().getStyle(), 20));
+		titulo.setBorder(new LineBorder(Color.BLACK));
+		titulo.setBackground(new Color(46, 139, 87));
+		titulo.setOpaque(true);
+		titulo.setPreferredSize(new Dimension(250, 65));
+		titulo.setHorizontalAlignment(JLabel.CENTER);
+		titulo.setVerticalAlignment(JLabel.CENTER);
+		gbc.gridwidth = 2;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		panelPrincipal.add(titulo, gbc);
 
-        //Label oro disponible
+		// Label oro disponible
         oroJugador = new JLabel("Oro disponible: " + getJuego().getTurnoActual().getJugador().getCastillo().getOros());
         oroJugador.setFont(new Font(oroJugador.getFont().getName(), oroJugador.getFont().getStyle(), 15));
         oroJugador.setBorder(new LineBorder(Color.BLACK));
@@ -77,134 +80,139 @@ public class pnlTienda extends JFrame{
         oroJugador.setVerticalAlignment(JLabel.CENTER);
         gbc.gridwidth = 2;
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panelPrincipal.add(oroJugador, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		panelPrincipal.add(oroJugador, gbc);
 
+		// Label tropas
+		tropas = new JLabel("Tropas");
+		tropas.setFont(new Font(tropas.getFont().getName(), tropas.getFont().getStyle(), 15));
+		tropas.setBorder(new LineBorder(Color.BLACK));
+		tropas.setBackground(new Color(60, 179, 113));
+		tropas.setOpaque(true);
+		tropas.setPreferredSize(new Dimension(250, 45));
+		tropas.setHorizontalAlignment(JLabel.CENTER);
+		tropas.setVerticalAlignment(JLabel.CENTER);
+		gbc.gridwidth = 1;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
 
-        //Label tropas
-        tropas = new JLabel("Tropas");
-        tropas.setFont(new Font(tropas.getFont().getName(), tropas.getFont().getStyle(), 15));
-        tropas.setBorder(new LineBorder(Color.BLACK));
-        tropas.setBackground(new Color(60,179,113));
-        tropas.setOpaque(true);
-        tropas.setPreferredSize(new Dimension(250, 45));
-        tropas.setHorizontalAlignment(JLabel.CENTER);
-        tropas.setVerticalAlignment(JLabel.CENTER);
-        gbc.gridwidth = 1;
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+		panelPrincipal.add(tropas, gbc);
 
-        panelPrincipal.add(tropas, gbc);
+		// Label defensas
+		defensas = new JLabel("Defensas");
+		defensas.setFont(new Font(defensas.getFont().getName(), defensas.getFont().getStyle(), 15));
+		defensas.setBorder(new LineBorder(Color.BLACK));
+		defensas.setBackground(new Color(60, 179, 113));
+		defensas.setOpaque(true);
+		defensas.setPreferredSize(new Dimension(250, 45));
+		defensas.setHorizontalAlignment(JLabel.CENTER);
+		defensas.setVerticalAlignment(JLabel.CENTER);
 
-        //Label defensas
-        defensas = new JLabel("Defensas");
-        defensas.setFont(new Font(defensas.getFont().getName(), defensas.getFont().getStyle(), 15));
-        defensas.setBorder(new LineBorder(Color.BLACK));
-        defensas.setBackground(new Color(60,179,113));
-        defensas.setOpaque(true);
-        defensas.setPreferredSize(new Dimension(250, 45));
-        defensas.setHorizontalAlignment(JLabel.CENTER);
-        defensas.setVerticalAlignment(JLabel.CENTER);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		panelPrincipal.add(defensas, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        panelPrincipal.add(defensas, gbc);
+		// Panel tropas
+		panelTropas = new JPanel();
+		panelTropas.setBorder(new LineBorder(Color.BLACK));
+		panelTropas.setPreferredSize(new Dimension(250, 300));
+		panelTropas.setLayout(new GridLayout(7, 1));
 
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		panelPrincipal.add(panelTropas, gbc);
 
+		// Panel defensas
+		panelDefensas = new JPanel();
+		panelDefensas.setBorder(new LineBorder(Color.BLACK));
+		panelDefensas.setPreferredSize(new Dimension(250, 300));
+		panelDefensas.setLayout(new GridLayout(7, 1));
 
-        //Panel tropas
-        panelTropas = new JPanel();
-        panelTropas.setBorder(new LineBorder(Color.BLACK));
-        panelTropas.setPreferredSize(new Dimension(250, 300));
-        panelTropas.setLayout(new GridLayout(7,1));
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		panelPrincipal.add(panelDefensas, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panelPrincipal.add(panelTropas, gbc);
+		// Botones tropas
 
-        //Panel defensas
-        panelDefensas = new JPanel();
-        panelDefensas.setBorder(new LineBorder(Color.BLACK));
-        panelDefensas.setPreferredSize(new Dimension(250, 300));
-        panelDefensas.setLayout(new GridLayout(7,1));
+		arquero = new JButton("    Arquero       -   10 oro");
+		setIconButton(arquero, eIMG.IMG_ARQUERO);
+		panelTropas.add(arquero);
 
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        panelPrincipal.add(panelDefensas, gbc);
+		asesino = new JButton("   Asesino        -     5 oro");
+		setIconButton(asesino, eIMG.IMG_ASESINO);
+		panelTropas.add(asesino);
 
-        //Botones tropas
+		bersequer = new JButton("   Berserquer    -   25 oro");
+		setIconButton(bersequer, eIMG.IMG_BERSEQUER);
+		panelTropas.add(bersequer);
 
-        arquero = new JButton("Arquero - 10 oro");
-        panelTropas.add(arquero);
+		espadachin = new JButton("   Espadachín  -   15 oro");
+		setIconButton(espadachin, eIMG.IMG_ESPADACHIN);
+		panelTropas.add(espadachin);
 
-        asesino = new JButton("Asesino - 5 oro");
-        panelTropas.add(asesino);
+		espia = new JButton("    Espía            -     5 oro");
+		setIconButton(espia, eIMG.IMG_ESPIA);
+		panelTropas.add(espia);
 
-        bersequer = new JButton("Berserquer - 2 oro");
-        panelTropas.add(bersequer);
+		jinete = new JButton(" Jinete             -  15 oro  ");
+		setIconButton(jinete, eIMG.IMG_JINETE);
+		panelTropas.add(jinete);
 
-        espadachin = new JButton("Espadachín - 15 oro");
-        panelTropas.add(espadachin);
+		mago = new JButton("   Mago            -   10 oro");
+		setIconButton(mago, eIMG.IMG_MAGO);
+		panelTropas.add(mago);
 
-        espia = new JButton("Espía - 5 oro");
-        panelTropas.add(espia);
+		// Botones defensas
 
-        jinete = new JButton("Jinete - 15 oro");
-        panelTropas.add(jinete);
+		catapulta = new JButton("   Catapulta   -  8 oro");
+		setIconButton(catapulta, eIMG.IMG_CATAPULTA);
+		panelDefensas.add(catapulta);
 
-        mago = new JButton("Mago - 10 oro");
-        panelTropas.add(mago);
+		ballesta = new JButton("   Ballesta      -  5 oro");
+		setIconButton(ballesta, eIMG.IMG_BALLESTA);
+		panelDefensas.add(ballesta);
 
-        //Botones defensas
+		this.add(panelPrincipal, BorderLayout.PAGE_START);
+		pack();
+		agregarAcciones();
+	}
 
-        catapulta = new JButton("Catapulta - 8 oro");
-        panelDefensas.add(catapulta);
+	private void agregarAcciones() {
+		ballesta.addActionListener(e -> comprarTropa(1));
+		catapulta.addActionListener(e -> comprarTropa(2));
+		arquero.addActionListener(e -> comprarTropa(3));
+		espadachin.addActionListener(e -> comprarTropa(4));
+		bersequer.addActionListener(e -> comprarTropa(5));
+		mago.addActionListener(e -> comprarTropa(6));
+		asesino.addActionListener(e -> comprarTropa(7));
+		jinete.addActionListener(e -> comprarTropa(8));
+		espia.addActionListener(e -> comprarTropa(9));
+	}
 
-        ballesta = new JButton("Ballesta - 5 oro");
-        panelDefensas.add(ballesta);
+	private void comprarTropa(int tipoTropa) {
 
-
-        //this.add(panelPrincipal);
-        this.add(panelPrincipal, BorderLayout.PAGE_START);
-        pack();
-        agregarAcciones();
-    }
-
-    private void agregarAcciones(){
-        ballesta.addActionListener(e -> comprarTropa(1));
-        catapulta.addActionListener(e -> comprarTropa(2));
-        arquero.addActionListener(e -> comprarTropa(3));
-        espadachin.addActionListener(e -> comprarTropa(4));
-        bersequer.addActionListener(e -> comprarTropa(5));
-        mago.addActionListener(e -> comprarTropa(6));
-        asesino.addActionListener(e -> comprarTropa(7));
-        jinete.addActionListener(e -> comprarTropa(8));
-        espia.addActionListener(e -> comprarTropa(9));
-    }
-
-    private void comprarTropa(int tipoTropa){
-
-        try{
-            boolean compraRealizada = false;
+		try {
+			boolean compraRealizada = false;
 
             compraRealizada = getJuego().getTienda().comprarTropa(getJuego().getTurnoActual().getJugador(), tipoTropa);
 
-            if(compraRealizada){
-                mostrarMensaje();
-                actualizarOro();
-            }
+			if (compraRealizada) {
+				mostrarMensaje();
+				actualizarOro();
+			}
 
-        }catch (Exception exc){
-            System.out.println(exc);
-        }
-    }
+		} catch (Exception exc) {
+			System.out.println(exc);
+		}
+	}
 
-    private void mostrarMensaje(){
-        JOptionPane.showMessageDialog(new JPanel(), "La tropa ha sido agregada correctamente", "Compra completada", JOptionPane.INFORMATION_MESSAGE);
-    }
+	private void mostrarMensaje() {
+		JOptionPane.showMessageDialog(new JPanel(), "La tropa ha sido agregada correctamente", "Compra completada",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
 
-    private void actualizarOro(){
+	private void actualizarOro() {
         oroJugador.setText("Oro disponible: " + getJuego().getTurnoActual().getJugador().getCastillo().getOros());
     }
 
@@ -214,5 +222,15 @@ public class pnlTienda extends JFrame{
 
     public void setJuego(Juego juego) {
         this.juego = juego;
-    }
+	}
+
+	private void setIconButton(JButton btn, String nombreIcono) {
+		btn.setIcon(eIMG.getIcon(nombreIcono));
+		btn.setSelectedIcon(eIMG.getIcon(nombreIcono));
+		btn.setIconTextGap(2);
+		btn.setHorizontalAlignment(SwingConstants.CENTER);
+		btn.setVerticalAlignment(SwingConstants.CENTER);
+		btn.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btn.setVerticalTextPosition(SwingConstants.CENTER);
+	}
 }

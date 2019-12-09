@@ -19,6 +19,7 @@ public abstract class ConstructorTablero {
 
     public void crearJuego(){
         this.juego = new Juego();
+        Juego.juegoActual = this.juego;
     }
 
     protected Jugador crearJugador(String pNombreJugador){
@@ -55,11 +56,11 @@ public abstract class ConstructorTablero {
         Tablero tablero = juego.getTablero();
         int ancho = tablero.getAncho() - 1;
         int largo = tablero.getLargo() - 1;
-        for(int i = 0; i < 14; i++) {
+        for(int i = 0; i < 15; i++) {
             do {
                 puntos = obtenerPuntosAletorios(ancho, largo);
                 casilla = tablero.getCasillas()[puntos[0]][puntos[1]];
-            } while (!tablero.esCasillasValida(casilla) && !casilla.tieneRecurso());
+            } while (casilla.tieneRecurso() || !tablero.esCasillasValida(casilla));
             powerUp = numeroAleatorio(1, 3);
             casilla.setRecurso(fabricaCasillas.crearGemas(powerUp));
         }
@@ -76,7 +77,7 @@ public abstract class ConstructorTablero {
             do {
                 puntos = obtenerPuntosAletorios(ancho, largo);
                 casilla = tablero.getCasillas()[puntos[0]][puntos[1]];
-            } while (!tablero.esCasillasValida(casilla) && casilla.tieneRecurso());
+            } while (casilla.tieneRecurso() || !tablero.esCasillasValida(casilla));
             powerUp = numeroAleatorio(1, 4);
             casilla.setRecurso(fabricaCasillas.crearPowerUp(powerUp));
         }
