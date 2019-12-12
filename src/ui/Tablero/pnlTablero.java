@@ -25,7 +25,6 @@ public class pnlTablero extends JPanel {
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
-	private Tablero tablero;
 	private Juego juego;
 	private Color[] Yellow = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
 	private Color[] Red = new Color[] {new Color(255, 45, 100, 100), new Color(255, 45, 100, 100)};
@@ -38,7 +37,7 @@ public class pnlTablero extends JPanel {
 	 * Create the panel.
 	 */
 	public pnlTablero(int anchoTablero, int largoTablero, Juego juego) {
-		this.tablero = tablero;
+		this.tablero = juego.getTablero();
 		this.setLayout(null);
 		this.setSize(anchoTablero, largoTablero);
 		this.setBackground(new java.awt.Color(51, 51, 51));
