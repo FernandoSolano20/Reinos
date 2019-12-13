@@ -100,6 +100,7 @@ public class FrmMain extends JFrame {
 		btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		btnSalir.setOpaque(false);
+
 		btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				SALIR();
@@ -289,10 +290,6 @@ public class FrmMain extends JFrame {
 			jugador.setNombreJugador("Jugador" + numJugador);
 			++numJugador;
 		}
-
-		// pasarTurno();
-
-		//System.out.println(juego.getTablero().recorrerTablero());
 
 		// Mostrar el tablero:
 		this.mostrarTablero();

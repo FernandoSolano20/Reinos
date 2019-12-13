@@ -28,9 +28,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	public int i;
 	public int j;
 	private Color[] fondoCasilla = null;
-
 	private int[] casillaMarcada = new int[2]; // { i, j }
-
 	private Image imgActual = null;
 
 	/**
@@ -98,25 +96,37 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		// Marcamos la casilla seleccionada.
 		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
+
+		//REALIZAR ATAQUE
 		if(tablero.getJuego().getTablero().isModoAtaque()){
 			System.out.println("Atacando a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
 		}
+
+		//REALIZAR MOVIMIENTO
 		else if(tablero.getJuego().getTablero().isModoMovimiento()){
 			System.out.println("Movimiendo a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
-			tablero.getJuego().moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
+			tablero.moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
 		}
+
+		//COLOCAR PIEZA EN EL TABLERO
+		else if(tablero.getJuego().getTablero().isModoColocarPieza()){
+			int jugadorCoordenadaX = tablero.getJuego().getTurnoActual().getJugador().getPosicionCastillo()[0];
+			int jugadorCoordenadaY = tablero.getJuego().getTurnoActual().getJugador().getPosicionCastillo()[1];
+
+			System.out.println("Colocando pieza");
+			tablero.ponerPiezaEnJuego(jugadorCoordenadaX,jugadorCoordenadaY, casillaMarcada[0],casillaMarcada[1]);
+			tablero.repintarCasillas();
+		}
+
+		//SELECCIONAR CASILLA
 		else{
 			System.out.println("Casilla seleccionada");
-		//Obtenemos la casilla del tablero para asignarla a la casilla actual
+			//Obtenemos la casilla del tablero para asignarla a la casilla actual
 			Casilla casillaActual = tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
-				.getCasillaMarcada()[1]];
+
 			CasillaActual.setCasilla(casillaActual);
 		}
 
-
-
-		// JOptionPane.showMessageDialog(null, "Casilla seleccionada:\nI: " + i + ", J:
-		// " + j);
 
 		// Recursos
 		Casilla casilla = tablero.getTableroLogica().obtenerCasilla(i, j);

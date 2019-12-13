@@ -14,6 +14,7 @@ public abstract class Tropa extends Construccion {
     private int alcance;
     private int precio;
     protected int ataque;
+    private boolean enJuego;
 
     public Tropa() {
     }
@@ -36,6 +37,14 @@ public abstract class Tropa extends Construccion {
 
     public int getAtaque() {
         return ataque;
+    }
+
+    public boolean isEnJuego() {
+        return enJuego;
+    }
+
+    public void setEnJuego(boolean enJuego) {
+        this.enJuego = enJuego;
     }
 
     public abstract void setAtaque(int ataque);

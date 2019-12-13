@@ -4,6 +4,7 @@ import bl.Construccion.Juego.Juego;
 import ui.Tablero.pnlTablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
+import ui.contenedor.Controles.Tropas.pnlTropas;
 import ui.eConfiguracion;
 import ui.Tablero.pnlTablero;
 
@@ -68,9 +69,10 @@ public class pnlControles extends JPanel {
 	private void agregarAcciones() {
 		btnMover.addActionListener(e -> {
 			juego.getTablero().setModoMovimiento(true);
+			juego.getTablero().setModoAtaque(false);
 				// acción de mover
 		});
-	}
+
 		btnPasarTurno.addActionListener(e -> {
 			juego.pasarTurno();
 			String jugadorActual = juego.getTurnoActual().getJugador().getNombreJugador();
@@ -89,11 +91,12 @@ public class pnlControles extends JPanel {
 			pnlTienda pnlTienda = new pnlTienda(this.getJuego());
 			pnlTienda.setVisible(true);
 		});
-		btnMisTropas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// acción de mis tropas
-			}
+
+		btnMisTropas.addActionListener(e -> {
+			pnlTropas pnlTropas = new pnlTropas(this.getJuego());
+			pnlTropas.setVisible(true);
 		});
+
 		btnUsarPowerUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tropa tropa = pnlTablero.getTropaSeleccionada();

@@ -7,12 +7,15 @@ import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 
+import java.util.ArrayList;
+
 public class Tablero implements ITablero {
     private Casilla[][] casillas;
     private int ancho; //width
     private int largo; //height
 	private boolean modoAtaque;
 	private boolean modoMovimiento;
+	private boolean modoColocarPieza;
 
     public Tablero(int ancho, int largo) {
         setAncho(ancho);
@@ -22,6 +25,7 @@ public class Tablero implements ITablero {
         generarCasillas(ancho,largo);
         setModoAtaque(false);
         setModoMovimiento(false);
+        setModoColocarPieza(false);
     }
 
 	public int getAncho() {
@@ -62,6 +66,14 @@ public class Tablero implements ITablero {
 
 	public void setModoMovimiento(boolean modoMovimiento) {
 		this.modoMovimiento = modoMovimiento;
+	}
+
+	public boolean isModoColocarPieza() {
+		return modoColocarPieza;
+	}
+
+	public void setModoColocarPieza(boolean modoColocarPieza) {
+		this.modoColocarPieza = modoColocarPieza;
 	}
 
 	public void construirEnCasilla(int pAncho, int pLargo, Construccion pConstruccion) {
@@ -150,18 +162,59 @@ public class Tablero implements ITablero {
 		}
 
 		else if(! validarMovimientoTropa((TropaAtaque) piezaOrigen, distanciaMovimiento)) {
-			throw new ExcepcionJuego("La tropa no tiene suficientes moviemientos");
+			throw new ExcepcionJuego("La tropa no tiene suficientes movimientos");
 		}
+
 		else{
 			colocarPiezaCasilla(destinoX, destinoY, piezaOrigen);
 			removerPiezaCasilla(origenX, origenY);
 			descontarMovimientosTropa((TropaAtaque) piezaOrigen, distanciaMovimiento);
-
 			//Retorna el valor restante del dado
 			return pTurno.getMovimientosPermitidos() - distanciaMovimiento;
 		}
-
     }
+
+    public int ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY, Turno pTurno, Tropa pTropa) throws ExcepcionJuego{
+
+    	Construccion piezaOrigen = pTropa;
+		Construccion piezaDestino = obtenerPiezaCasilla(destinoX, destinoY);
+
+		int distanciaMovimiento = obtenerDistanciaEntreCasillas(origenX, origenY, destinoX, destinoY);
+		//Validamos que las dos coordenadas ingresadas sean correctas
+
+		if (! validarCasillas(origenX, origenY, destinoX, destinoY)) {
+			throw new ExcepcionJuego("El movimiento solicitado es invalido");
+		}
+
+		else if(piezaDestino != null){
+			throw new ExcepcionJuego("La casilla de destino se encuentra ocupada");
+		}
+
+		else if( ! validarCantidadTropasEnJuego(pTurno.getJugador().getTropas())){
+			throw new ExcepcionJuego("Puede tener un maximo de 3 tropas en juego");
+		}
+
+		else if(! validarMovimientoDado(distanciaMovimiento, pTurno.getMovimientosPermitidos())) {
+			throw new ExcepcionJuego("La cantidad de movimientos es mayor al valor restante del dado");
+		}
+
+		else{
+			try{
+
+				colocarPiezaCasilla(destinoX, destinoY, piezaOrigen);
+				cambiarEstadoTropa(piezaOrigen);
+
+				return pTurno.getMovimientosPermitidos() - distanciaMovimiento;
+
+			}catch (ExcepcionJuego e){
+				System.out.println("Error al colocar la pieza: " + e);
+			}
+			//Retorna el valor restante del dado
+			return pTurno.getMovimientosPermitidos();
+		}
+
+
+	}
 
 	//Metodo que obtiene la ubicacion de  la casilla de origen y de la casilla destino
 	// Lo que busca es obtener la distancia que hay en X y la distancia en Y
@@ -221,6 +274,27 @@ public class Tablero implements ITablero {
 	private void descontarMovimientosTropa(TropaAtaque pTropa, int cantidadMovimientosRealizados){
     	int cantidadMovimientosTropa = pTropa.getCantMovimientos();
     	pTropa.setCantMovimientos(cantidadMovimientosTropa - cantidadMovimientosRealizados);
+	}
+
+	private void cambiarEstadoTropa(Construccion pTropa) throws ExcepcionJuego{
+    	if( pTropa instanceof Tropa){
+    		((Tropa) pTropa).setEnJuego(true);
+		}
+    	else{
+    		throw new ExcepcionJuego("La pieza no se puede mover");
+		}
+	}
+
+	private boolean validarCantidadTropasEnJuego(ArrayList<Tropa> pTropas){
+
+    	int cantidad = 0;
+    	for (Tropa tropa : pTropas){
+    		if(tropa.isEnJuego()){
+				cantidad++;
+			}
+    		if(cantidad >=3) return false;
+		}
+    	return true;
 	}
 
 

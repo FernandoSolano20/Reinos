@@ -1,14 +1,17 @@
 package bl.Construccion.Juego;
 
+import bl.Construccion.Excepciones.ExcepcionJuego;
 import bl.Construccion.Juego.Dado.*;
 import bl.Construccion.Juego.Turno.Iterador.IIterador;
 import bl.Construccion.Juego.Turno.Turno;
 import bl.Construccion.Juego.VisitanteTropas.IVisitante;
 import bl.Construccion.Juego.VisitanteTropas.RegeneradorTropas;
 import bl.Construccion.Jugadores.Jugador;
+import bl.Construccion.Tablero.CasillaActual;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tienda.ITienda;
 import bl.Construccion.Tienda.Tienda;
+import bl.Construccion.Tropa.Tropa;
 
 import java.util.ArrayList;
 
@@ -126,13 +129,28 @@ public class Juego implements IJuego {
     	int valorFinalDado = 0;
 
     	try {
-
 			valorFinalDado =  getTablero().moverPieza(origenX,origenY,destinoX,destinoY, getTurnoActual());
 			getTurnoActual().setMovimientosPermitidos(valorFinalDado);
 
 		}catch (Exception e){
 			System.out.println("Error al mover la pieza: " + e);
 		}
+
+		restablecerAccion();
+	}
+
+	public void ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY, Tropa pTropa){
+		int valorFinalDado = 0;
+
+		try {
+			valorFinalDado =  getTablero().ponerPiezaEnJuego(origenX,origenY,destinoX,destinoY, getTurnoActual(),pTropa);
+			getTurnoActual().setMovimientosPermitidos(valorFinalDado);
+
+		}catch (Exception e){
+			System.out.println("Error al poner la pieza en juego: " + e);
+		}
+
+		restablecerAccion();
 	}
 
 	@Override
@@ -162,5 +180,11 @@ public class Juego implements IJuego {
 	@Override
 	public int tirarDado() {
 		return dado.tirarDado();
+	}
+
+	private void restablecerAccion(){
+		getTablero().setModoMovimiento(false);
+		getTablero().setModoAtaque(false);
+		getTablero().setModoColocarPieza(false);
 	}
 }

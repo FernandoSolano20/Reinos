@@ -22,8 +22,8 @@ public abstract class ConstructorTablero {
         Juego.juegoActual = this.juego;
     }
 
-    protected Jugador crearJugador(String pNombreJugador){
-        return new Jugador(pNombreJugador);
+    protected Jugador crearJugador(String pNombreJugador,int pPosicionCastilloX, int pPosicionCastilloY){
+        return new Jugador(pNombreJugador,pPosicionCastilloX,pPosicionCastilloY);
     }
 
     //Añade la cantidad de jugadores al ArrayList de jugadores en la clase Juego

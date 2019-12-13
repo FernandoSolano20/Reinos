@@ -1,7 +1,10 @@
 package ui.contenedor.componentes;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+
 import ui.eConfiguracion;
+
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class pnlAbajo extends JPanel {
