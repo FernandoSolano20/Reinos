@@ -5,7 +5,7 @@ import ui.eConfiguracion;
 
 @SuppressWarnings("serial")
 public class pnlDerecha extends JPanel {
-	private final int ANCHO = 90;
+	private final int ANCHO = 40;
 
 	public pnlDerecha(int height) {
 		this.setLayout(null);

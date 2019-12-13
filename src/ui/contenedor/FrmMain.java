@@ -1,6 +1,5 @@
 package ui.contenedor;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import javax.swing.JFrame;
@@ -32,6 +31,8 @@ public class FrmMain extends JFrame {
 
 	private static Juego juego;
 
+	@SuppressWarnings("unused")
+	private eIMG eIMGIniciaConstructor = new eIMG();
 	private JPanel pnlMain;
 	private JPanel pPnlArriba;
 	private JPanel pPnlIzquierda;
@@ -61,7 +62,7 @@ public class FrmMain extends JFrame {
 		this.setState(Frame.MAXIMIZED_BOTH);
 		this.setUndecorated(true);
 		this.setTitle(eConfiguracion.TITULO_APP);
-		this.setIconImage(eIMG.getImage(eIMG.IMG_APP));
+		this.setIconImage(eIMG.IMAGE_APP);
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
 		this.setPantallaCompleta();
@@ -176,7 +177,7 @@ public class FrmMain extends JFrame {
 
 		pPnlCentro = new JPanel();
 		pPnlCentro.setLayout(null);
-		pPnlCentro.setBackground(new Color(47, 79, 79, 255));
+		pPnlCentro.setBackground(eConfiguracion.COLOR_FONDO);
 		pPnlCentro.setBounds(derechaAncho, arribaAlto, centroAncho, centroAlto);
 		pnlMain.add(pPnlCentro, null);
 
@@ -222,7 +223,7 @@ public class FrmMain extends JFrame {
 		Object[] opciones = { "Si", "Cancelar" };
 		Icon icono = null;
 		try {
-			icono = eIMG.getIcon(eIMG.IMG_SALIR);
+			icono = eIMG.getIcon(eIMG.getImgSalir());
 		} catch (Exception e) {
 		}
 		int opcion = JOptionPane.showOptionDialog(null, "<html><b>¿Seguro que desea salir?</b></html>", " ",
@@ -274,6 +275,7 @@ public class FrmMain extends JFrame {
 	}
 
 	public void iniciar() {
+		FabricadorDeTropas.procesarFuncion(1);
 		Tropa tropa = new Arquero();
 		juego.getJugadores().get(0).getTropas().add(tropa);
 		juego.getTablero().construirEnCasilla(0, 4, tropa);
@@ -290,7 +292,7 @@ public class FrmMain extends JFrame {
 
 		// pasarTurno();
 
-		System.out.println(juego.getTablero().recorrerTablero());
+		//System.out.println(juego.getTablero().recorrerTablero());
 
 		// Mostrar el tablero:
 		this.mostrarTablero();
