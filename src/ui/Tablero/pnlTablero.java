@@ -34,7 +34,7 @@ public class pnlTablero extends JPanel {
 	private Cursor mano = new Cursor(Cursor.HAND_CURSOR);
 	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
 	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
-	private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
+	//private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
 	private Color[] Red = new Color[] { new Color(255, 45, 100, 100), new Color(255, 45, 100, 100) };
 	private Color[] Green = new Color[] { new Color(45, 255, 100, 100), new Color(45, 255, 100, 100) };
 	private Color[] White = new Color[] { new Color(255, 255, 255, 255), new Color(255, 255, 255, 255) };
@@ -85,27 +85,32 @@ public class pnlTablero extends JPanel {
 		// Pintar casillas que no están vacias:
 		for (Casilla[] i : juego.getTablero().getCasillas()) {
 			for (Casilla j : i) {
-				if (j.tienePieza()) {
-					Construccion laPieza = j.getPieza();
-					if (null != laPieza) {
-						casillasUI[j.getX()][j.getY()].setCursor(mano);
-						String nombrePieza = laPieza.getNombre();
-						construirEnCasilla(j.getX(), j.getY(), nombrePieza);
+				if (false == j.tienePieza() && false == j.tieneRecurso()) {
+					// Se pinta el color default
+					construirEnCasilla(j.getX(), j.getY(), "");
+				} else {
+					if (j.tienePieza()) {
+						Construccion laPieza = j.getPieza();
+						if (null != laPieza) {
+							casillasUI[j.getX()][j.getY()].setCursor(mano);
+							String nombrePieza = laPieza.getNombre();
+							construirEnCasilla(j.getX(), j.getY(), nombrePieza);
+						}
 					}
-				}
-				if (j.tieneRecurso()) {
-					if (j.getRecurso() instanceof PowerUp) {
-						construirEnCasilla(j.getX(), j.getY(), "PowerUp");
-					} else {
-						if (j.getRecurso() instanceof Azul) {
-							// pintarCasilla(j.getX(), j.getY(), Blue);
-							construirEnCasilla(j.getX(), j.getY(), "GemaAzul");
-						} else if (j.getRecurso() instanceof Blanca) {
-							// pintarCasilla(j.getX(), j.getY(), White);
-							construirEnCasilla(j.getX(), j.getY(), "GemaBlanca");
-						} else if (j.getRecurso() instanceof Verde) {
-							// pintarCasilla(j.getX(), j.getY(), Green);
-							construirEnCasilla(j.getX(), j.getY(), "GemaVerde");
+					if (j.tieneRecurso()) {
+						if (j.getRecurso() instanceof PowerUp) {
+							construirEnCasilla(j.getX(), j.getY(), "PowerUp");
+						} else {
+							if (j.getRecurso() instanceof Azul) {
+								// pintarCasilla(j.getX(), j.getY(), Blue);
+								construirEnCasilla(j.getX(), j.getY(), "GemaAzul");
+							} else if (j.getRecurso() instanceof Blanca) {
+								// pintarCasilla(j.getX(), j.getY(), White);
+								construirEnCasilla(j.getX(), j.getY(), "GemaBlanca");
+							} else if (j.getRecurso() instanceof Verde) {
+								// pintarCasilla(j.getX(), j.getY(), Green);
+								construirEnCasilla(j.getX(), j.getY(), "GemaVerde");
+							}
 						}
 					}
 				}
