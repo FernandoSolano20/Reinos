@@ -157,9 +157,14 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	}
 
 	private void atacar(Construccion construccion) {
-		pnlTablero.getTropaSeleccionada().atacar(construccion);
-		pnlTablero.setTropaSeleccionada(null);
-		pnlTablero.isAtaque = false;
+		if (null != construccion && null != construccion.getCasilla()) {
+			pnlTablero.getTropaSeleccionada().atacar(construccion);
+			pnlTablero.setTropaSeleccionada(null);
+			pnlTablero.isAtaque = false;
+			this.tablero.repintarCasillas();
+		} else {
+			System.err.println("No se puede atacar.");
+		}
 	}
 
 	private void recorgerRecurso(Casilla casilla) {
@@ -171,13 +176,17 @@ public class pnlCasilla extends JPanel implements MouseListener {
 				int opc = recogerPowerUp();
 				if (opc == 0) {
 					tropaAtaque.recogerPowerUp(casilla);
-					this.tablero.construirEnCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], "");
+					// this.tablero.construirEnCasilla(this.getCasillaMarcada()[0],
+					// this.getCasillaMarcada()[1], "");
+					this.tablero.repintarCasillas();
 				}
 			} else {
 				int opc = recogerOro();
 				if (opc == 0) {
 					tropaAtaque.recogerOro(casilla);
-					this.tablero.construirEnCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], "");
+					// this.tablero.construirEnCasilla(this.getCasillaMarcada()[0],
+					// this.getCasillaMarcada()[1], "");
+					this.tablero.repintarCasillas();
 				}
 			}
 		}
