@@ -108,10 +108,12 @@ public class pnlCasilla extends JPanel implements MouseListener {
 				}
 				else{
 					mostrarMsg("Esta tropa ya realizó su ataque");
+					pnlTablero.isAtaque = false;
 				}
 			}
 			else {
 				mostrarMsg("No se pudo completar el ataque");
+				pnlTablero.isAtaque = false;
 			}
 		}
 
