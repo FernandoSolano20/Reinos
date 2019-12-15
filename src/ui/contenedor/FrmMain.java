@@ -276,10 +276,6 @@ public class FrmMain extends JFrame {
 	}
 
 	public void iniciar() {
-		FabricadorDeTropas.procesarFuncion(1);
-		Tropa tropa = new Arquero();
-		juego.getJugadores().get(0).getTropas().add(tropa);
-		juego.getTablero().construirEnCasilla(0, 4, tropa);
 
 		// Envía el tablero a pnlTablero:
 		this.setTableroUI(juego.getTablero());

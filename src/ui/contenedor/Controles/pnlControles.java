@@ -78,6 +78,7 @@ public class pnlControles extends JPanel {
 		btnPasarTurno.addActionListener(e -> {
 			juego.pasarTurno();
 			String jugadorActual = juego.getTurnoActual().getJugador().getNombreJugador();
+			pnlTablero.setTropaSeleccionada(null);
 			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno",
 					JOptionPane.INFORMATION_MESSAGE);
 		});
@@ -117,6 +118,7 @@ public class pnlControles extends JPanel {
 					pnlTablero.setTropaSeleccionada(null);
 				}
 			}
+
 		});
 	}
 

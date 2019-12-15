@@ -2,9 +2,8 @@ package bl.Construccion.Tropa;
 
 import bl.Construccion.Castillo.Castillo;
 import bl.Construccion.Construccion;
-import bl.Construccion.Cordenadas.CoordenasAtaque;
+import bl.Construccion.Coordenadas.CoordenasAtaque;
 import bl.Construccion.Juego.Juego;
-import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 
@@ -14,8 +13,9 @@ public abstract class Tropa extends Construccion {
     private int alcance;
     private int precio;
     protected int ataque;
-    private boolean yaAtaco;
+    private boolean ataqueRealizado;
     private boolean enJuego;
+    private boolean movimientoRealizado;
 
     public Tropa() {
     }
@@ -50,12 +50,20 @@ public abstract class Tropa extends Construccion {
 
     public abstract void setAtaque(int ataque);
 
-    public boolean isYaAtaco() {
-        return yaAtaco;
+    public boolean isAtaqueRealizado() {
+        return ataqueRealizado;
     }
 
-    public void setYaAtaco(boolean yaAtaco) {
-        this.yaAtaco = yaAtaco;
+    public void setAtaqueRealizado(boolean ataqueRealizado) {
+        this.ataqueRealizado = ataqueRealizado;
+    }
+
+    public boolean isMovimientoRealizado() {
+        return movimientoRealizado;
+    }
+
+    public void setMovimientoRealizado(boolean movimientoRealizado) {
+        this.movimientoRealizado = movimientoRealizado;
     }
 
     public boolean validarAtaque(int x1, int y1, int x2, int y2){
@@ -82,7 +90,7 @@ public abstract class Tropa extends Construccion {
         Casilla casillaAtacante = this.getCasilla();
         Casilla casillaAtacado = construccion.getCasilla();
         if(validarAtaque(casillaAtacante.getX(),casillaAtacante.getY(),casillaAtacado.getX(),casillaAtacado.getY())){
-            this.setYaAtaco(true);
+            this.setAtaqueRealizado(true);
             if(construccion instanceof TropaAtaque){
                 TropaAtaque tropaAtaque = (TropaAtaque) construccion;
                 tropaAtaque.setDefensa(tropaAtaque.getDefensa() - this.getAtaque());
@@ -91,14 +99,14 @@ public abstract class Tropa extends Construccion {
                     tropaAtaque.setDefensa(0);
                 }
                 msg = "Tropa: " + tropaAtaque.getNombre() + " es atacada por" + this.getNombre() +
-                        "\nEstadisitcas de " + tropaAtaque.getNombre()  +
+                        "\nEstadísticas de " + tropaAtaque.getNombre()  +
                         "\nDefensa: " + tropaAtaque.getDefensa() +
                         "\nVida: " + tropaAtaque.getVida();
             }
             else {
                 construccion.setVida(construccion.getVida() - this.getAtaque());
                 msg = "Tropa: " + construccion.getNombre() + " es atacada por" + this.getNombre() +
-                        "\nEstadisitcas de " + construccion.getNombre()  +
+                        "\nEstadísticas de " + construccion.getNombre()  +
                         "\nVida: " + construccion.getVida();
             }
             if (construccion.getVida() <= 0){
@@ -106,7 +114,7 @@ public abstract class Tropa extends Construccion {
                     Juego juego = Juego.juegoActual;
                     juego.getJugadores().remove(construccion.getJugador());
                     construccion.getCasilla().setPieza(null);
-                    msg = "Jugador " + construccion.getJugador().getNombreJugador() + " perdio";
+                    msg = "Jugador " + construccion.getJugador().getNombreJugador() + " perdió";
                     juego.finalizarPartida();
                 }
                 else {
@@ -114,7 +122,7 @@ public abstract class Tropa extends Construccion {
                     tropas.remove(construccion);
                     construccion.getCasilla().setPieza(null);
                     msg = "Jugador " + construccion.getJugador().getNombreJugador() + " " +
-                            "perdio la tropa: " + construccion.getNombre();
+                            "perdió la tropa: " + construccion.getNombre();
                 }
             }
         }
