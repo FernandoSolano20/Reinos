@@ -16,6 +16,9 @@ public class ConstructorTresJugadores extends ConstructorTablero {
 		Jugador jugador1 = this.juego.getJugadores().get(0);
 		Jugador jugador2 = this.juego.getJugadores().get(1);
 		Jugador jugador3 = this.juego.getJugadores().get(2);
+		jugador1.getCastillo().setCasilla(juego.getTablero().obtenerCasilla(jugador1.getPosicionCastillo()[0], jugador1.getPosicionCastillo()[1]));
+		jugador2.getCastillo().setCasilla(juego.getTablero().obtenerCasilla(jugador2.getPosicionCastillo()[0], jugador2.getPosicionCastillo()[1]));
+		jugador3.getCastillo().setCasilla(juego.getTablero().obtenerCasilla(jugador3.getPosicionCastillo()[0], jugador3.getPosicionCastillo()[1]));
 		this.juego.getTablero().construirEnCasilla(jugador1.getPosicionCastillo()[0], jugador1.getPosicionCastillo()[1], jugador1.getCastillo());
 		this.juego.getTablero().construirEnCasilla(jugador2.getPosicionCastillo()[0], jugador2.getPosicionCastillo()[1], jugador2.getCastillo());
 		this.juego.getTablero().construirEnCasilla(jugador3.getPosicionCastillo()[0], jugador3.getPosicionCastillo()[1], jugador3.getCastillo());

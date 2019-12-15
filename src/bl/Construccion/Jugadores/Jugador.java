@@ -56,6 +56,7 @@ public class Jugador {
 
     public void setCastillo(Castillo castillo) {
         this.castillo = castillo;
+        castillo.setJugador(this);
     }
 
     public ArrayList<Tropa> getTropas() {

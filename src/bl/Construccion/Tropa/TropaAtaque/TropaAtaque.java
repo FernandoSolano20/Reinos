@@ -89,6 +89,7 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
     public void recogerOro(Casilla casilla){
         Gema gema = (Gema) casilla.getRecurso();
         setOros(gema.getValor());
+        casilla.removerRecurso();
     }
 
     public TropaAtaque usarPowerUp(TropaAtaque tropaAtaque){

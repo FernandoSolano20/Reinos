@@ -1,10 +1,14 @@
 package bl.Construccion.decoradoresPowerUp;
 
 import bl.Construccion.Juego.VisitanteTropas.IVisitante;
+import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import bl.Construccion.decorador.ObjetoDecorado;
 
+import java.util.ArrayList;
+
 public class DecoradorDisminuyeDefensa extends ObjetoDecorado {
+    private String nombrePowerUp;
     public DecoradorDisminuyeDefensa(TropaAtaque tropaAtaque) {
         this.cTropaAtaque = tropaAtaque;
         setPrecio(this.cTropaAtaque.getPrecio());
@@ -17,6 +21,7 @@ public class DecoradorDisminuyeDefensa extends ObjetoDecorado {
         setNombre(this.cTropaAtaque.getNombre());
         setJugador(this.cTropaAtaque.getJugador());
         setCasilla(this.cTropaAtaque.getCasilla());
+        setNombrePowerUp("Disminuye defensa");
     }
 
     @Override
@@ -26,12 +31,23 @@ public class DecoradorDisminuyeDefensa extends ObjetoDecorado {
 
     @Override
     public void visitaRegeneracion(IVisitante pVisitante) {
+        ArrayList<Tropa> tropas = this.getJugador().getTropas();
+        tropas.remove(this);
         pVisitante.visitarTropaAtaque(cTropaAtaque);
         getCasilla().setPieza(cTropaAtaque);
+        tropas.add(cTropaAtaque);
     }
 
     @Override
     public void setAtaque(int ataque) {
         this.ataque = ataque;
+    }
+
+    public String getNombrePowerUp() {
+        return nombrePowerUp;
+    }
+
+    public void setNombrePowerUp(String nombrePowerUp) {
+        this.nombrePowerUp = nombrePowerUp;
     }
 }

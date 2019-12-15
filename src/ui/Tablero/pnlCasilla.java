@@ -1,6 +1,7 @@
 package ui.Tablero;
 
 import bl.Construccion.Construccion;
+import bl.Construccion.Excepciones.ExcepcionJuego;
 import bl.Construccion.Recursos.IRecurso;
 import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
@@ -19,6 +20,8 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import static javax.swing.BorderFactory.createMatteBorder;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -98,14 +101,27 @@ public class pnlCasilla extends JPanel implements MouseListener {
 
 
 		//REALIZAR ATAQUE
-		if(tablero.getJuego().getTablero().isModoAtaque()){
-			System.out.println("Atacando a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
+		if(pnlTablero.isAtaque){
+			//System.out.println("Atacando a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
+			Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
+			if(pnlTablero.getTropaSeleccionada() != null && construccion != null){
+				if(!pnlTablero.getTropaSeleccionada().isYaAtaco()){
+					atacar(construccion);
+				}
+				else{
+					mostrarMsg("Ya la tropa ataco");
+				}
+			}
+			else {
+				mostrarMsg("No se ataco");
+			}
 		}
 
 		//REALIZAR MOVIMIENTO
 		else if(tablero.getJuego().getTablero().isModoMovimiento()){
 			System.out.println("Movimiendo a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
 			tablero.moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
+			pnlTablero.setTropaSeleccionada(null);
 		}
 
 		//COLOCAR PIEZA EN EL TABLERO
@@ -116,6 +132,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 			System.out.println("Colocando pieza");
 			tablero.ponerPiezaEnJuego(jugadorCoordenadaX,jugadorCoordenadaY, casillaMarcada[0],casillaMarcada[1]);
 			tablero.repintarCasillas();
+			pnlTablero.setTropaSeleccionada(null);
 		}
 
 		//SELECCIONAR CASILLA
@@ -125,6 +142,16 @@ public class pnlCasilla extends JPanel implements MouseListener {
 			Casilla casillaActual = tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
 
 			CasillaActual.setCasilla(casillaActual);
+			Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
+			if (construccion != null && construccion instanceof Tropa) {
+				Tropa tropa = (Tropa) construccion;
+				if(tablero.getTableroLogica().validarTropaJugador(tropa,tablero.getJuego().getTurnoActual().getJugador())){
+					pnlTablero.setTropaSeleccionada(tropa);
+				}
+				else {
+					new ExcepcionJuego("Tropa pertenece a otro jugador");
+				}
+			}
 		}
 
 
@@ -132,13 +159,6 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		Casilla casilla = tablero.getTableroLogica().obtenerCasilla(i, j);
 		if (casilla.tieneRecurso()) {
 			recorgerRecurso(casilla);
-		}
-		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
-		if (pnlTablero.getTropaSeleccionada() == null && construccion instanceof Tropa) {
-			Tropa tropa = (Tropa) construccion;
-			pnlTablero.setTropaSeleccionada(tropa);
-		} else if (pnlTablero.isAtaque) {
-			atacar(construccion);
 		}
 	}
 
@@ -165,6 +185,12 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		return opcion;
 	}
 
+	private void mostrarMsg(String msg) {
+		int opcion = 0;
+		String cad = msg;
+		JOptionPane.showMessageDialog(null, msg, eConfiguracion.TITULO_APP, JOptionPane.INFORMATION_MESSAGE);
+	}
+
 	private int recogerOro() {
 		int opcion = 0;
 		String cad = "Quiere Recoger oro:\n";
@@ -179,12 +205,13 @@ public class pnlCasilla extends JPanel implements MouseListener {
 
 	private void atacar(Construccion construccion) {
 		if (null != construccion && null != construccion.getCasilla()) {
-			pnlTablero.getTropaSeleccionada().atacar(construccion);
+			mostrarMsg(pnlTablero.getTropaSeleccionada().atacar(construccion));
 			pnlTablero.setTropaSeleccionada(null);
 			pnlTablero.isAtaque = false;
 			this.tablero.repintarCasillas();
 		} else {
-			System.err.println("No se puede atacar.");
+			pnlTablero.setTropaSeleccionada(null);
+			mostrarMsg("No se puede atacar.");
 		}
 	}
 

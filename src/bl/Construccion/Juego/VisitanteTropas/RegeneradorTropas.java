@@ -16,42 +16,49 @@ public class RegeneradorTropas implements IVisitante {
     public void visitarTropaAtaque(Arquero pTropa) {
         pTropa.setDefensa(3);
         pTropa.setCantMovimientos(3);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
     public void visitarTropaAtaque(Asesino pTropa){
         pTropa.setDefensa(3);
         pTropa.setCantMovimientos(4);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
     public void visitarTropaAtaque(Bersequer pTropa) {
         pTropa.setDefensa(10);
         pTropa.setCantMovimientos(1);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
     public void visitarTropaAtaque(Espadachin pTropa) {
         pTropa.setDefensa(5);
         pTropa.setCantMovimientos(2);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
     public void visitarTropaAtaque(Espia pTropa) {
         pTropa.setDefensa(1);
         pTropa.setCantMovimientos(5);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
     public void visitarTropaAtaque(Jinete pTropa) {
         pTropa.setDefensa(4);
         pTropa.setCantMovimientos(6);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
     public void visitarTropaAtaque(Mago pTropa) {
         pTropa.setDefensa(3);
         pTropa.setCantMovimientos(2);
+        pTropa.setYaAtaco(false);
     }
 
     @Override
@@ -85,6 +92,7 @@ public class RegeneradorTropas implements IVisitante {
         for(Tropa tropa:  pTropas){
             if( tropa instanceof TropaAtaque){
                 ((TropaAtaque) tropa).visitaRegeneracion(this);
+                ((TropaAtaque) tropa).setYaAtaco(false);
             }
         }
     }

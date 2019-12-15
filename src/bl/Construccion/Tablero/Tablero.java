@@ -261,7 +261,7 @@ public class Tablero implements ITablero {
 		return pDistancia <= pValorDado;
 	}
 
-	private boolean validarTropaJugador(TropaAtaque pTropa, Jugador pJugador){
+	public boolean validarTropaJugador(Tropa pTropa, Jugador pJugador){
 		for(Tropa tropa : pJugador.getTropas()){
 			if(pTropa.equals(tropa)){
 				return true;

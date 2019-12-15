@@ -12,7 +12,6 @@ public class Tienda implements ITienda {
         try{
 
             Tropa tropa = FabricadorDeTropas.procesarFuncion(pTipoTropa);
-
             if(tropa != null){
                 acreditarTropa(pJugador,tropa);
                 compraRealizada = true;
@@ -43,6 +42,7 @@ public class Tienda implements ITienda {
         }
         else{
             pJugador.getTropas().add(pTropa);
+            pTropa.setJugador(pJugador);
             descontarOro(pJugador,precioTropa);
         }
 

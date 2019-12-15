@@ -1,6 +1,7 @@
 package ui.contenedor.Controles;
 
 import bl.Construccion.Juego.Juego;
+import bl.Construccion.decorador.ObjetoDecorado;
 import ui.Tablero.pnlTablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
@@ -16,6 +17,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class pnlControles extends JPanel {
@@ -103,12 +105,25 @@ public class pnlControles extends JPanel {
 				TropaAtaque tropaAtaque = null;
 				if (tropa != null && tropa instanceof TropaAtaque) {
 					tropaAtaque = (TropaAtaque) tropa;
+					ArrayList<Tropa> tropas = tropaAtaque.getJugador().getTropas();
+					tropas.remove(tropaAtaque);
 					tropaAtaque = tropaAtaque.usarPowerUp(tropaAtaque);
+					tropas.add(tropaAtaque);
 					tropaAtaque.getCasilla().setPieza(tropaAtaque);
+					mostrarMsg("Tropa: " + tropaAtaque.getNombre() + "" +
+							"\nPowerUp: " + ((ObjetoDecorado)tropaAtaque).getNombrePowerUp() + "" +
+							"\nDefensa: " + tropaAtaque.getDefensa() + "" +
+							"\nAtaque: " + tropaAtaque.getAtaque() + "");
 					pnlTablero.setTropaSeleccionada(null);
 				}
 			}
 		});
+	}
+
+	private void mostrarMsg(String msg) {
+		int opcion = 0;
+		String cad = msg;
+		JOptionPane.showMessageDialog(null, msg, eConfiguracion.TITULO_APP, JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public Juego getJuego() {

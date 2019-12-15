@@ -14,6 +14,7 @@ public abstract class Tropa extends Construccion {
     private int alcance;
     private int precio;
     protected int ataque;
+    private boolean yaAtaco;
     private boolean enJuego;
 
     public Tropa() {
@@ -49,6 +50,14 @@ public abstract class Tropa extends Construccion {
 
     public abstract void setAtaque(int ataque);
 
+    public boolean isYaAtaco() {
+        return yaAtaco;
+    }
+
+    public void setYaAtaco(boolean yaAtaco) {
+        this.yaAtaco = yaAtaco;
+    }
+
     public boolean validarAtaque(int x1, int y1, int x2, int y2){
         int x = x1 - x2;
         int y = y1 - y2;
@@ -68,10 +77,12 @@ public abstract class Tropa extends Construccion {
         return response;
     }
 
-    public void atacar(Construccion construccion){
+    public String atacar(Construccion construccion){
+        String msg = "No se pudo atacar";
         Casilla casillaAtacante = this.getCasilla();
         Casilla casillaAtacado = construccion.getCasilla();
         if(validarAtaque(casillaAtacante.getX(),casillaAtacante.getY(),casillaAtacado.getX(),casillaAtacado.getY())){
+            this.setYaAtaco(true);
             if(construccion instanceof TropaAtaque){
                 TropaAtaque tropaAtaque = (TropaAtaque) construccion;
                 tropaAtaque.setDefensa(tropaAtaque.getDefensa() - this.getAtaque());
@@ -79,21 +90,34 @@ public abstract class Tropa extends Construccion {
                     tropaAtaque.setVida(tropaAtaque.getVida() + tropaAtaque.getDefensa());
                     tropaAtaque.setDefensa(0);
                 }
+                msg = "Tropa: " + tropaAtaque.getNombre() + " es atacada por" + this.getNombre() +
+                        "\nEstadisitcas de " + tropaAtaque.getNombre()  +
+                        "\nDefensa: " + tropaAtaque.getDefensa() +
+                        "\nVida: " + tropaAtaque.getVida();
             }
             else {
                 construccion.setVida(construccion.getVida() - this.getAtaque());
+                msg = "Tropa: " + construccion.getNombre() + " es atacada por" + this.getNombre() +
+                        "\nEstadisitcas de " + construccion.getNombre()  +
+                        "\nVida: " + construccion.getVida();
             }
-            if (getVida() <= 0){
+            if (construccion.getVida() <= 0){
                 if (construccion instanceof Castillo){
                     Juego juego = Juego.juegoActual;
                     juego.getJugadores().remove(construccion.getJugador());
+                    construccion.getCasilla().setPieza(null);
+                    msg = "Jugador " + construccion.getJugador().getNombreJugador() + " perdio";
                     juego.finalizarPartida();
                 }
                 else {
                     ArrayList<Tropa> tropas = construccion.getJugador().getTropas();
                     tropas.remove(construccion);
+                    construccion.getCasilla().setPieza(null);
+                    msg = "Jugador " + construccion.getJugador().getNombreJugador() + " " +
+                            "perdio la tropa: " + construccion.getNombre();
                 }
             }
         }
+        return msg;
     }
 }
