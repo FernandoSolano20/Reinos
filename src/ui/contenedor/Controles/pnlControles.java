@@ -26,6 +26,7 @@ public class pnlControles extends JPanel {
 	private JButton btnAtacar;
 	private JButton btnComprar;
 	private JButton btnMisTropas;
+	private JButton btnTransferirOro;
 	private Juego juego;
 	private JButton btnUsarPowerUp;
 
@@ -37,7 +38,7 @@ public class pnlControles extends JPanel {
 		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
 		this.juego = juego;
 		this.setLayout(null);
-		this.setSize(603, 140);
+		this.setSize(800, 140);
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
 
@@ -64,6 +65,10 @@ public class pnlControles extends JPanel {
 		btnMisTropas = new JButton("Mis tropas");
 		btnMisTropas.setBounds(429, 69, 142, 55);
 		add(btnMisTropas);
+
+		btnTransferirOro = new JButton("Tranferir Oro");
+		btnTransferirOro.setBounds(632, 11, 142, 55);
+		add(btnTransferirOro);
 
 		agregarAcciones();
 	}
@@ -121,6 +126,13 @@ public class pnlControles extends JPanel {
 					}
 				}
 				pnlTablero.setTropaSeleccionada(null);
+			}
+		});
+
+		btnTransferirOro.addActionListener(e -> {
+			Tropa tropa = pnlTablero.getTropaSeleccionada();
+			if(tropa != null && tropa instanceof TropaAtaque){
+				mostrarMsg(((TropaAtaque) tropa).tranferirOroCastillo());
 			}
 		});
 	}
