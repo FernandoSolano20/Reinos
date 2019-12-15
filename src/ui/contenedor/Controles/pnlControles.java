@@ -105,17 +105,22 @@ public class pnlControles extends JPanel {
 				TropaAtaque tropaAtaque = null;
 				if (tropa != null && tropa instanceof TropaAtaque) {
 					tropaAtaque = (TropaAtaque) tropa;
-					ArrayList<Tropa> tropas = tropaAtaque.getJugador().getTropas();
-					tropas.remove(tropaAtaque);
-					tropaAtaque = tropaAtaque.usarPowerUp(tropaAtaque);
-					tropas.add(tropaAtaque);
-					tropaAtaque.getCasilla().setPieza(tropaAtaque);
-					mostrarMsg("Tropa: " + tropaAtaque.getNombre() + "" +
-							"\nPowerUp: " + ((ObjetoDecorado)tropaAtaque).getNombrePowerUp() + "" +
-							"\nDefensa: " + tropaAtaque.getDefensa() + "" +
-							"\nAtaque: " + tropaAtaque.getAtaque() + "");
-					pnlTablero.setTropaSeleccionada(null);
+					if(tropaAtaque.getPowerUp() != null){
+						ArrayList<Tropa> tropas = tropaAtaque.getJugador().getTropas();
+						tropas.remove(tropaAtaque);
+						tropaAtaque = tropaAtaque.usarPowerUp(tropaAtaque);
+						tropas.add(tropaAtaque);
+						tropaAtaque.getCasilla().setPieza(tropaAtaque);
+						mostrarMsg("Tropa: " + tropaAtaque.getNombre() + "" +
+								"\nPowerUp: " + ((ObjetoDecorado)tropaAtaque).getNombrePowerUp() + "" +
+								"\nDefensa: " + tropaAtaque.getDefensa() + "" +
+								"\nAtaque: " + tropaAtaque.getAtaque() + "");
+					}
+					else {
+						mostrarMsg("No tiene Power Up");
+					}
 				}
+				pnlTablero.setTropaSeleccionada(null);
 			}
 		});
 	}
