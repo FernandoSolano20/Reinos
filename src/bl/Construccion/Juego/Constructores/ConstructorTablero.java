@@ -39,7 +39,7 @@ public abstract class ConstructorTablero {
     public void generarPrimerTurno(){
         try{
 
-            Turno primerTurno = new Turno(juego.getTablero(), juego.getIterador().obtenerPrimerJugador(), juego.tirarDado());
+            Turno primerTurno = new Turno(juego.getTablero(), juego.getIterador().obtenerPrimerJugador(), 0);
             juego.setTurnoActual(primerTurno);
 
         }catch (Exception e){

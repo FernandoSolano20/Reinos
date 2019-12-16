@@ -159,10 +159,10 @@ public class Juego implements IJuego {
 	}
 
 	@Override
-	public void pasarTurno(){
+	public void pasarTurno(int numeroDado){
     	try{
 
-			setTurnoActual(new Turno(getTablero(), iterador.obtenerSiguienteJugador(), tirarDado()));
+			setTurnoActual(new Turno(getTablero(), iterador.obtenerSiguienteJugador(), numeroDado));
 			restablecerAcciones();
 
 			System.out.println("\n");
