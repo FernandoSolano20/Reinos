@@ -28,7 +28,7 @@ public class pnlDado extends JPanel {
 		this.juego = juego;
 		setLayout(null);
 		this.setOpaque(true);
-		this.setSize(230, 45);
+		this.setSize(180, 45);
 		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
@@ -37,23 +37,11 @@ public class pnlDado extends JPanel {
 		lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNumero.setBounds(0, 0, 126, 40);
+		actualizarNumero();
 		add(lblNumero, null);
 
-		JButton btnTirarDado = new JButton("Tirar dado");
-		btnTirarDado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnTirarDadoClick(arg0);
-			}
-
-		});
-		btnTirarDado.setBounds(136, 10, 81, 23);
-		add(btnTirarDado);
-
 	}
 
-	public void btnTirarDadoClick(ActionEvent arg0) {
-		this.setNumero(juego.tirarDado());
-	}
 
 	public String getNumero() {
 		return this.lblNumero.getText();
@@ -63,8 +51,8 @@ public class pnlDado extends JPanel {
 		this.lblNumero.setText("" + lblNumero);
 	}
 
-	public void limpiarNumero() {
-		this.lblNumero.setText("___");
+	public void actualizarNumero() {
+		this.lblNumero.setText("Valor del dado: " + juego.getTurnoActual().getMovimientosPermitidos());
 	}
 
 }

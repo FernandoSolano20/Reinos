@@ -29,7 +29,6 @@ import java.awt.event.MouseEvent;
 public class FrmMain extends JFrame {
 
 	private static Juego juego;
-	private pnlDado dado;
 
 	@SuppressWarnings("unused")
 	private eIMG eIMGIniciaConstructor = new eIMG();
@@ -45,8 +44,10 @@ public class FrmMain extends JFrame {
 
 	private JLabel txtJugador = new JLabel();
 
+
 	private pnlTablero tableroUI;
 	private pnlControles pnlControles;
+	private pnlDado dado;
 
 	private int cantidadJugadores = 0;
 
@@ -210,7 +211,7 @@ public class FrmMain extends JFrame {
 	}
 
 	public void setTableroUI(Tablero pTablero) {
-		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), juego);
+		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), juego, dado);
 	}
 
 	public int pnlCentrogetWidth() {

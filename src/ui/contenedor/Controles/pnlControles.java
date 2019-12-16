@@ -26,7 +26,6 @@ public class pnlControles extends JPanel {
 	private Juego juego;
 	private JButton btnUsarPowerUp;
 	private JLabel txtJugador;
-	
 	private pnlDado dado;
 
 	/**
@@ -92,7 +91,7 @@ public class pnlControles extends JPanel {
 			juego.pasarTurno();
 			txtJugador.setText(juego.getTurnoActual().getJugador().getNombreJugador());
 			pnlTablero.setTropaSeleccionada(null);
-			this.dado.limpiarNumero();
+			this.dado.actualizarNumero();
 		});
 
 		btnAtacar.addActionListener(new ActionListener() {
