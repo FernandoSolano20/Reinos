@@ -35,8 +35,9 @@ public class pnlDado extends JPanel {
 
 		lblNumero.setForeground(eConfiguracion.COLOR_LETRA);
 		lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNumero.setVerticalAlignment(SwingConstants.CENTER);
 		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNumero.setBounds(0, 0, 126, 40);
+		lblNumero.setBounds(30, 0, 126, 40);
 		actualizarNumero();
 		add(lblNumero, null);
 
