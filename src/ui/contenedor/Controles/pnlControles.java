@@ -6,6 +6,7 @@ import ui.Tablero.pnlTablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.contenedor.Controles.Tropas.pnlTropas;
+import ui.JButtonRound;
 import ui.eConfiguracion;
 import ui.contenedor.Controles.Tienda.pnlTienda;
 import javax.swing.*;
@@ -17,16 +18,17 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class pnlControles extends JPanel {
-	private JButton btnMover;
-	private JButton btnPasarTurno;
-	private JButton btnAtacar;
-	private JButton btnComprar;
-	private JButton btnMisTropas;
-	private JButton btnTransferirOro;
+	private JButtonRound btnMover;
+	private JButtonRound btnPasarTurno;
+	private JButtonRound btnAtacar;
+	private JButtonRound btnComprar;
+	private JButtonRound btnMisTropas;
+	private JButtonRound btnTransferirOro;
 	private Juego juego;
-	private JButton btnUsarPowerUp;
+	private JButtonRound btnUsarPowerUp;
 	private JLabel txtJugador;
 	private pnlDado dado;
+	private pnlTienda pnlTienda;
 
 	/**
 	 * Create the panel.
@@ -41,31 +43,31 @@ public class pnlControles extends JPanel {
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
 
-		btnMover = new JButton("Mover");
+		btnMover = new JButtonRound("Mover");
 		btnMover.setBounds(45, 11, 142, 55);
 		add(btnMover);
 
-		btnPasarTurno = new JButton("Pasar Turno");
+		btnPasarTurno = new JButtonRound("Pasar Turno");
 		btnPasarTurno.setBounds(45, 69, 142, 55);
 		add(btnPasarTurno);
 
-		btnAtacar = new JButton("Atacar");
+		btnAtacar = new JButtonRound("Atacar");
 		btnAtacar.setBounds(238, 11, 142, 55);
 		add(btnAtacar);
 
-		btnComprar = new JButton("Comprar");
+		btnComprar = new JButtonRound("Comprar");
 		btnComprar.setBounds(238, 69, 142, 55);
 		add(btnComprar);
 
-		btnUsarPowerUp = new JButton("Usar power up");
+		btnUsarPowerUp = new JButtonRound("Usar power up");
 		btnUsarPowerUp.setBounds(429, 11, 142, 55);
 		add(btnUsarPowerUp);
 
-		btnMisTropas = new JButton("Mis tropas");
+		btnMisTropas = new JButtonRound("Mis tropas");
 		btnMisTropas.setBounds(429, 69, 142, 55);
 		add(btnMisTropas);
 
-		btnTransferirOro = new JButton("Tranferir Oro");
+		btnTransferirOro = new JButtonRound("Tranferir Oro");
 		btnTransferirOro.setBounds(632, 11, 142, 55);
 		add(btnTransferirOro);
 
@@ -102,8 +104,12 @@ public class pnlControles extends JPanel {
 		});
 
 		btnComprar.addActionListener(e -> {
-			pnlTienda pnlTienda = new pnlTienda(this.getJuego());
-			pnlTienda.setVisible(true);
+			if (null == pnlTienda) {
+				pnlTienda = new pnlTienda(this.getJuego());
+				pnlTienda.setVisible(true);
+			} else {
+				pnlTienda.setVisible(true);
+			}
 		});
 
 		btnMisTropas.addActionListener(e -> {

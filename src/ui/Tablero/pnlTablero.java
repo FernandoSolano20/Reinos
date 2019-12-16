@@ -32,14 +32,12 @@ public class pnlTablero extends JPanel {
 	private pnlDado pnlDado;
 	private Cursor mano = new Cursor(Cursor.HAND_CURSOR);
 	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
-	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
+	//private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
 	//private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
 	private Color[] Red = new Color[] { new Color(255, 45, 100, 100), new Color(255, 45, 100, 100) };
 	private Color[] Green = new Color[] { new Color(45, 255, 100, 100), new Color(45, 255, 100, 100) };
 	private Color[] White = new Color[] { new Color(255, 255, 255, 255), new Color(255, 255, 255, 255) };
 	private Color[] Blue = new Color[] { new Color(45, 100, 255, 100), new Color(45, 100, 255, 100) };
-
-	private int indexNumCastillo = 1;
 
 	/**
 	 * Create the panel.
@@ -133,21 +131,7 @@ public class pnlTablero extends JPanel {
 			switch (nombrePieza.toUpperCase()) {
 
 			case "CASTILLO":
-				casillasUI[i][j].setFondoCasilla(grisClaro);
-				if (1 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO1);
-
-				if (2 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO2);
-
-				if (3 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO3);
-
-				if (4 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO4);
-
-				++indexNumCastillo;
-
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO1);
 				break;
 
 			case "BALLESTA":
@@ -271,7 +255,6 @@ public class pnlTablero extends JPanel {
 	public Juego getJuego() {
 		return juego;
 	}
-
 
 	public ui.contenedor.Controles.pnlDado getPnlDado() {
 		return pnlDado;
