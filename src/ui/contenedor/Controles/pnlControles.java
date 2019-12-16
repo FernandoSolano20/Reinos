@@ -104,12 +104,8 @@ public class pnlControles extends JPanel {
 		});
 
 		btnComprar.addActionListener(e -> {
-			if (null == pnlTienda) {
 				pnlTienda = new pnlTienda(this.getJuego());
 				pnlTienda.setVisible(true);
-			} else {
-				pnlTienda.setVisible(true);
-			}
 		});
 
 		btnMisTropas.addActionListener(e -> {
@@ -147,7 +143,6 @@ public class pnlControles extends JPanel {
 			Tropa tropa = pnlTablero.getTropaSeleccionada();
 			if (tropa != null && tropa instanceof TropaAtaque) {
 				mostrarMsg(((TropaAtaque) tropa).tranferirOroCastillo());
-				pnlTablero.repintarCasillas();
 			}
 
 		});

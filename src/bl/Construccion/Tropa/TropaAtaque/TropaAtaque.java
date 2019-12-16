@@ -116,9 +116,13 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
         Castillo castillo = this.getJugador().getCastillo();
         if (CoordenasAtaque.validarAtaqueAlcanze1(getCasilla().getX() - castillo.getCasilla().getX() ,getCasilla().getY() - castillo.getCasilla().getY())){
             castillo.setOros(castillo.getOros() + this.getOros());
-            this.setOros(0);
+            this.forzarOros(0);
             return "El oro fue transferido al Castillo";
         }
         return "No hay tropas cerca del Castillo";
+    }
+
+    private void forzarOros(int pOros){
+        this.oros = pOros;
     }
 }

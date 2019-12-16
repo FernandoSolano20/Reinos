@@ -115,12 +115,11 @@ public abstract class Tropa extends Construccion {
                     Juego juego = Juego.juegoActual;
                     juego.getJugadores().remove(construccion.getJugador());
                     construccion.getCasilla().setPieza(null);
-                    msg = "Jugador " + construccion.getJugador().getNombreJugador() + " perdió";
                     if(this instanceof  TropaAtaque){
                         TropaAtaque miTropa = ((TropaAtaque)this);
                         miTropa.setOros(((Castillo)construccion).getOros());
                     }
-
+                    msg = "Jugador " + construccion.getJugador().getNombreJugador() + " perdió";
                     juego.finalizarPartida();
                 }
                 else {
