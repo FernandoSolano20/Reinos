@@ -21,6 +21,7 @@ public class pnlTropas extends JFrame {
 	// Paneles
 	private JPanel panelPrincipal;
 	private JPanel panelBotones;
+	private pnlTablero pnlTablero;
 
 	// Labels
 	private JLabel titulo;
@@ -30,8 +31,8 @@ public class pnlTropas extends JFrame {
 	private final int CANTIDADBOTONES = 7;
 	ArrayList<JButton> botones = new ArrayList<>();
 
-	public pnlTropas(Juego juego) {
-
+	public pnlTropas(Juego juego, pnlTablero pnlTablero) {
+		this.pnlTablero = pnlTablero;
 		setJuego(juego);
 		this.setSize(400, 550);
 		this.setVisible(true);

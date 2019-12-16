@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class pnlCasilla extends JPanel implements MouseListener {
-	private pnlTablero tablero;
+	private pnlTablero pnlTablero;
 	public int i;
 	public int j;
 	private Color[] fondoCasilla = null;
@@ -40,7 +40,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	}
 
 	public pnlCasilla(pnlTablero t) {
-		this.tablero = t;
+		this.pnlTablero = t;
 		this.setLayout(null);
 		this.setOpaque(true);
 
@@ -95,75 +95,81 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 
 		// Marcamos la casilla seleccionada.
-		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
+		this.setCasillaMarcada(pnlTablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
-
-		//REALIZAR ATAQUE
-		if(pnlTablero.isAtaque){
-			//System.out.println("Atacando a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
-			Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
-			if(pnlTablero.getTropaSeleccionada() != null && construccion != null){
-				if(!pnlTablero.getTropaSeleccionada().isAtaqueRealizado()){
+		// REALIZAR ATAQUE
+		if (pnlTablero.isAtaque) {
+			// System.out.println("Atacando a casilla: " +
+			// tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX()
+			// + "," +
+			// tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
+			Construccion construccion = pnlTablero.getTableroLogica().obtenerPiezaCasilla(i, j);
+			if (pnlTablero.getTropaSeleccionada() != null && construccion != null) {
+				if (!pnlTablero.getTropaSeleccionada().isAtaqueRealizado()) {
 					atacar(construccion);
-				}
-				else{
+				} else {
 					mostrarMsg("Esta tropa ya realizó su ataque");
 					pnlTablero.isAtaque = false;
 				}
-			}
-			else {
+			} else {
 				mostrarMsg("No se pudo completar el ataque");
 				pnlTablero.isAtaque = false;
 			}
 		}
 
-		//REALIZAR MOVIMIENTO
-		else if(tablero.getJuego().getTablero().isModoMovimiento()){
-			if(CasillaActual.getCasilla() == null){
+		// REALIZAR MOVIMIENTO
+		else if (pnlTablero.getJuego().getTablero().isModoMovimiento()) {
+			if (CasillaActual.getCasilla() == null) {
 				mostrarMsg("Por favor seleccione una casilla de origen");
-				tablero.getJuego().getTablero().setModoMovimiento(false);
-			}
-			else{
-				System.out.println("Movimiendo a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
-				tablero.moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
+				pnlTablero.getJuego().getTablero().setModoMovimiento(false);
+			} else {
+				System.out.println("Moviendo a casilla: "
+						+ pnlTablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this
+								.getCasillaMarcada()[1]].getX()
+						+ "," + pnlTablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this
+								.getCasillaMarcada()[1]].getY());
+				pnlTablero.moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(),
+						casillaMarcada[0], casillaMarcada[1]);
+				this.pnlTablero.repintarCasillas();
 				pnlTablero.setTropaSeleccionada(null);
 			}
 
 		}
 
-		//COLOCAR PIEZA EN EL TABLERO
-		else if(tablero.getJuego().getTablero().isModoColocarPieza()){
-			int jugadorCoordenadaX = tablero.getJuego().getTurnoActual().getJugador().getPosicionCastillo()[0];
-			int jugadorCoordenadaY = tablero.getJuego().getTurnoActual().getJugador().getPosicionCastillo()[1];
+		// COLOCAR PIEZA EN EL TABLERO
+		else if (pnlTablero.getJuego().getTablero().isModoColocarPieza()) {
+			int jugadorCoordenadaX = pnlTablero.getJuego().getTurnoActual().getJugador().getPosicionCastillo()[0];
+			int jugadorCoordenadaY = pnlTablero.getJuego().getTurnoActual().getJugador().getPosicionCastillo()[1];
 
 			System.out.println("Colocando pieza");
-			tablero.ponerPiezaEnJuego(jugadorCoordenadaX,jugadorCoordenadaY, casillaMarcada[0],casillaMarcada[1]);
-			tablero.repintarCasillas();
+			pnlTablero.ponerPiezaEnJuego(jugadorCoordenadaX, jugadorCoordenadaY, casillaMarcada[0], casillaMarcada[1]);
+			pnlTablero.repintarCasillas();
 			pnlTablero.setTropaSeleccionada(null);
 		}
 
-		//SELECCIONAR CASILLA
-		else{
+		// SELECCIONAR CASILLA
+		else {
 			System.out.println("Casilla seleccionada");
-			//Obtenemos la casilla del tablero para asignarla a la casilla actual
-			Casilla casillaActual = tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
+			// Obtenemos la casilla del tablero para asignarla a la casilla actual
+			Casilla casillaActual = pnlTablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this
+					.getCasillaMarcada()[1]];
 
 			CasillaActual.setCasilla(casillaActual);
-			Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
+			Construccion construccion = pnlTablero.getTableroLogica().obtenerPiezaCasilla(i, j);
 			if (construccion != null && construccion instanceof Tropa) {
 				Tropa tropa = (Tropa) construccion;
-				if(tablero.getTableroLogica().validarTropaJugador(tropa,tablero.getJuego().getTurnoActual().getJugador())){
+				if (pnlTablero.getTableroLogica().validarTropaJugador(tropa,
+						pnlTablero.getJuego().getTurnoActual().getJugador())) {
 					pnlTablero.setTropaSeleccionada(tropa);
-				}
-				else {
+					this.pnlTablero.repintarCasillas();
+				} else {
 					new ExcepcionJuego("Tropa pertenece a otro jugador");
 				}
 			}
 		}
 
-
 		// Recursos
-		Casilla casilla = tablero.getTableroLogica().obtenerCasilla(i, j);
+		Casilla casilla = pnlTablero.getTableroLogica().obtenerCasilla(i, j);
 		if (casilla.tieneRecurso()) {
 			recorgerRecurso(casilla);
 		}
@@ -213,7 +219,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 			mostrarMsg(pnlTablero.getTropaSeleccionada().atacar(construccion));
 			pnlTablero.setTropaSeleccionada(null);
 			pnlTablero.isAtaque = false;
-			this.tablero.repintarCasillas();
+			this.pnlTablero.repintarCasillas();
 		} else {
 			pnlTablero.setTropaSeleccionada(null);
 			mostrarMsg("No se puede atacar.");
@@ -222,24 +228,20 @@ public class pnlCasilla extends JPanel implements MouseListener {
 
 	private void recorgerRecurso(Casilla casilla) {
 		IRecurso recurso = casilla.getRecurso();
-		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
+		Construccion construccion = pnlTablero.getTableroLogica().obtenerPiezaCasilla(i, j);
 		if (construccion instanceof TropaAtaque) {
 			TropaAtaque tropaAtaque = (TropaAtaque) construccion;
 			if (recurso instanceof PowerUp) {
 				int opc = recogerPowerUp();
 				if (opc == 0) {
 					tropaAtaque.recogerPowerUp(casilla);
-					// this.tablero.construirEnCasilla(this.getCasillaMarcada()[0],
-					// this.getCasillaMarcada()[1], "");
-					this.tablero.repintarCasillas();
+					this.pnlTablero.repintarCasillas();
 				}
 			} else {
 				int opc = recogerOro();
 				if (opc == 0) {
 					tropaAtaque.recogerOro(casilla);
-					// this.tablero.construirEnCasilla(this.getCasillaMarcada()[0],
-					// this.getCasillaMarcada()[1], "");
-					this.tablero.repintarCasillas();
+					this.pnlTablero.repintarCasillas();
 				}
 			}
 		}

@@ -29,11 +29,13 @@ public class pnlControles extends JPanel {
 	private JLabel txtJugador;
 	private pnlDado dado;
 	private pnlTienda pnlTienda;
+	private pnlTablero pnlTablero;
 
 	/**
 	 * Create the panel.
 	 */
-	public pnlControles(int widthTablero, Juego juego, JLabel txtJugador, pnlDado dado) {
+	public pnlControles(int widthTablero, Juego juego, JLabel txtJugador, pnlDado dado, pnlTablero pnlTablero) {
+		this.pnlTablero = pnlTablero;
 		this.dado = dado;
 		this.setTxtJugador(txtJugador);
 		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
@@ -86,14 +88,12 @@ public class pnlControles extends JPanel {
 		btnMover.addActionListener(e -> {
 			juego.getTablero().setModoMovimiento(true);
 			juego.getTablero().setModoAtaque(false);
-			// acción de mover
+			pnlTablero.repintarCasillas();
 		});
 
 		btnPasarTurno.addActionListener(e -> {
-			juego.pasarTurno();
-			txtJugador.setText(juego.getTurnoActual().getJugador().getNombreJugador());
-			pnlTablero.setTropaSeleccionada(null);
-			this.dado.actualizarNumero();
+			juego.pasarTurno(0);
+			this.deshabilitar();
 		});
 
 		btnAtacar.addActionListener(new ActionListener() {
@@ -113,7 +113,9 @@ public class pnlControles extends JPanel {
 		});
 
 		btnMisTropas.addActionListener(e -> {
-			pnlTropas pnlTropas = new pnlTropas(this.getJuego());
+
+			pnlTablero.repintarCasillas();
+			pnlTropas pnlTropas = new pnlTropas(this.getJuego(), this.pnlTablero);
 			pnlTropas.setVisible(true);
 		});
 
@@ -137,6 +139,7 @@ public class pnlControles extends JPanel {
 					}
 				}
 				pnlTablero.setTropaSeleccionada(null);
+				pnlTablero.repintarCasillas();
 			}
 		});
 
@@ -144,6 +147,7 @@ public class pnlControles extends JPanel {
 			Tropa tropa = pnlTablero.getTropaSeleccionada();
 			if (tropa != null && tropa instanceof TropaAtaque) {
 				mostrarMsg(((TropaAtaque) tropa).tranferirOroCastillo());
+				pnlTablero.repintarCasillas();
 			}
 
 		});
@@ -160,4 +164,22 @@ public class pnlControles extends JPanel {
 	public void setJuego(Juego juego) {
 		this.juego = juego;
 	}
+
+	public void deshabilitar() {
+		txtJugador.setText(juego.getTurnoActual().getJugador().getNombreJugador());
+		pnlTablero.repintarCasillas();
+		this.dado.setNumero("___");
+		this.dado.habilitarBoton();
+		this.setVisible(false);
+	}
+
+	public void habilitar(int resultadoDado) {
+		juego.getTurnoActual().setMovimientosPermitidos(resultadoDado);
+		this.dado.actualizarNumero();
+		this.dado.deshabilitarBoton();
+		pnlTablero.setTropaSeleccionada(null);
+		pnlTablero.repintarCasillas();
+		this.setVisible(true);
+	}
+
 }

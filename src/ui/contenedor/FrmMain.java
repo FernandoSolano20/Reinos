@@ -7,11 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bl.Construccion.Fabricas.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
-import bl.Construccion.Tablero.Tablero;
 import ui.eConfiguracion;
 import ui.eIMG;
 import ui.contenedor.Controles.pnlControles;
@@ -43,7 +41,6 @@ public class FrmMain extends JFrame {
 	private JLabel txtTitulo = new JLabel();
 
 	private JLabel txtJugador = new JLabel();
-
 
 	private pnlTablero tableroUI;
 	private pnlControles pnlControles;
@@ -151,15 +148,8 @@ public class FrmMain extends JFrame {
 		int cantidadJugadores = getCantidadDeJugadores();
 		this.setCantidadJugadores(cantidadJugadores);
 		juego = new Fachada().construirJuego(cantidadJugadores);
-		dado = new pnlDado(juego);
 
-		dado.setBounds(40, 60, dado.getWidth(), dado.getHeight());
-		pnlControles = new pnlControles(pnlMain.getWidth(), juego, txtJugador, dado);
-
-		pPnlAbajo.add(dado, null);
-
-		pPnlAbajo.add(pnlControles);
-		pPnlAbajo.setSize(pPnlAbajo.getWidth(), pnlControles.getHeight());
+		pPnlAbajo.setSize(pPnlAbajo.getWidth(), 180);
 
 		int controlesAncho = (pPnlAbajo.getWidth() - pPnlAbajo.getInsets().left - pPnlAbajo.getInsets().right);
 
@@ -168,10 +158,6 @@ public class FrmMain extends JFrame {
 		}
 
 		controlesAncho = Math.round((controlesAncho / 2) / 2);
-
-		pnlControles.setBounds(controlesAncho, 0, pnlControles.getWidth(), pnlControles.getHeight());
-
-		pnlControles.setVisible(false);
 
 		pPnlAbajo.setBounds(0, (mainAlto - pPnlAbajo.getHeight()), pnlMain.getWidth(), pPnlAbajo.getHeight());
 
@@ -204,14 +190,23 @@ public class FrmMain extends JFrame {
 		pPnlCentro.setBounds(derechaAncho, arribaAlto, centroAncho, centroAlto);
 		pnlMain.add(pPnlCentro, null);
 
+		dado = new pnlDado(juego);
+		dado.setBounds(40, 60, dado.getWidth(), dado.getHeight());
+		this.tableroUI = pnlTablero.getInstancia(pPnlCentro.getWidth(), pPnlCentro.getHeight(), juego, dado);
+
+		pnlControles = new pnlControles(pnlMain.getWidth(), juego, txtJugador, dado, getTableroUI());
+		pnlControles.setBounds(controlesAncho, 0, pnlControles.getWidth(), 180);
+		pnlControles.setVisible(false);
+
+		dado.setPnlControles(pnlControles);
+
+		pPnlAbajo.add(dado, null);
+		pPnlAbajo.add(pnlControles);
+
 	}
 
 	public pnlTablero getTableroUI() {
 		return tableroUI;
-	}
-
-	public void setTableroUI(Tablero pTablero) {
-		this.tableroUI = new pnlTablero(pPnlCentro.getWidth(), pPnlCentro.getHeight(), juego, dado);
 	}
 
 	public int pnlCentrogetWidth() {
@@ -268,8 +263,9 @@ public class FrmMain extends JFrame {
 	}
 
 	public void mostrarTablero() {
-		setPanelCentral(tableroUI);
+		setPanelCentral(getTableroUI());
 		pnlControles.setVisible(true);
+		pnlControles.deshabilitar();
 	}
 
 	public int getCantidadJugadores() {
@@ -293,14 +289,10 @@ public class FrmMain extends JFrame {
 		return opcion;
 	}
 
-	public void pasarTurno() {
-		juego.pasarTurno();
-	}
-
 	public void iniciar() {
 
 		// Envía el tablero a pnlTablero:
-		this.setTableroUI(juego.getTablero());
+		// this.setTableroUI(juego.getTablero());
 
 		// Nombre del jugador:
 		int numJugador = 1;

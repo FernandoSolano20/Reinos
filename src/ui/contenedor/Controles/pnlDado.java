@@ -3,6 +3,7 @@ package ui.contenedor.Controles;
 import javax.swing.JPanel;
 
 import bl.Construccion.Juego.Juego;
+import ui.JButtonRound;
 import ui.eConfiguracion;
 
 import javax.swing.JLabel;
@@ -19,6 +20,8 @@ import java.awt.event.ActionEvent;
 public class pnlDado extends JPanel {
 
 	private Juego juego;
+	private pnlControles pnlControles;
+	private JButton btnTirarDado = new JButtonRound("Tirar dado");
 	private JLabel lblNumero = new JLabel("___");
 
 	/**
@@ -28,7 +31,7 @@ public class pnlDado extends JPanel {
 		this.juego = juego;
 		setLayout(null);
 		this.setOpaque(true);
-		this.setSize(180, 45);
+		this.setSize(230, 45);
 		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
@@ -37,23 +40,53 @@ public class pnlDado extends JPanel {
 		lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumero.setVerticalAlignment(SwingConstants.CENTER);
 		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNumero.setBounds(30, 0, 126, 40);
-		actualizarNumero();
+		lblNumero.setBounds(0, 0, 126, 40);
+
 		add(lblNumero, null);
+
+		btnTirarDado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnTirarDadoClick(arg0);
+			}
+
+		});
+		btnTirarDado.setBounds(136, 10, 81, 23);
+		add(btnTirarDado);
 
 	}
 
+	public void btnTirarDadoClick(ActionEvent arg0) {
+		juego.getTurnoActual().setMovimientosPermitidos(juego.tirarDado());
+		actualizarNumero();
+		getPnlControles().habilitar(juego.getTurnoActual().getMovimientosPermitidos());
+	}
 
 	public String getNumero() {
 		return this.lblNumero.getText();
 	}
 
-	public void setNumero(int lblNumero) {
-		this.lblNumero.setText("" + lblNumero);
+	public void setNumero(String texto) {
+		this.lblNumero.setText(texto);
 	}
 
 	public void actualizarNumero() {
-		this.lblNumero.setText("Valor del dado: " + juego.getTurnoActual().getMovimientosPermitidos());
+		this.setNumero("" + juego.getTurnoActual().getMovimientosPermitidos());
+	}
+
+	public pnlControles getPnlControles() {
+		return pnlControles;
+	}
+
+	public void setPnlControles(pnlControles pnlControles) {
+		this.pnlControles = pnlControles;
+	}
+
+	public void deshabilitarBoton() {
+		btnTirarDado.setEnabled(false);
+	}
+
+	public void habilitarBoton() {
+		btnTirarDado.setEnabled(true);
 	}
 
 }
