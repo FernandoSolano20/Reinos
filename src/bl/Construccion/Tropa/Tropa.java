@@ -83,8 +83,9 @@ public abstract class Tropa extends Construccion {
         Casilla casillaAtacado = construccion.getCasilla();
         if(validarAtaque(casillaAtacante.getX(),casillaAtacante.getY(),casillaAtacado.getX(),casillaAtacado.getY())){
             this.setYaAtaco(true);
+            TropaAtaque tropaAtaque = null;
             if(construccion instanceof TropaAtaque){
-                TropaAtaque tropaAtaque = (TropaAtaque) construccion;
+                tropaAtaque = (TropaAtaque) construccion;
                 tropaAtaque.setDefensa(tropaAtaque.getDefensa() - this.getAtaque());
                 if (tropaAtaque.getDefensa() < 0){
                     tropaAtaque.setVida(tropaAtaque.getVida() + tropaAtaque.getDefensa());
@@ -106,12 +107,21 @@ public abstract class Tropa extends Construccion {
                     Juego juego = Juego.juegoActual;
                     juego.getJugadores().remove(construccion.getJugador());
                     construccion.getCasilla().setPieza(null);
+                    if(this instanceof  TropaAtaque){
+                        TropaAtaque miTropa = ((TropaAtaque)this);
+                        miTropa.setOros(((Castillo)construccion).getOros());
+                    }
+
                     msg = "Jugador " + construccion.getJugador().getNombreJugador() + " perdio";
                     juego.finalizarPartida();
                 }
                 else {
                     ArrayList<Tropa> tropas = construccion.getJugador().getTropas();
                     tropas.remove(construccion);
+                    if(this instanceof  TropaAtaque && tropaAtaque != null){
+                        TropaAtaque miTropa = ((TropaAtaque)this);
+                        miTropa.setOros(tropaAtaque.getOros());
+                    }
                     construccion.getCasilla().setPieza(null);
                     msg = "Jugador " + construccion.getJugador().getNombreJugador() + " " +
                             "perdio la tropa: " + construccion.getNombre();
