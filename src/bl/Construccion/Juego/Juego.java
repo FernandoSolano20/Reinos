@@ -1,13 +1,11 @@
 package bl.Construccion.Juego;
 
-import bl.Construccion.Excepciones.ExcepcionJuego;
 import bl.Construccion.Juego.Dado.*;
 import bl.Construccion.Juego.Turno.Iterador.IIterador;
 import bl.Construccion.Juego.Turno.Turno;
 import bl.Construccion.Juego.VisitanteTropas.IVisitante;
 import bl.Construccion.Juego.VisitanteTropas.RegeneradorTropas;
 import bl.Construccion.Jugadores.Jugador;
-import bl.Construccion.Tablero.CasillaActual;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tienda.ITienda;
 import bl.Construccion.Tienda.Tienda;
@@ -179,7 +177,7 @@ public class Juego implements IJuego {
 
 	@Override
 	public int tirarDado() {
-		return dado.tirarDado();
+		return getDado().tirarDado();
 	}
 
 	private void restablecerAccion(){
