@@ -115,8 +115,6 @@ public class pnlTablero extends JPanel {
 		}
 	}
 
-
-
 	public void construirEnCasilla(int i, int j, String nombrePieza) {
 		// System.out.println("nombrePieza: " + nombrePieza);
 
@@ -220,20 +218,20 @@ public class pnlTablero extends JPanel {
 		return new int[2];
 	}
 
-	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY){
-		juego.moverPieza(origenX,origenY,destinoX,destinoY);
+	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY) {
+		juego.moverPieza(origenX, origenY, destinoX, destinoY);
 		repintarCasillas();
 	}
 
-	public void ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY){
-		juego.ponerPiezaEnJuego(origenX,origenY,destinoX,destinoY,getTropaSeleccionada());
+	public void ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY) {
+		juego.ponerPiezaEnJuego(origenX, origenY, destinoX, destinoY, getTropaSeleccionada());
 		repintarCasillas();
 	}
 
 	public Tablero getTableroLogica() {
 		return juego.getTablero();
 	}
-	
+
 	public static Tropa getTropaSeleccionada() {
 		return tropaSeleccionada;
 	}

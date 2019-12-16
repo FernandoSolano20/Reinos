@@ -6,12 +6,14 @@ import ui.Tablero.pnlTablero;
 import ui.eConfiguracion;
 import ui.eIMG;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class pnlTropas extends JFrame {
+
+	@SuppressWarnings("unused")
+	private eIMG eIMGIniciaConstructor = new eIMG();
 
 	// Juego
 	private Juego juego;
@@ -31,7 +33,7 @@ public class pnlTropas extends JFrame {
 	public pnlTropas(Juego juego) {
 
 		setJuego(juego);
-		this.setSize(400, 600);
+		this.setSize(400, 550);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -45,33 +47,38 @@ public class pnlTropas extends JFrame {
 
 		// PANEL PRINCIPAL
 		panelPrincipal = new JPanel();
-		panelPrincipal.setPreferredSize(new Dimension(400, 400));
-		panelPrincipal.setLayout(new FlowLayout());
+		panelPrincipal.setPreferredSize(new Dimension(this.getWidth(), 400));
+		panelPrincipal.setLayout(null);
+		panelPrincipal.setBorder(null);
 		this.add(panelPrincipal);
 
 		titulo = new JLabel("Mis tropas");
 		titulo.setFont(new Font(titulo.getFont().getName(), titulo.getFont().getStyle(), 20));
 		titulo.setBackground(new Color(46, 139, 87));
 		titulo.setOpaque(true);
-		titulo.setPreferredSize(new Dimension(400, 75));
+		titulo.setBounds(0, 0, this.getWidth(), 75);
 		titulo.setHorizontalAlignment(JLabel.CENTER);
 		titulo.setVerticalAlignment(JLabel.CENTER);
-		panelPrincipal.add(titulo);
+		titulo.setBorder(null);
+		panelPrincipal.add(titulo, null);
 
 		// Label descripcion
 		descripcion = new JLabel("Seleccione la tropa que desea agregar: ");
 		descripcion.setFont(new Font(titulo.getFont().getName(), titulo.getFont().getStyle(), 15));
 		descripcion.setBackground(new Color(60, 179, 113));
 		descripcion.setOpaque(true);
-		descripcion.setPreferredSize(new Dimension(400, 45));
+		descripcion.setBounds(0, titulo.getHeight(), this.getWidth(), 45);
 		descripcion.setHorizontalAlignment(JLabel.CENTER);
 		descripcion.setVerticalAlignment(JLabel.CENTER);
+		descripcion.setBorder(null);
 		panelPrincipal.add(descripcion);
 
 		// Panel botones
 		panelBotones = new JPanel();
-		panelBotones.setBorder(new LineBorder(Color.BLACK));
-		panelBotones.setPreferredSize(new Dimension(400, 400));
+		panelBotones.setForeground(this.getForeground());
+		panelBotones.setPreferredSize(new Dimension(this.getWidth(), 400));
+
+		panelBotones.setBounds(0, titulo.getHeight() + descripcion.getHeight(), this.getWidth(), 400);
 		panelBotones.setLayout(new GridLayout(7, 1));
 
 		// Se crean y se agregan todos los botones al panel de botones
@@ -86,19 +93,58 @@ public class pnlTropas extends JFrame {
 		JButton botonTropa;
 		ArrayList<Tropa> tropasJugador = getJuego().getTurnoActual().getJugador().getTropas();
 		int posicion = 0;
-		for (int i = 0; i < CANTIDADBOTONES; i++) {
+		for (int i = 0; i < CANTIDADBOTONES; ++i) {
 			if (tropasJugador.size() > i && !tropasJugador.get(i).isEnJuego()) {
-				botonTropa = new JButton(tropasJugador.get(i).getNombre());
+				botonTropa = new JButton("    " + tropasJugador.get(i).getNombre());
+				ponerIconosBotones(botonTropa, tropasJugador.get(i).getNombre());
+
 			} else if (tropasJugador.size() > i && tropasJugador.get(i).isEnJuego()) {
-				botonTropa = new JButton(tropasJugador.get(i).getNombre() + " (En juego)");
+				botonTropa = new JButton("    " + tropasJugador.get(i).getNombre() + " (En juego)");
+				ponerIconosBotones(botonTropa, tropasJugador.get(i).getNombre());
 				botonTropa.setEnabled(false);
 			} else {
 				posicion = i + 1;
 				botonTropa = new JButton("Tropa " + posicion);
 				botonTropa.setEnabled(false);
 			}
+
 			botones.add(botonTropa);
 			panelBotones.add(botonTropa);
+		}
+	}
+
+	private void ponerIconosBotones(JButton btn, String nombrePieza) {
+		switch (nombrePieza.toUpperCase()) {
+		case "BALLESTA":
+			setIconButton(btn, eIMG.ICON_BALLESTA);
+			break;
+		case "CATAPULTA":
+			setIconButton(btn, eIMG.ICON_CATAPULTA);
+			break;
+		case "ARQUERO":
+			setIconButton(btn, eIMG.ICON_ARQUERO);
+			break;
+		case "ESPADACHIN":
+			setIconButton(btn, eIMG.ICON_ESPADACHIN);
+			break;
+		case "BERSEQUER":
+			setIconButton(btn, eIMG.ICON_BERSEQUER);
+			break;
+		case "MAGO":
+			setIconButton(btn, eIMG.ICON_MAGO);
+			break;
+		case "ASESINO":
+			setIconButton(btn, eIMG.ICON_ASESINO);
+			break;
+		case "JINETE":
+			setIconButton(btn, eIMG.ICON_JINETE);
+			break;
+		case "ESPIA":
+			setIconButton(btn, eIMG.ICON_ESPIA);
+			break;
+		case "TROPA":
+			setIconButton(btn, eIMG.ICON_TROPA);
+			break;
 		}
 	}
 
@@ -126,9 +172,8 @@ public class pnlTropas extends JFrame {
 	}
 
 	private void mostrarMensaje(String pNombreTropa) {
-		JOptionPane.showMessageDialog(new JPanel(), "Colocando " + pNombreTropa, "Colocar pieza",
+		JOptionPane.showMessageDialog(null, "Colocando " + pNombreTropa, "Colocar pieza",
 				JOptionPane.INFORMATION_MESSAGE);
-
 	}
 
 	public Juego getJuego() {
@@ -146,4 +191,15 @@ public class pnlTropas extends JFrame {
 	public void setBotones(ArrayList<JButton> botones) {
 		this.botones = botones;
 	}
+
+	private void setIconButton(JButton btn, ImageIcon imagenIcono) {
+		btn.setIcon(imagenIcono);
+		btn.setSelectedIcon(imagenIcono);
+		btn.setIconTextGap(2);
+		btn.setHorizontalAlignment(SwingConstants.CENTER);
+		btn.setVerticalAlignment(SwingConstants.CENTER);
+		btn.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btn.setVerticalTextPosition(SwingConstants.CENTER);
+	}
+
 }

@@ -33,6 +33,7 @@ public class FrmMain extends JFrame {
 
 	@SuppressWarnings("unused")
 	private eIMG eIMGIniciaConstructor = new eIMG();
+
 	private JPanel pnlMain;
 	private JPanel pPnlArriba;
 	private JPanel pPnlIzquierda;
