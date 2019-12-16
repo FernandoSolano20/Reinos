@@ -7,7 +7,6 @@ import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tablero.CasillaActual;
-import ui.contenedor.FrmMain;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.eConfiguracion;
 
@@ -20,7 +19,6 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import static javax.swing.BorderFactory.createMatteBorder;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -105,23 +103,32 @@ public class pnlCasilla extends JPanel implements MouseListener {
 			//System.out.println("Atacando a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
 			Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i, j);
 			if(pnlTablero.getTropaSeleccionada() != null && construccion != null){
-				if(!pnlTablero.getTropaSeleccionada().isYaAtaco()){
+				if(!pnlTablero.getTropaSeleccionada().isAtaqueRealizado()){
 					atacar(construccion);
 				}
 				else{
-					mostrarMsg("Ya la tropa ataco");
+					mostrarMsg("Esta tropa ya realizó su ataque");
+					pnlTablero.isAtaque = false;
 				}
 			}
 			else {
-				mostrarMsg("No se ataco");
+				mostrarMsg("No se pudo completar el ataque");
+				pnlTablero.isAtaque = false;
 			}
 		}
 
 		//REALIZAR MOVIMIENTO
 		else if(tablero.getJuego().getTablero().isModoMovimiento()){
-			System.out.println("Movimiendo a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
-			tablero.moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
-			pnlTablero.setTropaSeleccionada(null);
+			if(CasillaActual.getCasilla() == null){
+				mostrarMsg("Por favor seleccione una casilla de origen");
+				tablero.getJuego().getTablero().setModoMovimiento(false);
+			}
+			else{
+				System.out.println("Movimiendo a casilla: " +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getX() + "," +  tablero.getJuego().getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]].getY());
+				tablero.moverPieza(CasillaActual.getCasilla().getX(), CasillaActual.getCasilla().getY(), casillaMarcada[0],casillaMarcada[1]);
+				pnlTablero.setTropaSeleccionada(null);
+			}
+
 		}
 
 		//COLOCAR PIEZA EN EL TABLERO
@@ -186,8 +193,6 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	}
 
 	private void mostrarMsg(String msg) {
-		int opcion = 0;
-		String cad = msg;
 		JOptionPane.showMessageDialog(null, msg, eConfiguracion.TITULO_APP, JOptionPane.INFORMATION_MESSAGE);
 	}
 

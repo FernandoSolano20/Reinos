@@ -1,4 +1,4 @@
-package bl.Construccion.Cordenadas;
+package bl.Construccion.Coordenadas;
 
 public class CoordenasAtaque {
     public static int[] x1 = {0,1,0,-1,1,-1,-1,1};

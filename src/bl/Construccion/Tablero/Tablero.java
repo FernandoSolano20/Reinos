@@ -157,6 +157,10 @@ public class Tablero implements ITablero {
 			throw new ExcepcionJuego("Esta tropa pertenece a otro jugador");
 		}
 
+		else if(((TropaAtaque) piezaOrigen).isMovimientoRealizado()){
+			throw new ExcepcionJuego("Esta tropa ya ha realizado un movimiento en este turno");
+		}
+
 		else if(! validarMovimientoDado(distanciaMovimiento, pTurno.getMovimientosPermitidos())) {
 			throw new ExcepcionJuego("La cantidad de movimientos es mayor al valor restante del dado");
 		}
@@ -169,6 +173,7 @@ public class Tablero implements ITablero {
 			colocarPiezaCasilla(destinoX, destinoY, piezaOrigen);
 			removerPiezaCasilla(origenX, origenY);
 			descontarMovimientosTropa((TropaAtaque) piezaOrigen, distanciaMovimiento);
+			marcarMovimientoRealizado((TropaAtaque) piezaOrigen);
 			//Retorna el valor restante del dado
 			return pTurno.getMovimientosPermitidos() - distanciaMovimiento;
 		}
@@ -203,6 +208,7 @@ public class Tablero implements ITablero {
 
 				colocarPiezaCasilla(destinoX, destinoY, piezaOrigen);
 				cambiarEstadoTropa(piezaOrigen);
+				marcarMovimientoRealizado((TropaAtaque) piezaOrigen);
 
 				return pTurno.getMovimientosPermitidos() - distanciaMovimiento;
 
@@ -295,6 +301,10 @@ public class Tablero implements ITablero {
     		if(cantidad >=3) return false;
 		}
     	return true;
+	}
+
+	private void marcarMovimientoRealizado(TropaAtaque pTropaAtaque){
+    	pTropaAtaque.setMovimientoRealizado(true);
 	}
 
 
