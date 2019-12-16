@@ -7,7 +7,6 @@ import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tablero.CasillaActual;
-import ui.contenedor.FrmMain;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.eConfiguracion;
 
@@ -20,7 +19,6 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import static javax.swing.BorderFactory.createMatteBorder;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -186,8 +184,6 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	}
 
 	private void mostrarMsg(String msg) {
-		int opcion = 0;
-		String cad = msg;
 		JOptionPane.showMessageDialog(null, msg, eConfiguracion.TITULO_APP, JOptionPane.INFORMATION_MESSAGE);
 	}
 

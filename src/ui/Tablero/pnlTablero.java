@@ -6,7 +6,6 @@ import java.awt.Cursor;
 import javax.swing.JPanel;
 
 import bl.Construccion.Construccion;
-import bl.Construccion.Excepciones.ExcepcionJuego;
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Recursos.Gemas.Tipo.Azul;
 import bl.Construccion.Recursos.Gemas.Tipo.Blanca;
@@ -15,8 +14,6 @@ import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
-import bl.Construccion.Tropa.TropaAtaque.Asesino;
-import bl.Construccion.Tropa.TropaAtaque.Jinete;
 import ui.eConfiguracion;
 import ui.eIMG;
 

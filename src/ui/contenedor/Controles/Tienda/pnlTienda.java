@@ -3,7 +3,6 @@ import bl.Construccion.Juego.Juego;
 
 import ui.eConfiguracion;
 import ui.eIMG;
-import ui.contenedor.FrmMain;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -13,7 +12,6 @@ public class pnlTienda extends JFrame {
 
 	@SuppressWarnings("unused")
     private Juego juego;
-	private eIMG eIMGIniciaConstructor = new eIMG();
 
 	private JPanel panelPrincipal;
 	private JPanel panelTropas;
