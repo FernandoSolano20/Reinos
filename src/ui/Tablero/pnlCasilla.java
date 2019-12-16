@@ -193,8 +193,6 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	}
 
 	private void mostrarMsg(String msg) {
-		int opcion = 0;
-		String cad = msg;
 		JOptionPane.showMessageDialog(null, msg, eConfiguracion.TITULO_APP, JOptionPane.INFORMATION_MESSAGE);
 	}
 

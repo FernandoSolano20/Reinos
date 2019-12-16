@@ -179,7 +179,7 @@ public class Juego implements IJuego {
 
 	@Override
 	public int tirarDado() {
-		return dado.tirarDado();
+		return getDado().tirarDado();
 	}
 
 	private void restablecerAcciones(){

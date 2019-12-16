@@ -1,5 +1,7 @@
 package bl.Construccion.Tropa.TropaAtaque;
 
+import bl.Construccion.Castillo.Castillo;
+import bl.Construccion.Cordenadas.CoordenasAtaque;
 import bl.Construccion.Juego.VisitanteTropas.IVisitante;
 import bl.Construccion.Recursos.Gemas.Gema;
 import bl.Construccion.Recursos.PowerUps.PowerUp;
@@ -108,5 +110,15 @@ public abstract class TropaAtaque extends Tropa implements ITropaAtaque{
             }
         }
         return tropaAtaque;
+    }
+
+    public String tranferirOroCastillo(){
+        Castillo castillo = this.getJugador().getCastillo();
+        if (CoordenasAtaque.validarAtaqueAlcanze1(getCasilla().getX() - castillo.getCasilla().getX() ,getCasilla().getY() - castillo.getCasilla().getY())){
+            castillo.setOros(castillo.getOros() + this.getOros());
+            this.setOros(0);
+            return "Oro asigando";
+        }
+        return "No esta lo suficientemente cerca del castillo";
     }
 }
