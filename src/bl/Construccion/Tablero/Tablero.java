@@ -222,6 +222,12 @@ public class Tablero implements ITablero {
 
 	}
 
+	// Retorna true si la cantidad de movimientos NO es mayor al valor restante del dado.
+	public boolean movimientoEsPermitido(int origenX, int origenY, int destinoX, int destinoY, Turno pTurno) {
+        int distanciaMovimiento = obtenerDistanciaEntreCasillas(origenX, origenY, destinoX, destinoY);
+		return validarMovimientoDado(distanciaMovimiento, pTurno.getMovimientosPermitidos());
+	}
+
 	//Metodo que obtiene la ubicacion de  la casilla de origen y de la casilla destino
 	// Lo que busca es obtener la distancia que hay en X y la distancia en Y
 	// Posteriormente lo suma para obtener la distancia total en ambos ejes
